@@ -13,11 +13,15 @@ Bullet::Bullet()
 	TextureManager* textureMan = TextureManager::GetInstance();
 	m_pTexture = textureMan->LoadTexture("./textures/bullet");
 
+	
+
 	//m_pCollider = new Collider();
 	m_pCollider.m_nodes->push_back(new ColliderNode(Vector2(-2.5, 2.5), 1));
 	m_pCollider.m_nodes->push_back(new ColliderNode(Vector2(2.5, 2.5), 2));
 	m_pCollider.m_nodes->push_back(new ColliderNode(Vector2(2.5, -2.5), 3));
 	m_pCollider.m_nodes->push_back(new ColliderNode(Vector2(-2.5, -2.5), 0));
+
+	m_pCollider.SetLayer(ECOLLISIONLAYER_BULLET);
 }
 
 Bullet::~Bullet()

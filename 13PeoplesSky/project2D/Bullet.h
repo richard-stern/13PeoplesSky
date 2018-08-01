@@ -1,6 +1,5 @@
 #pragma once
 #include "Actor.h"
-#include "Collider.h"
 
 class Bullet : public Actor
 {
