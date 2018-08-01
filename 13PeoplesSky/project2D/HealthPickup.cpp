@@ -1,12 +1,12 @@
-//#include "HealthPickup.h"
-//
-//
-//
-//HealthPickup::HealthPickup()
-//{
-//}
-//
-//
-//HealthPickup::~HealthPickup()
-//{
-//}
+#include "HealthPickup.h"
+
+
+
+HealthPickup::HealthPickup()
+{
+}
+
+
+HealthPickup::~HealthPickup()
+{
+}
