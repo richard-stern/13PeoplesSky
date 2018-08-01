@@ -46,7 +46,7 @@ void Bullet::Shoot(Vector2 position, Vector2 velocity)
 //-----------------
 // Bullet is set to not visible when it collides
 //-----------------
-void Bullet::OnCollision(Actor* other)
+void Bullet::OnCollision(GameObject* collidingObject)
 {
 	m_bVisible = false;
 }
