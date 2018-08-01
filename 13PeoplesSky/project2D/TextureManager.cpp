@@ -10,6 +10,9 @@ TextureManager::~TextureManager()
 	// delete all the textures
 	for (auto pair : m_textures)
 		delete pair.second;
+	// and all the fonts
+	for (auto pair : m_fonts)
+		delete pair.second;
 }
 
 TextureManager* TextureManager::GetInstance()
@@ -48,4 +51,23 @@ aie::Texture* TextureManager::LoadTexture(std::string fileName)
 
 	// texture SHOULD exist in the map now!
 	return m_textures[fileName];
+}
+
+aie::Font* TextureManager::LoadFont(std::string fileName, 
+	unsigned short fontSize)
+{
+	// stick the font size onto the end of the file name as the key
+	std::string key = fileName + std::to_string(fontSize);
+
+	auto foundFont = m_fonts.find(key);
+
+	// check if the font exists
+	if (foundFont == m_fonts.end())
+	{
+		// font doesn't exist! let's create it
+		m_fonts[key] = new aie::Font(fileName.c_str(), fontSize);
+	}
+
+	// font should exist!
+	return m_fonts[key];
 }
