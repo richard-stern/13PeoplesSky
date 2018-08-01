@@ -43,6 +43,8 @@ public:
 private:
 	Matrix3* m_m3StartButton;
 	Matrix3* m_m3QuitButton;
+	Matrix3* m_m3GameTitle;
 	aie::Texture* m_pStartTexture;
 	aie::Texture* m_pQuitTexture;
+	aie::Texture* m_pGameTitle;
 };

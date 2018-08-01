@@ -1,12 +1,17 @@
 #include "StateMachine.h"
 #include "BaseState.h"
+#include "MenuState.h"
+#include "GameState.h"
+#include "GameOverState.h"
 
 StateMachine::StateMachine()
 {
 	m_eCurrentState = ESTATE_MENU;
 
 	// Create states in state array
-	
+	m_pStates[0] = new MenuState();
+	m_pStates[1] = new GameState();
+	m_pStates[2] = new GameOverState();
 }
 
 StateMachine::~StateMachine()
