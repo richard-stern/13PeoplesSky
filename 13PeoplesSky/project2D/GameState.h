@@ -1,12 +1,13 @@
 #pragma once
-class GameState 
+#include "BaseState.h"
+class GameState : BaseState
 {
 public:
 	GameState();
 	~GameState();
 	void Enter();
-	void Update();
-	void Draw();
+	void Update(float fDeltaTime, StateMachine* pStateMachine);
+	void Draw(aie::Renderer2D* pRenderer);
 	void Exit();
 };
 
