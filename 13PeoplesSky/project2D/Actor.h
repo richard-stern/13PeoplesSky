@@ -1,12 +1,12 @@
 #pragma once
 #include "GameObject.h"
-//#include "Collider.h"
+#include "Collider.h"
 #include "Matrix3.h"
 
 class Actor : public GameObject
 {
 public:
-	//Collider m_pCollider;
+	Collider m_pCollider;
 
 	/* health variables */
 	int m_nHealth; /* current */
