@@ -153,6 +153,9 @@
     <ClCompile Include="Application2D.cpp">
       <Filter>Source Files\_CORE</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files\TextureManager</Filter>
     </ClCompile>
@@ -220,6 +223,13 @@
   <ItemGroup>
     <ClInclude Include="Application2D.h">
       <Filter>Header Files\_CORE</Filter>
+    </ClInclude>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BaseState.h">
       <Filter>Header Files\BaseState</Filter>

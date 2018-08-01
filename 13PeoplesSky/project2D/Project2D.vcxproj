@@ -166,6 +166,7 @@
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Application2D.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="BaseState.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletManager.cpp" />
@@ -194,9 +195,9 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Application2D.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="BulletManager.h" />
-    <ClInclude Include="Camera.h" />
+    <ClInclude Include="BulletManager.h" />    <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="ColliderManager.h" />
     <ClInclude Include="Enemy.h" />
