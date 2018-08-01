@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseState.h"
-class GameState : BaseState
+class GameState : public BaseState
 {
 public:
 	GameState();
