@@ -164,9 +164,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Application2D.cpp" />
     <ClCompile Include="BaseState.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -174,10 +176,12 @@
     <ClCompile Include="StateMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor.h" />
     <ClInclude Include="Application2D.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="StateMachine.h" />
