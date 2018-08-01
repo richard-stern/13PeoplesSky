@@ -1,12 +1,19 @@
 #pragma once
 #include "Renderer2D.h"
 #include "Font.h"
+#include "Camera.h"
+#include "TextureManager.h"
+
+#define GUI_FONT_SIZE 24
+#define CORNER_OFFSET_X 20.0f
+#define CORNER_OFFSET_Y 20.0f
 
 class GUI
 {
 private:
 	GUI(); /* private constructor to restrict initialisation */
 	~GUI(); /* destructor for memory deallocation */
+	
 	static GUI *instance; /* single instance of "this" */
 
 	int health;
@@ -14,14 +21,15 @@ private:
 	int lives;
 
 public:
+	static void Destroy();
+	
 	static GUI *GetInstance(); /* retrieve single instance of GUI class */
-	static void Destroy(); 
-
+	
 	void Draw(aie::Renderer2D *renderer); /* draw the UI */
 
 	void SetHealth(int health); /* tell UI how much health to display */
 	void AddScore(int score); /* tell UI to increase player score */
-	int GetScore(); /* retrieve final score */
+	int  GetScore(); /* retrieve final score */
 	void SetLives(int remainingLives); /* set the amount of player lives left */
 };
 

@@ -54,16 +54,24 @@ Description: Draws the graphical user interface
 */
 void GUI::Draw(aie::Renderer2D *renderer)
 {
-	/* heatlh */
-	/* do stuff here */
-	//renderer->drawText(font, health, xPos, yPos);
+	Vector2 resolution = Camera::GetInstance()->GetResolution();
+	aie::Font *font = TextureManager::GetInstance()->LoadFont("./font/consolas_bold.ttf", GUI_FONT_SIZE);
+	float xPos = CORNER_OFFSET_X;
+
+	/* health */
+	float healthPosY = resolution.y - CORNER_OFFSET_Y;
+	
+	renderer->drawText(font, "Health", xPos, healthPosY);
+	renderer->drawText(font, (char*)health, xPos + CORNER_OFFSET_X, healthPosY);
 
 	/* score */
-	/* do stuff here */
-	//renderer->drawText(font, score, xPos, yPos);
+	float scorePosY = resolution.y - 2 * CORNER_OFFSET_Y;
+
+	renderer->drawText(font, "Score", xPos, scorePosY);
+	renderer->drawText(font, (char*)score, xPos + CORNER_OFFSET_X, scorePosY);
 
 	/* lives */
-	/* do stuff here */
+	//float livesPosX, livesPosY;
 	//renderer->drawText(font, lives, xPos, yPos);
 }
 
