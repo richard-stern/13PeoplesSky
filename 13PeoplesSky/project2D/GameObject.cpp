@@ -149,6 +149,16 @@ float GameObject::GetDrag()
 	return m_fDrag;
 }
 
+void GameObject::SetMass(float _mass)
+{
+	m_fMass = _mass;
+}
+
+float GameObject::GetMass()
+{
+	return m_fMass;
+}
+
 void GameObject::SetVisible(bool _visible)
 {
 	m_bVisible = _visible;
