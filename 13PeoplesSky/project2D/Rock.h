@@ -27,6 +27,6 @@ public:
 	//If a bullet collided, the rock should take one (1) damage. 
 	//If the rock's health is reduced to zero (0), the m_bVisible variable should be set to 'false'.
 	//------------------------------------
-	void OnCollision(GameObject* collide);
+	void OnCollision(Actor* collide);
 };
 

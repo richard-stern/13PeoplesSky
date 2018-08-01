@@ -26,6 +26,6 @@ public:
 	//If the player or a bullet collides with the health pickup, the pickup should be destroyed. 
 	//If anything else collides, it should bounce off harmlessly. 
 	//------------------------------------
-	void OnCollision(GameObject* collide);
+	void OnCollision(Actor* collide);
 };
 
