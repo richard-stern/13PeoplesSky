@@ -39,7 +39,18 @@ Vector2 Camera::GetPosition()
 	return m_CameraPosition;
 }
 
+void Camera::SetResolution(Vector2 resolution)
+{
+	m_Resolution = resolution;
+}
+
+Vector2 Camera::GetResolution()
+{
+	return m_Resolution;
+}
+
 void Camera::Destroy()
 {
 	delete m_instance;
 }
+
