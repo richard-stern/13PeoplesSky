@@ -23,6 +23,6 @@ public:
 	void OnCollision(GameObject* collidingObject);
 
 private:
-	Collider* m_pCollider;
+
 };
 
