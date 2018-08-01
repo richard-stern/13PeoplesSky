@@ -9,11 +9,11 @@
 
 class GameObject
 {
-private:
+protected:
 	GameObject* m_pParent;
 	std::list<GameObject*> m_Children;
 
-protected:
+
 	aie::Texture* m_pTexture;
 	//DEFAULT: White
 	//Hex value for the color
