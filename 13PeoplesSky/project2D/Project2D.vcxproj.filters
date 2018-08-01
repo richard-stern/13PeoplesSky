@@ -13,90 +13,276 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\_CORE">
+      <UniqueIdentifier>{557563d8-bb70-4d18-9533-369047f5e166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\_CORE">
+      <UniqueIdentifier>{ad621ce1-1be8-4c4f-a64e-5d56b3e707a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject">
+      <UniqueIdentifier>{e107f236-4d05-41fc-b8de-6124ddc6c141}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Collider">
+      <UniqueIdentifier>{05588420-7858-4bde-b921-a5fa18390010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TextureManager">
+      <UniqueIdentifier>{cd567267-edb7-4438-aaad-ba7724c37e05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BaseState">
+      <UniqueIdentifier>{7bb5bcc7-d392-40bd-a0a5-c462535d94f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GUI">
+      <UniqueIdentifier>{2c7c43c5-4fb2-489d-8785-f6168bec4af8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Camera">
+      <UniqueIdentifier>{7f82359b-81b4-4263-a751-93ec437070d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Actor">
+      <UniqueIdentifier>{c5e140f0-d684-460b-9903-77f5588c459f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Star">
+      <UniqueIdentifier>{4f834008-ae1c-40f5-bd59-bb2dbbbe8b66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Level">
+      <UniqueIdentifier>{13346d77-288b-43d7-97ea-f5ba7ef45366}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Collider\ColliderManager">
+      <UniqueIdentifier>{35e516ae-b5a2-4ac3-84b9-c320afa0a090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BaseState\StateMachine">
+      <UniqueIdentifier>{52fb1849-85ec-469c-b9f4-683b78c6d761}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BaseState\MenuState">
+      <UniqueIdentifier>{e59e0d7f-494b-486f-8808-c34622fc09bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BaseState\GameState">
+      <UniqueIdentifier>{6bcc5d39-dcb9-44a0-bc2f-8c5e8322a466}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BaseState\GameOverState">
+      <UniqueIdentifier>{d8858ae3-4d33-4136-b8d9-170e698f060d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Actor\Player">
+      <UniqueIdentifier>{9c8d2c48-c432-4474-a2e1-45dc5e94b514}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Actor\Turret">
+      <UniqueIdentifier>{39e812b8-cc8e-4007-bacc-b019fd816df8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Actor\Bullet">
+      <UniqueIdentifier>{566edc3d-b4de-4ce3-bf4a-733c23950525}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Actor\Bullet\BulletManager">
+      <UniqueIdentifier>{d612d56c-2191-4bdf-a3a8-c35dbad9e469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Actor\Rock">
+      <UniqueIdentifier>{9a4bb56b-2ab9-4200-ae65-23c4ac8734da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Actor\Enemy">
+      <UniqueIdentifier>{8946ae90-060c-4daa-90be-53c7855655d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Actor\HealthPickup">
+      <UniqueIdentifier>{b62dcf61-7dd6-495d-aba2-e61ad4516d88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject">
+      <UniqueIdentifier>{1910ec4a-f49f-41c1-bfea-31c72b982715}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Actor">
+      <UniqueIdentifier>{f420a634-86e8-4c9c-b807-dc1bb1e44796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Actor\Player">
+      <UniqueIdentifier>{d22fbe26-32db-4e97-adc0-5f16b3dae1cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Actor\Turret">
+      <UniqueIdentifier>{cf5bdce8-b7fc-4f3a-8073-a9d326aaf404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Actor\Bullet">
+      <UniqueIdentifier>{7d3492c1-ac1d-4199-b455-93ba56df434a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Actor\Bullet\BulletManager">
+      <UniqueIdentifier>{27c3f235-9bff-4578-a871-cf430439760d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Actor\Rock">
+      <UniqueIdentifier>{aa1e10df-4f69-4183-b04a-c30b43075c2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Actor\Enemy">
+      <UniqueIdentifier>{5a27badf-c148-47de-b962-5c894ac5b5f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Actor\HealthPickup">
+      <UniqueIdentifier>{967e9764-96fb-4c01-8101-e03ffa91d257}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Star">
+      <UniqueIdentifier>{b2676c02-f82d-4368-9d54-609a6b7dac0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Level">
+      <UniqueIdentifier>{51feafdb-dc5a-4ccc-af2b-37c15d6c8db4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Collider">
+      <UniqueIdentifier>{188cc7c8-dcbe-43c4-acff-b1d34a641983}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Collider\ColliderManager">
+      <UniqueIdentifier>{1e7629e6-b697-412f-94d3-4a84eaaabe1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TextureManager">
+      <UniqueIdentifier>{d831139f-a8a3-4c21-aa56-48cc38e7e835}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BaseState">
+      <UniqueIdentifier>{80739ef3-37ad-4eda-803e-c7652e5061b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BaseState\StateMachine">
+      <UniqueIdentifier>{a5a43a3e-2d38-4151-938c-d683c5c64a13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BaseState\MenuState">
+      <UniqueIdentifier>{47b8edf4-0cf1-45c7-aab6-10582d8a2bb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BaseState\GameState">
+      <UniqueIdentifier>{d5953120-c76f-4741-b7b8-cc82aa3b4ab0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BaseState\GameOverState">
+      <UniqueIdentifier>{ab8f5a54-0ce9-44fc-be32-e58b8a1d3619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{ee7851d0-dc59-45a2-8736-dd06ad0660ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Camera">
+      <UniqueIdentifier>{7b756b4b-e6dc-4f82-a940-8ffe3421d42c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\_CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="Application2D.cpp">
+      <Filter>Source Files\_CORE</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\TextureManager</Filter>
     </ClCompile>
     <ClCompile Include="BaseState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\BaseState</Filter>
     </ClCompile>
     <ClCompile Include="MenuState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\BaseState\MenuState</Filter>
     </ClCompile>
     <ClCompile Include="StateMachine.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\BaseState\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Actor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthPickup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Rock.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObject\Actor</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObject\Actor\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="BulletManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObject\Actor\Bullet\BulletManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\GameObject\Actor\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthPickup.cpp">
+      <Filter>Source Files\GameObject\Actor\HealthPickup</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\GameObject\Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Rock.cpp">
+      <Filter>Source Files\GameObject\Actor\Rock</Filter>
+    </ClCompile>
+    <ClCompile Include="Turret.cpp">
+      <Filter>Source Files\GameObject\Actor\Turret</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files\GameObject\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Star.cpp">
+      <Filter>Source Files\GameObject\Star</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderManager.cpp">
+      <Filter>Source Files\Collider\ColliderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source Files\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverState.cpp">
+      <Filter>Source Files\BaseState\GameOverState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files\BaseState\GameState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\_CORE</Filter>
     </ClInclude>
     <ClInclude Include="BaseState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\BaseState</Filter>
     </ClInclude>
     <ClInclude Include="MenuState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\BaseState\MenuState</Filter>
     </ClInclude>
     <ClInclude Include="StateMachine.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\BaseState\StateMachine</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files\TextureManager</Filter>
     </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Actor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthPickup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Rock.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameObject\Actor</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameObject\Actor\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="BulletManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameObject\Actor\Bullet\BulletManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\GameObject\Actor\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthPickup.h">
+      <Filter>Header Files\GameObject\Actor\HealthPickup</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\GameObject\Actor\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Rock.h">
+      <Filter>Header Files\GameObject\Actor\Rock</Filter>
+    </ClInclude>
+    <ClInclude Include="Turret.h">
+      <Filter>Header Files\GameObject\Actor\Turret</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Header Files\GameObject\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Star.h">
+      <Filter>Header Files\GameObject\Star</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderManager.h">
+      <Filter>Header Files\Collider\ColliderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files\BaseState\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverState.h">
+      <Filter>Header Files\BaseState\GameOverState</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

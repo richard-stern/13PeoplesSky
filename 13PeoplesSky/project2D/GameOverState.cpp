@@ -1,13 +1,12 @@
 #include "GameOverState.h"
 
-GameOverState::GameOverState() { }
 
-GameOverState::~GameOverState() { }
 
-void GameOverState::Enter() { }
+GameOverState::GameOverState()
+{
+}
 
-void GameOverState::Update(float fDeltaTime, StateMachine* pStateMachine) { }
 
-void GameOverState::Draw(aie::Renderer2D* pRenderer) { }
-
-void GameOverState::Exit() { }
+GameOverState::~GameOverState()
+{
+}
