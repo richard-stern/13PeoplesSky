@@ -176,7 +176,7 @@
     <ClCompile Include="BulletManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
-    <ClCompile Include="ColliderManager.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameOverState.cpp" />
@@ -193,6 +193,8 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rock.cpp" />
     <ClCompile Include="Star.cpp" />
+    <ClCompile Include="Primatives.cpp" />
+    <ClCompile Include="TempObj.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="StateMachine.cpp" />
@@ -209,9 +211,12 @@
     <ClInclude Include="SeekBehaviour.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="BulletManager.h" />    <ClInclude Include="Camera.h" />
+    <ClInclude Include="BulletManager.h" />  
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
-    <ClInclude Include="ColliderManager.h" />
+    <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="Primatives.h" />
+    <ClInclude Include="TempObj.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameOverState.h" />

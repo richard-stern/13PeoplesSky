@@ -192,6 +192,18 @@
     <ClCompile Include="StateMachine.cpp">
       <Filter>Source Files\BaseState\StateMachine</Filter>
     </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Primatives.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TempObj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
@@ -248,7 +260,6 @@
     <ClInclude Include="Application2D.h">
       <Filter>Header Files\_CORE</Filter>
     </ClInclude>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -272,6 +283,18 @@
     </ClInclude>
     <ClInclude Include="AvoidBehaviour.h">
       <Filter>Header Files\AI Behaviours</Filter>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Primatives.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TempObj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>Header Files\TextureManager</Filter>
     </ClInclude>
