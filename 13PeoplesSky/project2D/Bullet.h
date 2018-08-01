@@ -10,7 +10,7 @@ public:
 	void Update(float deltaTime);
 
 	//-----------------
-	// Sets the starting position of the bullet and the velocity it will fire at
+	// Fire a bullet
 	// Params: initial position
 	//			initial velocity
 	//-----------------

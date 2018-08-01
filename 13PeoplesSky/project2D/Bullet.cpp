@@ -7,6 +7,7 @@
 Bullet::Bullet()
 {
 	m_bWrapAndRespawn = false;
+	m_bVisible = false;
 
 	TextureManager* textureMan = TextureManager::GetInstance();
 	m_pTexture = textureMan->LoadTexture("./textures/bullet");
@@ -20,7 +21,7 @@ void Bullet::Update(float deltaTime)
 {
 	Camera* camera = Camera::GetInstance();
 
-	Vector2 pos = m_m3LocalMatrix.getPosition();
+	Vector2 pos = m_m3LocalMatrix.GetPosition();
 	pos -= camera->GetPosition();
 
 	if (pos.x > 1280 || pos.x < 0 || pos.y > 720 || pos.y < 0)
@@ -37,7 +38,7 @@ void Bullet::Update(float deltaTime)
 //-----------------
 void Bullet::Shoot(Vector2 position, Vector2 velocity)
 {
-	m_m3LocalMatrix.setPosition(position);
+	m_m3LocalMatrix.SetPosition(position);
 	m_v2Velocity = velocity;
 	m_bVisible = true;
 }
