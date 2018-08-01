@@ -13,8 +13,8 @@ public:
 	//-----------------
 	// Searches the bullet pool for an inactive bullet and runs the shoot command
 	// Params: Input for the shoot command
-	//			initial position
-	//			initial velocity
+	//			initial position (turret position)
+	//			initial velocity (turret facing)
 	//-----------------
 	void ShootBullet(Vector2 position, Vector2 velocity);
 

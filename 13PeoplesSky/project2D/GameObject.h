@@ -73,6 +73,9 @@ public:
 	void SetDrag(float _drag);
 	float GetDrag();
 
+	void SetVisible(bool _visible);
+	bool GetVisible();
+
 	Matrix3 GetGlobalTransform();
 	Matrix3 GetLocalTransform();
 

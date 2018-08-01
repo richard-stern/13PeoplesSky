@@ -149,6 +149,16 @@ float GameObject::GetDrag()
 	return m_fDrag;
 }
 
+void GameObject::SetVisible(bool _visible)
+{
+	m_bVisible = _visible;
+}
+
+bool GameObject::GetVisible()
+{
+	return m_bVisible;
+}
+
 Matrix3 GameObject::GetGlobalTransform()
 {
 	return m_m3GlobalMatrix;

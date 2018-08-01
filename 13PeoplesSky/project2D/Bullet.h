@@ -1,5 +1,6 @@
 #pragma once
 #include "Actor.h"
+#include "Collider.h"
 
 class Bullet : public Actor
 {
@@ -22,6 +23,6 @@ public:
 	void OnCollision(GameObject* collidingObject);
 
 private:
-
+	Collider* m_pCollider;
 };
 

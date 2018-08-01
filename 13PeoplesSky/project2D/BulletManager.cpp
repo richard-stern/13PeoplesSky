@@ -21,11 +21,14 @@ BulletManager::~BulletManager()
 	delete[] m_bulletPool;
 }
 
+//-----------------
+// Find a bullet the first avaliable bullet in the pool and shoot it
+//-----------------
 void BulletManager::ShootBullet(Vector2 position, Vector2 velocity)
 {
 	for (int i = 0; i < POOL_SIZE; i++)
 	{
-		if (!m_bulletPool[i].GetVisible())
+		if (!m_bulletPool[i]->GetVisible())
 		{
 			m_bulletPool[i]->Shoot(position, velocity);
 			break;
