@@ -166,6 +166,8 @@
   <ItemGroup>
     <ClCompile Include="Application2D.cpp" />
     <ClCompile Include="BaseState.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="MenuState.cpp" />
@@ -173,6 +175,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application2D.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="MenuState.h" />
