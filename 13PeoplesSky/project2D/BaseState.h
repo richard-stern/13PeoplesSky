@@ -7,15 +7,35 @@ public:
 	BaseState();
 	~BaseState();
 
-	// Initialise state assets, called when state is started
+	//----------------------------------------------
+	// Enter
+	//----------------------------------------------
+	// Initialise state assets
+	// Called when state starts
+	// Basically a constructor for the class
 	virtual void Enter() = 0;
 
-	// Updates assets in state, called each frame
+	//----------------------------------------------
+	// Update
+	//----------------------------------------------
+	// Processes input
+	// Updates assets
+	// Changes StateMachine state when criteria is met
+	// Called each frame
 	virtual void Update(float fDeltaTime, StateMachine* pStateMachine) = 0;
 
-	// Draws assets in state, called each frame
+	//----------------------------------------------
+	// Draw
+	//----------------------------------------------
+	// Draws each asset in state
+	// Called each frame
 	virtual void Draw(aie::Renderer2D* pRenderer) = 0;
 
-	// Delete all assets in state, called when state is exited
+	//----------------------------------------------
+	// Exit
+	//----------------------------------------------
+	// Deletes state assets
+	// Called when state ends
+	// Basically a destructor for the class
 	virtual void Exit() = 0;
 };

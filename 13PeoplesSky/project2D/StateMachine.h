@@ -14,16 +14,36 @@ public:
 	StateMachine();
 	~StateMachine();
 
-	// Change game state
+	//----------------------------------------------
+	// ChangeState
+	//----------------------------------------------
+	// Used to switch between states
+	//	Process:
+	//	1.	Exit current state
+	//	2.	Set current state as parameter
+	//	3.	Enter new current state
 	void ChangeState(ESTATE eState);
 
-	// Update current game state
+	//----------------------------------------------
+	// Update
+	//----------------------------------------------
+	// Calls the update function of the current state
+	// Passes fDeltaTime and this pointer into current state
+	// Called every frame
 	void Update(float fDeltaTime);
 
-	// Draw current game state
+	//----------------------------------------------
+	// Draw
+	//----------------------------------------------
+	// Calls the draw function of the current state
+	// Passes Renderer2D pointer into current state
+	// Called every frame
 	void Draw(aie::Renderer2D* pRenderer);
 
 private:
+	// Stores current state
 	ESTATE m_eCurrentState;
+
+	// Stores array of all states
 	BaseState* m_pStates[3];
 };
