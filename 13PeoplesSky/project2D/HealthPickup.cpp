@@ -10,3 +10,7 @@ HealthPickup::HealthPickup()
 HealthPickup::~HealthPickup()
 {
 }
+
+void HealthPickup::OnCollision(GameObject* collide)
+{
+}
