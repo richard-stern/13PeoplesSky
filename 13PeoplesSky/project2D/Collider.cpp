@@ -29,7 +29,7 @@ Collider::~Collider()
 {
 	for (int i = 0; i < m_nodes->size(); ++i) 
 	{
-		delete m_nodes[i];
+		delete (*m_nodes)[i];
 	}
 	
 	delete m_nodes;
