@@ -11,8 +11,6 @@ GUI::GUI()
 	health = 0;
 	score = 0;
 	lives = 0;
-
-	instance = new GUI; /* initialise instance */
 }
 
 /*
@@ -31,7 +29,7 @@ GUI* GUI::GetInstance()
 {
 	if (!instance)
 	{
-		GUI();
+		instance = new GUI; /* initialise instance */
 	}
 
 	return instance;
@@ -43,8 +41,11 @@ Description: Destructor which deallocates the graphical user interface singleton
 */
 void GUI::Destroy()
 {
-	delete instance;
-	instance = nullptr;
+	if (instance)
+	{
+		delete instance;
+		instance = nullptr;
+	}
 }
 
 /*
@@ -71,8 +72,8 @@ void GUI::Draw(aie::Renderer2D *renderer)
 	renderer->drawText(font, (char*)score, xPos + CORNER_OFFSET_X, scorePosY);
 
 	/* lives */
-	//float livesPosX, livesPosY;
-	//renderer->drawText(font, lives, xPos, yPos);
+	float livesPosY = resolution.y - 3 * CORNER_OFFSET_Y;
+	renderer->drawText(font, "Lives", xPos, livesPosY);
 }
 
 /*
