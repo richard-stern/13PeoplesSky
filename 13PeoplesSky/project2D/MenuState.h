@@ -47,4 +47,5 @@ private:
 	aie::Texture* m_pStartTexture;
 	aie::Texture* m_pQuitTexture;
 	aie::Texture* m_pGameTitle;
+	aie::Texture* m_pMenuBackground;
 };

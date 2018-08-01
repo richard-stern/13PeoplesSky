@@ -27,9 +27,9 @@ void MenuState::Enter()
 
 	// Load button textures
 	TextureManager* textureMan = TextureManager::GetInstance();
-	m_pStartTexture = textureMan->LoadTexture("./textures/rock_large.png");
-	m_pQuitTexture = textureMan->LoadTexture("./textures/rock_medium.png");
-	m_pGameTitle = textureMan->LoadTexture("./textures/car.png");
+	m_pStartTexture = textureMan->LoadTexture("./textures/startButton.png");
+	m_pQuitTexture = textureMan->LoadTexture("./textures/quitButton.png");
+	m_pGameTitle = textureMan->LoadTexture("./textures/gameTitle.png");
 }
 
 void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
@@ -42,7 +42,7 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 		// Store mouse position in Vector2
 		Vector2 v2MousePos = Vector2(pInput->getMouseX(), pInput->getMouseY());
 
-		// USE MOUSE POS TO FIND IF OVER BUTTON
+		// USE MOUSE POS TO FIND IF OVER EACH BUTTON
 
 	}
 }
@@ -57,6 +57,9 @@ void MenuState::Draw(aie::Renderer2D* pRenderer)
 
 	// Draw game title
 	pRenderer->drawSpriteTransformed3x3(m_pGameTitle, (float*)m_m3GameTitle);
+
+	// Draw menu background
+	pRenderer->drawSprite(m_pMenuBackground, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 100.0f, 0.0f, 0.0f);
 }
 
 void MenuState::Exit()
