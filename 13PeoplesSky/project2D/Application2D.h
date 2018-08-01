@@ -20,6 +20,9 @@ public:
 protected:
 
 	aie::Renderer2D*	m_2dRenderer;
+
+	float m_cameraX, m_cameraY;
+	float m_timer;
 	
 	TempObj* obj;
 };
