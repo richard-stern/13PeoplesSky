@@ -51,6 +51,12 @@ public:
 
 
 	void SetTexture(aie::Texture* _texture);
+	//Sets the color using a 4-byte hex value
+	void SetColor(unsigned int _color_hex);
+	//Sets the color using 4 1-byte values
+	void SetColor(unsigned char _r, unsigned char _g, unsigned char _b, unsigned char _a);
+	//Sets the color using floats that range from 0.0f - 1.0f
+	void SetColor(float _r, float _g, float _b, float _a);
 
 	void SetPosition(Vector2 _position);
 	Vector2 GetPosition();

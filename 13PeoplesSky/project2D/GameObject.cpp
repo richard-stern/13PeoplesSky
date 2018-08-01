@@ -77,6 +77,28 @@ void GameObject::SetTexture(aie::Texture* _texture)
 	m_pTexture = _texture;
 }
 
+void GameObject::SetColor(unsigned int _color_hex)
+{
+	m_iColor = _color_hex;
+}
+
+void GameObject::SetColor(unsigned char _r, unsigned char _g, unsigned char _b, unsigned char _a)
+{
+	m_iColor = _r + (_g << 8) + (_b << 16) + (_a << 24);
+}
+
+void GameObject::SetColor(float _r, float _g, float _b, float _a)
+{
+	unsigned char r, g, b, a;
+
+	r = (unsigned char)(_r * 255.f);
+	g = (unsigned char)(_g * 255.f);
+	b = (unsigned char)(_b * 255.f);
+	a = (unsigned char)(_a * 255.f);
+
+	m_iColor = r + (g << 8) + (b << 16) + (a << 24);
+}
+
 void GameObject::SetPosition(Vector2 _position)
 {
 	m_v2Position = _position;
