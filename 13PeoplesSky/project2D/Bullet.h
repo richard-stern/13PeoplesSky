@@ -19,7 +19,7 @@ public:
 	//-----------------
 	// Destroys the bullet on collision
 	//-----------------
-	void OnCollision(GameObject* collidingObject);
+	void OnCollision(Actor* collidingObject);
 
 private:
 

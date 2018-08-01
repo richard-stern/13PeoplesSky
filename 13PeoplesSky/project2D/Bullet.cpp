@@ -56,9 +56,24 @@ void Bullet::Shoot(Vector2 position, Vector2 velocity)
 }
 
 //-----------------
-// Bullet is set to not visible when it collides
+// Bullet is set to not visible when it collides with an
+// enemy, health pack or a rock
 //-----------------
-void Bullet::OnCollision(GameObject* collidingObject)
+void Bullet::OnCollision(Actor* collidingObject)
 {
-	m_bVisible = false;
+	switch (collidingObject->m_pCollider.m_eLayer)
+	{
+	case(ECOLLISIONLAYER_ENEMY):
+		m_bVisible = false;
+		break;
+
+	case(ECOLLISIONLAYER_HEALTH):
+		m_bVisible = false;
+		break;
+
+	case(ECOLLISIONLAYER_ROCK):
+		m_bVisible = false;
+		break;
+	}
+	
 }
