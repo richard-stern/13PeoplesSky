@@ -31,11 +31,11 @@ void HealthPickup::OnCollision(Actor* collide)
 		break;
 	case(ECOLLISIONLAYER_PLAYER):
 		//player should also gain health, code done in player class
-		this->SetVisible = false;
+		this->SetVisible(false);
 		break;
 	case(ECOLLISIONLAYER_BULLET):
 		//bullet should also be destroyed
-		this->SetVisible = false;
+		this->SetVisible(false);
 		break;
 	case(ECOLLISIONLAYER_ROCK):
 		//bounce off
