@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\AI Behaviours">
+      <UniqueIdentifier>{27d697e4-e8b1-4715-ad8b-4ad04f0d90ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI Behaviours">
+      <UniqueIdentifier>{c7c28e5a-3a5f-46e0-98d0-bf77cbd5dadb}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\_CORE">
       <UniqueIdentifier>{557563d8-bb70-4d18-9533-369047f5e166}</UniqueIdentifier>
     </Filter>
@@ -156,6 +162,24 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BaseBehaviour.cpp">
+      <Filter>Source Files\AI Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="AvoidBehaviour.cpp">
+      <Filter>Source Files\AI Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="FleeBehaviour.cpp">
+      <Filter>Source Files\AI Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="PursueBehaviour.cpp">
+      <Filter>Source Files\AI Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="SeekBehaviour.cpp">
+      <Filter>Source Files\AI Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files\TextureManager</Filter>
     </ClCompile>
@@ -228,18 +252,26 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="BaseBehaviour.h">
+      <Filter>Header Files\AI Behaviours</Filter>
     </ClInclude>
+    <ClInclude Include="SeekBehaviour.h">
+      <Filter>Header Files\AI Behaviours</Filter>
     <ClInclude Include="BaseState.h">
       <Filter>Header Files\BaseState</Filter>
     </ClInclude>
+    <ClInclude Include="PursueBehaviour.h">
+      <Filter>Header Files\AI Behaviours</Filter>
     <ClInclude Include="MenuState.h">
       <Filter>Header Files\BaseState\MenuState</Filter>
     </ClInclude>
+    <ClInclude Include="FleeBehaviour.h">
+      <Filter>Header Files\AI Behaviours</Filter>
     <ClInclude Include="StateMachine.h">
       <Filter>Header Files\BaseState\StateMachine</Filter>
     </ClInclude>
+    <ClInclude Include="AvoidBehaviour.h">
+      <Filter>Header Files\AI Behaviours</Filter>
     <ClInclude Include="TextureManager.h">
       <Filter>Header Files\TextureManager</Filter>
     </ClInclude>
@@ -288,7 +320,7 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="GameState.h">
+    <ClInclude Include="Enemy.h">
       <Filter>Header Files\BaseState\GameState</Filter>
     </ClInclude>
     <ClInclude Include="GameOverState.h">

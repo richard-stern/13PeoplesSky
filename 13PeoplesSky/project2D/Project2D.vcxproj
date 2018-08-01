@@ -166,6 +166,10 @@
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Application2D.cpp" />
+    <ClCompile Include="AvoidBehaviour.cpp" />
+    <ClCompile Include="BaseBehaviour.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="FleeBehaviour.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="BaseState.cpp" />
     <ClCompile Include="Bullet.cpp" />
@@ -184,6 +188,8 @@
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PursueBehaviour.cpp" />
+    <ClCompile Include="SeekBehaviour.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rock.cpp" />
     <ClCompile Include="Star.cpp" />
@@ -195,6 +201,12 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Application2D.h" />
+    <ClInclude Include="AvoidBehaviour.h" />
+    <ClInclude Include="BaseBehaviour.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="FleeBehaviour.h" />
+    <ClInclude Include="PursueBehaviour.h" />
+    <ClInclude Include="SeekBehaviour.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletManager.h" />    <ClInclude Include="Camera.h" />
