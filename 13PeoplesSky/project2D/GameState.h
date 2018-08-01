@@ -1,10 +1,12 @@
 #pragma once
-#include "BaseState.h"
-class GameState :
-	public BaseState
+class GameState 
 {
 public:
 	GameState();
 	~GameState();
+	void Enter();
+	void Update();
+	void Draw();
+	void Exit();
 };
 
