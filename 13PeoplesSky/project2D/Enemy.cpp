@@ -111,7 +111,7 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 			SetWrapAndRespawn(false);
 
 			//When the enemy is destroyed, add 5 to the player score
-			GUI::GetInstance()->AddScore(5);
+			GUI::GetInstance()->AddScore(200);
 		}
 		break;
 

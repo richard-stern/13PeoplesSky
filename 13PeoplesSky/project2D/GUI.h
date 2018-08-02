@@ -13,7 +13,7 @@ private:
 	GUI(); /* private constructor to restrict initialisation */
 	~GUI(); /* destructor for memory deallocation */
 	
-	static GUI *instance; /* single instance of "this" */
+	static GUI *instance; /* single instance of "this" */ 
 
 	int health;
 	int score;

@@ -2,7 +2,7 @@
 #include "TextureManager.h"
 #include "CollisionManager.h"
 #include "Primitives.h"
-
+#include "GUI.h"
 Rock::Rock()
 {
 	//set health and max health to a random value between 2 and 4
@@ -58,7 +58,12 @@ void Rock::OnCollision(Actor* collidingObject, CollisionData* data)
 		//take damage from the bullet, bullet should also be destroyed on impact
 		ModifyHealth(-1);
 		if (GetHealth() <= 0)
+		{
 			SetVisible(false);
+			GUI::GetInstance()->AddScore(100);
+		}
+
+
 		break;
 	case(ECOLLISIONLAYER_ROCK):
 		//formula for bouncing off of other rocks
