@@ -54,19 +54,19 @@ void GameObject::Update(float _delta_time)
 			m_bVisible = true;
 			if (m_v2Position.x > camPos.x)
 			{
-				m_v2Position.x = (camRes.x / 2.f) - (camPos.x + 50.f);
+				m_v2Position.x = (camRes.x / 2.f) - (camPos.x + WRAP_OFFSET);
 			}
 			else
 			{
-				m_v2Position.x = (camRes.x / 2.f) + (camPos.x + 50.f);
+				m_v2Position.x = (camRes.x / 2.f) + (camPos.x + WRAP_OFFSET);
 			}
 			if (m_v2Position.y > camPos.y)
 			{
-				m_v2Position.y = (camRes.y / 2.f) - (camPos.y + 50.f);
+				m_v2Position.y = (camRes.y / 2.f) - (camPos.y + WRAP_OFFSET);
 			}
 			else
 			{
-				m_v2Position.y = (camRes.y / 2.f) + (camPos.y + 50.f);
+				m_v2Position.y = (camRes.y / 2.f) + (camPos.y + WRAP_OFFSET);
 			}
 		}
 	}
@@ -216,9 +216,4 @@ void GameObject::RemoveParent()
 	//	m_pParent = nullptr;
 	//}
 	m_pParent = nullptr;
-}
-
-void GameObject::OnCollision(GameObject* _other, CollisionData* _collision_data)
-{
-	//Doesn't do anything
 }

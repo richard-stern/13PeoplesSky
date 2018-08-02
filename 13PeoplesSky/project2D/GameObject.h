@@ -7,6 +7,8 @@
 #include "Vector2.h"
 #include "Matrix3.h"
 
+#define WRAP_OFFSET 40.f
+
 struct CollisionData;
 
 class GameObject
@@ -90,5 +92,5 @@ public:
 
 	//Collision Resolution
 	//This should be overwritten
-	virtual void OnCollision(GameObject* _other, CollisionData* _collision_data);
+	virtual void OnCollision(GameObject* _other, CollisionData* _collision_data) = 0;
 };
