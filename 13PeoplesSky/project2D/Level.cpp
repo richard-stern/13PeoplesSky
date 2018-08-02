@@ -20,40 +20,48 @@ Level::Level()
 			Rock* r = new Rock;
 			this->AddChild(r);
 			r->SetParent(this);
-			r->SetPosition(Vector2( j * 210.3f, i * 217.5f));
+			int randX = rand() % 200;
+			int randY = rand() % 200;
+			r->SetPosition(Vector2( j * 400.0f + randX, i * 400.0f + randY));
 		}
 	}
 	
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 4; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < 4; j++)
 		{
 			Enemy* e = new Enemy;
 			this->AddChild(e);
 			e->SetParent(this);
-			e->SetPosition(Vector2(j * 166.8f, i * 171.6f));
+			int randX = rand() % 220;
+			int randY = rand() % 225;
+			e->SetPosition(Vector2(j * 415.0f + randX, i * 445.0f + randY));
 		}
 	}
 	
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 3; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < 3; j++)
 		{
 			HealthPickup* h = new HealthPickup;
 			this->AddChild(h);
 			h->SetParent(this);
-			h->SetPosition(Vector2(j * 217.2f, i * 220.7f));
+			int randX = rand() % 230;
+			int randY = rand() % 235;
+			h->SetPosition(Vector2(j * 425.0f + randX, i * 475.0f + randY));
 		}
 	}
 	
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 1; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < 1 ; j++)
 		{
 			Star* s = new Star;
 			this->AddChild(s);
 			s->SetParent(this);
-			s->SetPosition(Vector2(j * 147.8f, i * 141.1f));
+			int randX = rand() % 240;
+			int randY = rand() % 245;
+			s->SetPosition(Vector2(j * 375.0f + randX, i * 450.0f + randY));
 		}
 	}
 
