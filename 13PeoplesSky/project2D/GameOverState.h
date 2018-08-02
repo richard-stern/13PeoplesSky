@@ -56,6 +56,6 @@ private:
 		float posX, float posY, bool selected);
 
 	void DrawCenteredText(aie::Renderer2D* pRenderer, const char* text,
-		float posX, float posY);
+		float posX, float posY, aie::Font* font = nullptr);
 };
 

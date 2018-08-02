@@ -14,7 +14,7 @@ GameOverState::GameOverState()
 	TextureManager* manager = TextureManager::GetInstance();
 	assert(manager && "Texture manager should exist!");
 
-	m_font = manager->LoadFont("./font/consolas.ttf", 36);
+	m_font = manager->LoadFont("./font/consolas.ttf", 24);
 	m_largeFont = manager->LoadFont("./font/consolas.ttf", 48);
 
 	m_upArrow = manager->LoadTexture("./textures/up_arrow.png");
@@ -27,8 +27,7 @@ GameOverState::~GameOverState() { }
 void GameOverState::Enter()
 {
 	// grab the score from the GUI
-	//m_lastScore = GUI::GetInstance()->GetScore();
-	m_lastScore = rand() % 420;
+	m_lastScore = GUI::GetInstance()->GetScore();
 
 	// score hasn't been submitted to the high scores table
 	m_hasSubmitted = false;
@@ -41,7 +40,7 @@ void GameOverState::Enter()
 	m_arrowTimer = 0.0f;
 
 	Vector2 windowSize = Camera::GetInstance()->GetResolution();
-	Camera::GetInstance()->SetPosition(windowSize.x/2, windowSize.y/2);
+	Camera::GetInstance()->SetPosition(windowSize.x / 2, windowSize.y / 2);
 }
 
 void GameOverState::Update(float fDeltaTime, StateMachine* pStateMachine)
@@ -166,19 +165,26 @@ void GameOverState::DrawNameSelection(aie::Renderer2D* pRenderer)
 
 	const float namePos = windowSize.x / 2.0f;
 	const float startPos = namePos - (wordWidth*0.5f);
+	const float letterPosY = 400.0f;
 	// draw the letters individually
 	for (int i = 0; i < NAME_LENGTH; ++i)
 	{
 		char letter = m_currentName[i];
 		float posX = startPos + i * letterWidth;
 
-		DrawLetter(pRenderer, letter, posX, 400, m_nameIndex == i);
+		DrawLetter(pRenderer, letter, posX, letterPosY, m_nameIndex == i);
 	}
 
-	DrawCenteredText(pRenderer, "Use ARROW KEYS to input your name", 
-		windowSize.x/2.0f, 60.0f);
-	DrawCenteredText(pRenderer, "Press ENTER to submit score", 
-		windowSize.x/2.0f, 30.0f);
+	DrawCenteredText(pRenderer, "You died!", windowSize.x / 2.0f,
+		windowSize.y - 150, m_largeFont);
+
+	DrawCenteredText(pRenderer, "Enter your name:", windowSize.x / 2.0f,
+		letterPosY + 60);
+
+	DrawCenteredText(pRenderer, "Use ARROW KEYS to input your name",
+		windowSize.x / 2.0f, 60.0f);
+	DrawCenteredText(pRenderer, "Press ENTER to submit score",
+		windowSize.x / 2.0f, 30.0f);
 }
 
 void GameOverState::DrawScoreList(aie::Renderer2D* pRenderer)
@@ -212,6 +218,14 @@ void GameOverState::DrawScoreList(aie::Renderer2D* pRenderer)
 	// and down the middle
 	pRenderer->drawLine(centerX, tableY, centerX, tableBottom, lineWidth);
 
+	float cell1Center = centerX - cellWidth / 2.0f;
+	float cell2Center = centerX + cellWidth / 2.0f;
+
+	DrawCenteredText(pRenderer, "Name", cell1Center, tableY);
+	DrawCenteredText(pRenderer, "Score", cell2Center, tableY);
+	DrawCenteredText(pRenderer, "HIGH SCORES", windowSize.x / 2.0f, 
+		tableY + 100, m_largeFont);
+
 	for (int i = 0; i < tableRows; ++i)
 	{
 
@@ -221,11 +235,9 @@ void GameOverState::DrawScoreList(aie::Renderer2D* pRenderer)
 		if (i >= (int)m_allScores.size())
 			continue;
 		// draw score info
-		float scoreY = tableY - 3.0f;
+		float scoreY = tableY + 4;
 		std::string scoreText = std::to_string(m_allScores[i].score);
 
-		float cell1Center = centerX - cellWidth / 2.0f;
-		float cell2Center = centerX + cellWidth / 2.0f;
 
 		DrawCenteredText(pRenderer, m_allScores[i].name.c_str(),
 			cell1Center, scoreY);
@@ -270,11 +282,14 @@ void GameOverState::DrawLetter(aie::Renderer2D* pRenderer, char letter,
 }
 
 void GameOverState::DrawCenteredText(aie::Renderer2D* pRenderer,
-	const char* text, float posX, float posY)
+	const char* text, float posX, float posY, aie::Font* font)
 {
-	float sWidth, sHeight;
-	m_font->getStringSize(text, sWidth, sHeight);
+	if (!font)
+		font = m_font;
 
-	pRenderer->drawText(m_font, text, posX - sWidth / 2.0f,
+	float sWidth, sHeight;
+	font->getStringSize(text, sWidth, sHeight);
+
+	pRenderer->drawText(font, text, posX - sWidth / 2.0f,
 		posY + sHeight / 2.0f);
 }
