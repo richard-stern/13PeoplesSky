@@ -10,8 +10,9 @@ namespace aie {
 
 Application::Application()
 	: m_window(nullptr),
-	m_gameOver(false),
-	m_fps(0) {
+	m_fps(0) 
+{
+	m_gameOver = false;
 }
 
 Application::~Application() {
