@@ -31,9 +31,9 @@ void MenuState::Enter()
 	unsigned int nWindowMiddleX = (unsigned int)m_v2WindowSize->x / 2;
 
 	// Set button positions
-	m_m3StartButton->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * (float)0.67);
-	m_m3QuitButton->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * (float)0.33);
-	m_m3GameTitle->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y - (float)32);
+	m_m3StartButton->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * (float)0.5);
+	m_m3QuitButton->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * (float)0.2);
+	m_m3GameTitle->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y - (float)96);
 
 	// Load button textures
 	TextureManager* textureMan = TextureManager::GetInstance();
@@ -45,6 +45,17 @@ void MenuState::Enter()
 
 void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 {
+	// Get resolution each frame (in case of window resize)
+	m_pCamera = Camera::GetInstance();
+	*m_v2WindowSize = m_pCamera->GetResolution();
+
+	unsigned int nWindowMiddleX = (unsigned int)m_v2WindowSize->x / 2;
+
+	// Set button positions based on window resolution (in case of window resize)
+	m_m3StartButton->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * (float)0.5);
+	m_m3QuitButton->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * (float)0.2);
+	m_m3GameTitle->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y - (float)96);
+
 	// Get input instance
 	aie::Input* pInput = aie::Input::getInstance();
 
@@ -58,12 +69,12 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 		Vector2 v2QuitButtonPosition = m_m3QuitButton->GetPosition();
 
 		// Find if mouse is over start or quit button
-		if (v2MousePos > m_m3StartButton->GetPosition() + Vector2(v2StartButtonPosition.x - 256, v2StartButtonPosition.y - 64) && v2MousePos < m_m3StartButton->GetPosition() + Vector2(v2StartButtonPosition.x + 256, v2StartButtonPosition.y + 64))
+		if (v2MousePos > Vector2(v2StartButtonPosition.x - 256, v2StartButtonPosition.y - 64) && v2MousePos < Vector2(v2StartButtonPosition.x + 256, v2StartButtonPosition.y + 64))
 		{
 			// Enter game state
 			pStateMachine->ChangeState(ESTATE_GAME);
 		}
-		else if (v2MousePos > m_m3QuitButton->GetPosition() + Vector2(v2QuitButtonPosition.x - 256, v2QuitButtonPosition.y - 64) && v2MousePos < m_m3QuitButton->GetPosition() + Vector2(v2QuitButtonPosition.x + 256, v2QuitButtonPosition.y + 64))
+		else if (v2MousePos > Vector2(v2QuitButtonPosition.x - 256, v2QuitButtonPosition.y - 64) && v2MousePos < Vector2(v2QuitButtonPosition.x + 256, v2QuitButtonPosition.y + 64))
 		{
 			// Quit application
 			Application2D::quit();
