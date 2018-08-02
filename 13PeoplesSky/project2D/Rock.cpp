@@ -26,6 +26,9 @@ Rock::Rock()
 	//Sets random velocity, change numbers as neccesary
 	SetVelocity(Vector2((float)((rand() % 50) - 25), (float)((rand() % 30) - 50)));
 
+	//Sets random rotation in radians
+	SetRotation(((float)(rand() % 32) - 16) / 10);
+
 	//Creates a collider, sets neccesary variables. 
 	PrimRectangle* collider = new PrimRectangle(64, 64);
 	collider->SetLayer(ECOLLISIONLAYER_ROCK);
