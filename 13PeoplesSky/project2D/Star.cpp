@@ -1,12 +1,17 @@
 #include "Star.h"
-
-
+#include "TextureManager.h"
 
 Star::Star()
 {
+	m_bWrapAndRespawn = true;
+	m_pTexture = TextureManager::GetInstance()->LoadTexture("./ball.png");		//loads texture from texture manager
 }
-
 
 Star::~Star()
 {
+}
+
+void Star::Draw(aie::Renderer2D* pRenderer)
+{
+	pRenderer->drawSpriteTransformed3x3(m_pTexture, (float*)m_m3GlobalMatrix);
 }
