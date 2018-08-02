@@ -23,7 +23,7 @@ Player::Player()
 	SetTexture(textureInstance->LoadTexture("./textures/ship.png"));
 		
 	// Create turret
-	m_ShipTurret = new Turret(this);
+	m_ShipTurret = new Turret();
 	this->AddChild(m_ShipTurret);
 	m_ShipTurret->SetParent(this);
 

@@ -247,4 +247,6 @@ bool Actor::WrapAndRespawn()
 		SetHealth(GetMaxHealth()); /* reset health to full */
 		SetVisible(true);
 	}
+
+	return true;
 }
