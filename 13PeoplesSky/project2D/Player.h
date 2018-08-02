@@ -32,5 +32,6 @@ public:
 protected:
 	float m_fMaxSpeed;
 	float m_fMaxRot;
+	float m_timer;
 	Turret* m_ShipTurret;
 };

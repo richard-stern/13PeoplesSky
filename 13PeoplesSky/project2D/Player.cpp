@@ -10,6 +10,7 @@
 Player::Player()
 {
 	SetVisible(true);
+	SetMaxHealth(100);
 	SetHealth(GetMaxHealth());
 	// Request the TextureManager for the ship texture 
 	// Getting TextureManager  and CollisionManager Instance
@@ -34,15 +35,14 @@ Player::Player()
 	m_fMass = 0.5f;
 	m_fDrag = 0.5f;
 
+	// Collider things ask nick for it
 	Collider* collider = new Collider;
 	auto colliderNodes = collider->GetNodes();
-
 	colliderNodes->push_back(new ColliderNode(Vector2(0, 40), 1));
 	colliderNodes->push_back(new ColliderNode(Vector2(93 / 2, -8), 2));
 	colliderNodes->push_back(new ColliderNode(Vector2(20, -40), 3));
 	colliderNodes->push_back(new ColliderNode(Vector2(-20, -40), 4));
 	colliderNodes->push_back(new ColliderNode(Vector2(-93 / 2, -8), 0));
-
 	collider->SetLayer(ECOLLISIONLAYER_PLAYER);
 	SetCollider(collider);
 	collisionMan->AddObject(this);
@@ -59,7 +59,6 @@ void Player::Update(float deltaTime)
 	// Getting instance on input and camera
 	aie::Input* input = aie::Input::getInstance();
 	Camera* m_cLevelCamera = Camera::GetInstance();
-
 
 	// resetting values
 	Vector2 v2Acceleration, v2Dampening, v2ForceSum = Vector2(0.0f, 0.0f);
@@ -135,6 +134,8 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 		//break;
 	case(ECOLLISIONLAYER_ROCK):
 		//formula for bouncing off of other rocks
+		currentPos -= data->m_v2Normal * data->m_fPenetration;
+		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
 		ModifyHealth(-1);
 		std::cout << "Player health -1, Health is " << GetHealth() << std::endl;
 		if (GetHealth() <= 0)
@@ -142,6 +143,8 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 		break;
 	case(ECOLLISIONLAYER_ENEMY):
 		//formula for bouncing off of enemies
+		currentPos -= data->m_v2Normal * data->m_fPenetration;
+		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
 		ModifyHealth(-2);
 		std::cout << "Player health -1, Health is " << GetHealth() << std::endl;
 		if (GetHealth() <= 0)
@@ -149,10 +152,12 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 		break;
 	case(ECOLLISIONLAYER_HEALTH):
 		//formula for bouncing off of health pickups
+		currentPos -= data->m_v2Normal * data->m_fPenetration;
+		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
 		ModifyHealth(2);
 		std::cout << "Player health -1, Health is " << GetHealth() << std::endl;
-		if (GetHealth() > 10)
-			SetHealth(10);
+		if (GetHealth() > 100)
+			SetHealth(GetMaxHealth());
 		break;
 	}
 	SetPosition(currentPos);
