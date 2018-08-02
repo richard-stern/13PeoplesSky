@@ -5,7 +5,9 @@
 #include "HealthPickup.h"
 #include "Star.h"
 #define STAR_COUNT 30
-
+#define HEALTH_PICKUP_COUNT 1
+#define ROCK_COUNT 10
+#define ENEMY_COUNT 5
 Level::Level()
 {
 	m_bWrapAndRespawn = false;
@@ -27,9 +29,9 @@ Level::Level()
 		}
 	}
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < ROCK_COUNT; i++)
 	{
-		for (int j = 0; j < 3; j++)
+		for (int j = 0; j < ROCK_COUNT; j++)
 		{
 			Rock* r = new Rock;
 			this->AddChild(r);
@@ -40,9 +42,9 @@ Level::Level()
 		}
 	}
 
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < HEALTH_PICKUP_COUNT; i++)
 	{
-		for (int j = 0; j < 1; j++)
+		for (int j = 0; j < HEALTH_PICKUP_COUNT; j++)
 		{
 			HealthPickup* h = new HealthPickup;
 			this->AddChild(h);
@@ -55,9 +57,9 @@ Level::Level()
 
 	Player* p = new Player;
 
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < ENEMY_COUNT; i++)
 	{
-		for (int j = 0; j < 3; j++)
+		for (int j = 0; j < ENEMY_COUNT; j++)
 		{
 			Enemy* e = new Enemy(p);
 			this->AddChild(e);
