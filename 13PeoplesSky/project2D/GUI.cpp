@@ -89,7 +89,7 @@ void GUI::DrawHealthBar(aie::Renderer2D *renderer, Vector2 resolution, Vector2 p
 
 	float healthPosX = position.x + CORNER_OFFSET_X;
 	float healthPosY = resolution.y + position.y - CORNER_OFFSET_Y;
-	float healthWidth = health * 5.6f;
+	float healthWidth = health * 56.0f;
 
 	renderer->drawSprite(healthBar, healthPosX, healthPosY);
 	renderer->setRenderColour(0x70DD54FF);
