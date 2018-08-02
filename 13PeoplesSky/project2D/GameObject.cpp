@@ -138,7 +138,7 @@ bool GameObject::GetWrapAndRespawn()
 	return m_bWrapAndRespawn;
 }
 
-void GameObject::WrapAndRespawn()
+bool GameObject::WrapAndRespawn()
 {
 	Vector2 camPos = Camera::GetInstance()->GetPosition();
 	Vector2 camRes = Camera::GetInstance()->GetResolution();
@@ -146,25 +146,31 @@ void GameObject::WrapAndRespawn()
 	camPos += Vector2{ camRes.x / 1.5f, camRes.y / 1.5f };
 
 	Vector2 distance = camPos - m_v2Position;
+	bool wrapped = false;
 
 	//X
 	if (distance.x > camRes.x)
 	{
 		m_v2Position.x += camRes.x * 1.5f;
+		wrapped = true;
 	}
 	else if (distance.x < -camRes.x)
 	{
 		m_v2Position.x -= camRes.x * 1.5f;
+		wrapped = true;
 	}
 	//Y
 	if (distance.y > camRes.y)
 	{
 		m_v2Position.y += camRes.y * 1.5f;
+		wrapped = true;
 	}
 	else if (distance.y < -camRes.y)
 	{
 		m_v2Position.y -= camRes.y * 1.5f;
+		wrapped = true;
 	}
+	return wrapped;
 }
 
 Matrix3 GameObject::GetGlobalTransform()

@@ -79,7 +79,7 @@ public:
 
 	void SetWrapAndRespawn(bool _wrap_and_respawn);
 	bool GetWrapAndRespawn();
-	virtual void WrapAndRespawn();
+	virtual bool WrapAndRespawn();
 
 	Matrix3 GetGlobalTransform();
 	Matrix3 GetLocalTransform();
