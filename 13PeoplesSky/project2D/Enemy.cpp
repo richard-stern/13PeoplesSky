@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "Rock.h"
-#include "Bullet.h
+#include "Bullet.h"
 #include "TextureManager.h"
 #include "PursueBehaviour.h"
 #include "AvoidBehaviour.h"
