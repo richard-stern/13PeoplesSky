@@ -5,7 +5,7 @@ class BaseState
 {
 public:
 	BaseState();
-	~BaseState();
+	virtual ~BaseState();
 
 	//----------------------------------------------
 	// Enter
