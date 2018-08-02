@@ -23,13 +23,9 @@ Turret::~Turret()		//cleanup
 void Turret::Update(float fDeltaTime)
 {
 	aie::Input* input = aie::Input::getInstance();		//gets the input instance
-	float fRot = GetRotation();		//gets rotation for bullet trajectory
 
-	if (input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT))		//checks for LMB input
-	{
-		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fRot), sinf(fRot)));		//calls the shoot function in the bullet manager
-	}
 
+	//gets rotation for both player rotation and bullet trajectory
 	Vector2 mousePos = Camera::GetInstance()->GetPosition();
 	mousePos.x += input->getMouseX();
 	mousePos.y += input->getMouseY();
@@ -38,8 +34,13 @@ void Turret::Update(float fDeltaTime)
 	v2Diff = mousePos - GetGlobalTransform().GetPosition();
 
 	float fTurn = (float)atan2(v2Diff.y, v2Diff.x);		//gets new rotation
-	//m_m3LocalMatrix.SetRotate2D(fTurn);		//sets the new rotation
-	m_fRotation = fTurn - M_PI/2;
+
+	if (input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT))		//checks for LMB input
+	{
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn), sinf(fTurn)));		//calls the shoot function in the bullet manager
+	}
+
+	m_fRotation = fTurn - M_PI/2;		//sets the new rotation
 	Actor::Update(fDeltaTime);		//update the actor
 }
 
