@@ -6,15 +6,15 @@
 #include "Star.h"
 #define STAR_COUNT 30
 #define HEALTH_PICKUP_COUNT 1
-#define ROCK_COUNT 10
-#define ENEMY_COUNT 5
+#define ROCK_COUNT 3
+#define ENEMY_COUNT 2
 Level::Level()
 {
 	m_bWrapAndRespawn = false;
 
 	for (int i = 0; i < STAR_COUNT; i++)
 	{
-		for (int j = 0; j < STAR_COUNT; j++)
+		for (int j = 0; j < STAR_COUNT; j++) 
 		{
 			Star* s = new Star;
 			this->AddChild(s); 
