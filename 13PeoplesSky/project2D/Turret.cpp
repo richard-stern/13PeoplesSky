@@ -6,10 +6,11 @@
 #include "TextureManager.h"
 #include "BulletManager.h"
 #include "Camera.h"
+#include "Player.h"
 
-Turret::Turret() : Actor()
+Turret::Turret(Player* pPlayer) : Actor()
 {
-	m_pBullets = new BulletManager();
+	m_pBullets = new BulletManager(pPlayer);		//makes new bullet pool and passes in a player pointer
 	AddChild(m_pBullets);		//adds bullets to child list for updating
 	m_bWrapAndRespawn = false;		//stops bullets from wrapping around the screen
 	m_pTexture = TextureManager::GetInstance()->LoadTexture("./textures/BarrelBlue.png");		//loads texture from texture manager
@@ -40,7 +41,7 @@ void Turret::Update(float fDeltaTime)
 		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn), sinf(fTurn)));		//calls the shoot function in the bullet manager
 	}
 
-	m_fRotation = fTurn - M_PI/2 - m_pParent->GetRotation();		//sets the new rotation
+	m_fRotation = fTurn - (float)M_PI/2.0f - m_pParent->GetRotation();		//sets the new rotation
 	Actor::Update(fDeltaTime);		//update the actor
 }
 

@@ -2,11 +2,12 @@
 #include "Renderer2D.h"
 #include "Actor.h"
 class BulletManager;
+class Player;
 
 class Turret : public Actor
 {
 public:
-	Turret();		//default constuctor that sets position
+	Turret(Player* pPlayer);		//constuctor that sets position and takes in a player pointer to give to the bullets
 	~Turret();
 
 	void Update(float fDeltaTime);		//updates the turrets rotation, checks for shoot input
