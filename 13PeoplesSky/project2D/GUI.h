@@ -23,6 +23,8 @@ public:
 	static void Destroy();
 	
 	static GUI *GetInstance(); /* retrieve single instance of GUI class */
+
+	void Reset(); /* Resets GUI to initialised values */
 	
 	void Draw(aie::Renderer2D *renderer); /* draw the UI */
 	void DrawHealthBar(aie::Renderer2D *renderer, Vector2 resolution, Vector2 position);

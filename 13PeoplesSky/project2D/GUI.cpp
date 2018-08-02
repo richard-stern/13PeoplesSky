@@ -53,6 +53,17 @@ void GUI::Destroy()
 }
 
 /*
+Function:	 Reset
+Description: Resets GUI to initialised values
+*/
+void GUI::Reset()
+{
+	health = 10;
+	score = 0;
+	lives = 3;
+}
+
+/*
 Function:	 Draw
 Input/s:	 Renderer2D
 Description: Draws the graphical user interface
