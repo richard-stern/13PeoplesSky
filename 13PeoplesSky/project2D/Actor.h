@@ -6,20 +6,21 @@
 class Actor : public GameObject
 {
 private:
-	Collider m_pCollider; /* actor collider */
+	Collider *m_pCollider; /* actor collider */
 
 	/* health variables */
 	int m_nHealth; /* current */
 	int m_nMaxHealth; /* max */
 
+	/* flag which indicates whether the actor has experienced a collision */
+	bool m_bCollidedThisFrame;
+
+protected:
 	/* physics variables */
 	Vector2 m_v2Velocity;
 	float m_fAngularVelocity;
 	float m_fDrag;
 	float m_fMass;
-
-	/* flag which indicates whether the actor has experienced a collision */
-	bool m_bCollidedThisFrame;
 
 public:
 	Actor(); /* default constructor */
@@ -30,14 +31,15 @@ public:
 	virtual void OnCollision(Actor *collidingObject) = 0; /* pure virtual OnCollision function */
 
 	/* collider get/set */
-	Collider GetCollider();
-	void SetCollider(Collider collider);
+	Collider* GetCollider();
+	void SetCollider(Collider *collider);
 
 	/* health get/set */
 	int GetHealth();
 	void SetHealth(int health);
 	int GetMaxHealth();
 	void SetMaxHealth(int maxHealth);
+	void ModifyHealth(int value);
 
 	/* collidedThisFrame get/set */
 	bool GetCollidedThisFrame();

@@ -16,6 +16,11 @@ Actor::Actor(Matrix3 m_m3StartPosition)
 
 Actor::~Actor()
 {
+	if (m_pCollider)
+	{
+		delete m_pCollider;
+		m_pCollider = nullptr;
+	}
 }
 
 /*
@@ -34,7 +39,7 @@ void Actor::Update(float deltaTime)
 	m_m3LocalMatrix = rotation * translation; /* update local transform */
 
 	GameObject::Update(deltaTime); /* call base object update */
-	m_pCollider.UpdateBounds(&m_m3GlobalMatrix); /* update collision settings */
+	m_pCollider->UpdateBounds(&m_m3GlobalMatrix); /* update collision settings */
 }
 
 /*
@@ -42,7 +47,7 @@ Function:	 GetCollider
 Output:		 Collider
 Description: Retrieve actor's collider
 */
-Collider Actor::GetCollider()
+Collider* Actor::GetCollider()
 {
 	return m_pCollider;
 }
@@ -52,7 +57,7 @@ Function:	 SetCollider
 Input/s:	 Collider
 Description: Set actor's collider
 */
-void Actor::SetCollider(Collider collider)
+void Actor::SetCollider(Collider *collider)
 {
 	m_pCollider = collider;
 }
@@ -95,6 +100,17 @@ Description: Set actor's health
 void Actor::SetMaxHealth(int maxHealth)
 {
 	m_nMaxHealth = maxHealth;
+}
+
+/*
+Function:	 ModifyHealth
+Input/s:	 int
+Description: Takes in either a positive/negative integer value, and increments/decrements
+accordingly
+*/
+void Actor::ModifyHealth(int value)
+{
+	m_nHealth += value;
 }
 
 /*
