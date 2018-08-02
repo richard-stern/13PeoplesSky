@@ -6,6 +6,7 @@
 #include "CollisionManager.h"
 
 class Turret;
+class Collider;
 struct CollisionData;
 
 class Player : public Actor
@@ -26,15 +27,13 @@ public:
 	//			Calculating player's velocity and rotation(TODO)
 	//			Setting Camera's position to move with the player
 	//-----------------------------------------------------------//
-	void update(float deltTime);
-
-	// Just renders player for now
-	void draw(aie::Renderer2D* pRenderer);
-
+	void Update(float deltTime);
+	
 	// Does nothing at the moment
 	void OnCollision(Actor* collidingObject, CollisionData* data);
 
 protected:
 	float m_fMaxSpeed;
+	float m_fMaxRot;
 	Turret* m_ShipTurret;
 };
