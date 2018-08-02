@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "CollisionManager.h"
 #include "StateMachine.h"
+#include "Camera.h"
 GameState::GameState()
 {
 	level = nullptr;
@@ -29,6 +30,7 @@ void GameState::Update(float fDeltaTime, StateMachine* pStateMachine)
 {
 	level->Update(fDeltaTime);
 	CollisionManager::GetInstance()->Update();
+	Camera::GetInstance()->Update(fDeltaTime);
 	int lives = GUI::GetInstance()->GetLives();
 	if (lives <= 0)
 	{
