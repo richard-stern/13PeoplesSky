@@ -8,6 +8,8 @@
 #include "StateMachine.h"
 #include "CollisionManager.h"
 
+#include <imgui.h>
+
 Application2D::Application2D() 
 {
 	
@@ -99,4 +101,25 @@ void Application2D::draw()
 
 	// done drawing sprites
 	m_2dRenderer->end();
+
+	// IMGUI DEBUG STUFF
+	ImGui::Begin("DebugMouseGUI##0");
+	// Show FPS
+	ImGui::Text("%.1f FPS", ImGui::GetIO().Framerate);
+	ImGui::Separator();
+
+	// Mouse Pos
+	ImGui::Text("Mouse Position");
+
+	aie::Input* input = aie::Input::getInstance();
+	Vector2 mousePos = Camera::GetInstance()->GetPosition();
+	mousePos.x += input->getMouseX();
+	mousePos.y += input->getMouseY();
+
+	ImGui::Text("X Pos = %f", mousePos.x);
+	ImGui::SameLine();
+	ImGui::Text("Y Pos = %f", mousePos.y);
+
+
+	ImGui::End();
 }
