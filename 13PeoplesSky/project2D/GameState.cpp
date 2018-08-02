@@ -23,7 +23,7 @@ GameState::~GameState()
 void GameState::Enter()
 {
 	level = new Level;
-	GUI::GetInstance();
+	GUI::GetInstance()->Reset();
 }
 
 void GameState::Update(float fDeltaTime, StateMachine* pStateMachine)
@@ -31,7 +31,21 @@ void GameState::Update(float fDeltaTime, StateMachine* pStateMachine)
 	level->Update(fDeltaTime);
 	CollisionManager::GetInstance()->Update();
 	Camera::GetInstance()->Update(fDeltaTime);
-	int lives = GUI::GetInstance()->GetLives();
+	auto gui = GUI::GetInstance();
+
+	int health = gui->GetHealth();
+	int lives = gui->GetLives();
+
+	if (health <= 0)
+	{
+		lives--;
+		gui->SetLives(lives);
+
+		// RESET level ... poor mans way
+		delete level;
+		level = new Level;
+	}
+
 	if (lives <= 0)
 	{
 		pStateMachine->ChangeState(ESTATE_GAMEOVER);
@@ -46,8 +60,6 @@ void GameState::Draw(aie::Renderer2D* pRenderer)
 
 void GameState::Exit()
 {
-	GUI::Destroy();
-
 	if (level)
 	{
 		delete level;
