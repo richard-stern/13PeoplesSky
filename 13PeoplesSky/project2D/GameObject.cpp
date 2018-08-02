@@ -44,15 +44,15 @@ void GameObject::Update(float _delta_time)
 		Vector2 distance = camPos - m_v2Position;
 
 		//X
-		if(distance.x > camRes.x / 2.f)
-			m_v2Position.x += camRes.x;
-		else if(distance.x < -camRes.x / 2.f)
-			m_v2Position.x -= camRes.x;
+		if(distance.x > camRes.x)
+			m_v2Position.x += camRes.x * 2.f;
+		else if(distance.x < -camRes.x)
+			m_v2Position.x -= camRes.x * 2.f;
 		//Y
-		if (distance.y > camRes.y / 2.f)
-			m_v2Position.y += camRes.y;
-		else if(distance.y < -camRes.y / 2.f)
-			m_v2Position.y -= camRes.y;
+		if (distance.y > camRes.y)
+			m_v2Position.y += camRes.y * 2.f;
+		else if(distance.y < -camRes.y)
+			m_v2Position.y -= camRes.y * 2.f;
 	}
 	//Update all of our children
 	for (auto iter = m_Children.begin(); iter != m_Children.end(); ++iter)
