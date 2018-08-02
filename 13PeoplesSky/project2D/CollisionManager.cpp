@@ -53,7 +53,7 @@ void CollisionManager::RemoveObject(Actor* pActor)
 	std::vector<Actor*>& actorsRef = *m_actors;
 
 	// Iterate through all actors and remove the matching pointer.
-	for(int i = 0; i < actorsRef.size(); ++i)
+	for(unsigned int i = 0; i < actorsRef.size(); ++i)
 	{
 		if (actorsRef[i] == pActor)
 		{
@@ -68,7 +68,7 @@ void CollisionManager::Update()
 	std::vector<Actor*>& actorsRef = *m_actors;
 
 	// Iterate through all actors...
-	for (int i = 0; i < actorsRef.size(); ++i)
+	for (unsigned int i = 0; i < actorsRef.size(); ++i)
 	{
 		Actor* currentActor = actorsRef[i];
 		Collider* currentCollider = currentActor->GetCollider(); // Will be replaced with GetCollider()
@@ -76,7 +76,7 @@ void CollisionManager::Update()
 		if (true && currentCollider->GetLayer() != ECOLLISIONLAYER_NONE) // "true" will be replaced with actor is visible..
 		{
 			// Iterate through all other objects...
-			for (int j = 0; j < actorsRef.size(); ++j)
+			for (unsigned int j = 0; j < actorsRef.size(); ++j)
 			{
 				Actor* otherActor = actorsRef[j];
 				Collider* otherCollider = otherActor->GetCollider();
@@ -106,7 +106,7 @@ CollisionData CollisionManager::RunCollisionTest(Actor* pActor1, Actor* pActor2,
 	const std::vector<ColliderNode*>& collider2Nodes = *pCollider2->GetNodes();
 
 	// Iterate through all vertices of both colliders combined.
-	for (int i = 0; i < (collider1Nodes.size() + collider2Nodes.size()); ++i)
+	for (unsigned int i = 0; i < (collider1Nodes.size() + collider2Nodes.size()); ++i)
 	{
 		m_shape1Projections->clear();
 		m_shape2Projections->clear();
@@ -153,7 +153,7 @@ CollisionData CollisionManager::RunCollisionTest(Actor* pActor1, Actor* pActor2,
 
 		float fShape1CloseDist = INFINITY;
 		float fShape1FurthDist = -INFINITY;
-		for (int j = 0; j < collider1Nodes.size(); ++j) 
+		for (unsigned int j = 0; j < collider1Nodes.size(); ++j)
 		{
 			float fProjection = (pActor1->GetPosition() + collider1Nodes[j]->m_v2Offset).dot(v2Axis);
 
@@ -169,7 +169,7 @@ CollisionData CollisionManager::RunCollisionTest(Actor* pActor1, Actor* pActor2,
 
 		float fShape2CloseDist = INFINITY;
 		float fShape2FurthDist = -INFINITY;
-		for (int j = 0; j < collider2Nodes.size(); ++j)
+		for (unsigned int j = 0; j < collider2Nodes.size(); ++j)
 		{
 			float fProjection = (pActor2->GetPosition() + collider2Nodes[j]->m_v2Offset).dot(v2Axis);
 

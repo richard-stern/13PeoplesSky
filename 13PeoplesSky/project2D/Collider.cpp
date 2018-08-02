@@ -28,7 +28,7 @@ Collider::Collider()
 
 Collider::~Collider() 
 {
-	for (int i = 0; i < m_nodes->size(); ++i) 
+	for (unsigned int i = 0; i < m_nodes->size(); ++i)
 	{
 		delete (*m_nodes)[i];
 	}
@@ -41,7 +41,7 @@ void Collider::UpdateBounds(Matrix3* pObjMatrix)
 	std::vector<ColliderNode*>& nodesRef = *m_nodes;
 
 	// Iterate through all nodes and multiply their offsets by the parent object's matrix.
-	for (int i = 0; i < nodesRef.size(); ++i)
+	for (unsigned int i = 0; i < nodesRef.size(); ++i)
 	{
 		ColliderNode& currentNode = *nodesRef[i];
 
@@ -76,7 +76,7 @@ void Collider::DrawCollider(Vector2 v2Origin ,aie::Renderer2D* pRenderer)
 	std::vector<ColliderNode*>& nodesRef = *m_nodes;
 
 	// Iterate through all nodes and call drawLine() using their offsets.
-	for (int i = 0; i < nodesRef.size(); ++i)
+	for (unsigned int i = 0; i < nodesRef.size(); ++i)
 	{
 		// Get current node and its connected node.
 		ColliderNode& currentNode = *nodesRef[i];
