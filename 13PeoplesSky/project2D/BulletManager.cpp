@@ -45,3 +45,8 @@ void BulletManager::Update(float deltaTime)
 	}*/
 	GameObject::Update(deltaTime);
 }
+
+void BulletManager::Draw(aie::Renderer2D* pRenderer)
+{
+	GameObject::Draw(pRenderer);
+}

@@ -13,7 +13,7 @@ Bullet::Bullet()
 	m_fDrag = 0.0f;
 
 	TextureManager* textureMan = TextureManager::GetInstance();
-	m_pTexture = textureMan->LoadTexture("./textures/bullet");	
+	m_pTexture = textureMan->LoadTexture("./textures/bullet.png");	
 
 	Collider* collider = new Collider();
 
@@ -55,9 +55,10 @@ void Bullet::Update(float deltaTime)
 //-----------------
 void Bullet::Shoot(Vector2 position, Vector2 velocity)
 {
-	m_m3LocalMatrix.SetPosition(position);
-	m_v2Velocity = velocity;
+	m_v2Position = position;
+	m_v2Velocity = velocity * 100;
 	m_bVisible = true;
+	GetCollider()->UpdateBounds(&m_m3GlobalMatrix);
 }
 
 //-----------------

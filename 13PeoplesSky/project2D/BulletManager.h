@@ -21,6 +21,7 @@ public:
 	void ShootBullet(Vector2 position, Vector2 velocity);
 
 	void Update(float deltaTime);
+	void Draw(aie::Renderer2D* pRenderer);
 
 	Bullet** m_bulletPool;
 };
