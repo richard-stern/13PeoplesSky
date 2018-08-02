@@ -21,10 +21,10 @@ public:
 	float GetMaxSpeed();
 
 protected:
+	//The speed at which the enemy will move
 	float m_maxSpeed = 300.0f;
 	float m_distBetween;
 
 	PursueBehaviour* m_pursue;
 	AvoidBehaviour* m_avoid;
 };
-

@@ -14,4 +14,3 @@ public:
 
 	SeekBehaviour* m_seek;
 };
-

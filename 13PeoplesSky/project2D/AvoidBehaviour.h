@@ -14,4 +14,3 @@ public:
 
 	FleeBehaviour* m_flee;
 };
-

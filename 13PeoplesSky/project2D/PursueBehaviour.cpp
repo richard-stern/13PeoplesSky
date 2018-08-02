@@ -28,7 +28,7 @@ Vector2 PursueBehaviour::update(Actor* pTarget, Enemy* pPursuer)
 		return m_seek->update(pTarget, pPursuer);
 	}
 
-	//Here we are almost looking into the future to see where the pursued object is going to be in the future, and we will be seeking that location
+	//Here we are seeing where the pursued object is going to be in the future, and we will be seeking that location
 	double LookAheadTime = ToPlayer.magnitude() / (pPursuer->GetMaxSpeed() + pTarget->GetVelocity().magnitude());
 
 	return m_seek->update(pTarget->GetPosition() + pTarget->GetVelocity() * LookAheadTime, pPursuer);

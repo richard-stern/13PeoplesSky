@@ -15,4 +15,3 @@ public:
 
 	float m_weighting;
 };
-

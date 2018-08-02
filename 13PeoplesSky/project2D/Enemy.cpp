@@ -25,6 +25,9 @@ Enemy::Enemy()
 	PrimRectangle* collider = new PrimRectangle(36, 42);
 	collider->SetLayer(ECOLLISIONLAYER_ENEMY);
 	SetCollider(collider);
+
+	//Making sure the enemy is actually drawn to start with
+	SetVisible(true);
 }
 
 Enemy::~Enemy()
