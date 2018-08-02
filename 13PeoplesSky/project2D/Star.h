@@ -7,6 +7,5 @@ public:
 	~Star();
 
 	void Draw(aie::Renderer2D* pRenderer);		//draws the star
-	inline void OnCollision(GameObject* _other) {};		//does nothing, needed for override
 };
 

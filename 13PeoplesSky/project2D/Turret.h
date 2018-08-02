@@ -1,7 +1,7 @@
 #pragma once
 #include "Renderer2D.h"
 #include "Actor.h"
-#include "BulletManager.h"
+class BulletManager;
 
 class Turret : public Actor
 {

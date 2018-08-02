@@ -3,6 +3,7 @@
 #include "Matrix3.h"
 #include <math.h>
 #include "TextureManager.h"
+#include "BulletManager.h"
 
 Turret::Turret() : Actor()
 {
@@ -21,7 +22,7 @@ void Turret::Update(float fDeltaTime)
 	aie::Input* input = aie::Input::getInstance();		//gets the input instance
 	float fRot = GetRotation();		//gets rotation for bullet trajectory
 
-	if (input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT));		//checks for LMB input
+	if (input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT))		//checks for LMB input
 	{
 		m_pBullets->ShootBullet(GetPosition(), Vector2(cosf(fRot), sinf(fRot)));		//calls the shoot function in the bullet manager
 	}
