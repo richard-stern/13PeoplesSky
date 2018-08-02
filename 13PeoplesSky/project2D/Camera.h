@@ -17,7 +17,7 @@ public:
 	static void Destroy();
 	void SetPosition(float x, float y);
 	void SetPosition(Vector2 position);
-	void UpdateShake(float deltatime);
+	void Update(float deltatime);
 	void AddShakeDuration(float duration);
 	void SetShakeDuration(float duration);
 	void SetResolution(Vector2 resolution);
