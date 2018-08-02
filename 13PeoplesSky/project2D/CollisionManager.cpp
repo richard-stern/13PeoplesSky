@@ -94,7 +94,7 @@ void CollisionManager::Update()
 
 						// Run OnCollision() functions.
 						currentActor->OnCollision(otherActor, &data);
-						otherActor->OnCollision(currentActor, &data);
+						//otherActor->OnCollision(currentActor, &data);
 					}
 				}
 			}
@@ -224,7 +224,7 @@ CollisionData CollisionManager::RunCollisionTest(Actor* pActor1, Actor* pActor2,
 	}
 
 	// Swap collision normal and edge directions if the object direction indicates one object is above and to the right of another (dot product returns < 0).
-	if (v2ObjectDir.dot(data.m_v2Normal) < 0.0f)
+	if (v2ObjectDir.dot(data.m_v2Normal) > 0.0f)
 		data.m_v2Normal = -data.m_v2Normal;
 
 	return data; // At this point the collision was probably successful.
