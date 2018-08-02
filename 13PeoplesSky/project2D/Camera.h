@@ -1,7 +1,7 @@
 #pragma once
 #include "Vector2.h"
 
-#define SHAKE_MAGNITUDE 5.0f
+#define SHAKE_MAGNITUDE 3.0f
 
 class Camera
 {

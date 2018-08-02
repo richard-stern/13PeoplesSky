@@ -27,8 +27,6 @@ void Camera::SetPosition(float x, float y)
 {
 	m_CameraPosition.x = x - (m_Resolution.x * 0.5f);
 	m_CameraPosition.y = y - (m_Resolution.y * 0.5f);
-
-	Update(0.017f);
 }
 
 void Camera::SetPosition(Vector2 position)
