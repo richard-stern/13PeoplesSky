@@ -1,4 +1,4 @@
-#include "Primatives.h"
+#include "Primitives.h"
 #include "Vector2.h"
 
 // Rectangle
