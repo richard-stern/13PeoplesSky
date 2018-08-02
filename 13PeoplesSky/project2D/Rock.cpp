@@ -6,7 +6,7 @@ Rock::Rock()
 {
 	//set health and max health to a random value between 2 and 4
 	this->SetMaxHealth((rand() % 3) + 1);
-	this->SetHealth = this->GetMaxHealth();
+	this->SetHealth(this->GetMaxHealth());
 
 	//get instance of texture manager
 	TextureManager* textureMan = TextureManager::GetInstance();
