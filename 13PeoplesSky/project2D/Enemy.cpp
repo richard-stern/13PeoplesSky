@@ -36,6 +36,8 @@ Enemy::Enemy(Player* pPlayer) : Actor()
 
 	//Making sure the enemy is actually drawn to start with
 	SetVisible(true);
+
+	SetWrapAndRespawn(true);
 }
 
 Enemy::~Enemy()
