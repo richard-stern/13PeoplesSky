@@ -33,5 +33,7 @@ protected:
 	float m_fMaxSpeed;
 	float m_fMaxRot;
 	float m_timer;
+	float m_fCollisionTime;
+	float m_fRotationDrag;
 	Turret* m_ShipTurret;
 };
