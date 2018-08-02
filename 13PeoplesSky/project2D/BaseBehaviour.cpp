@@ -12,13 +12,3 @@ BaseBehaviour::BaseBehaviour()
 BaseBehaviour::~BaseBehaviour()
 {
 }
-
-Vector2 BaseBehaviour::GetHeading()
-{
-	Matrix3 heading;
-	Vector2 facing;
-
-	facing = heading.GetFacing2D();
-	
-	return facing;
-}

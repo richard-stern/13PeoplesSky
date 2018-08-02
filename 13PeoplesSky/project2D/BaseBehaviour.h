@@ -13,8 +13,6 @@ public:
 
 	virtual Vector2 update(Actor* pActor, Enemy* pEnemy) = 0;
 
-	Vector2 GetHeading();
-
 	float m_weighting;
 };
 
