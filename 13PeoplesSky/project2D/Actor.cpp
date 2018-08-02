@@ -114,6 +114,86 @@ void Actor::ModifyHealth(int value)
 }
 
 /*
+Function:	 GetVelocity
+Output:		 Vector2
+Description: Retrieves actor's velocity
+*/
+Vector2 Actor::GetVelocity()
+{
+	return m_v2Velocity;
+}
+
+/*
+Function:	 SetVelocity
+Input/s:	 Vector2
+Description: Set actor's velocity
+*/
+void Actor::SetVelocity(Vector2 velocity)
+{
+	m_v2Velocity = velocity;
+}
+
+/*
+Function:	 GetAngularVelocity
+Output:		 float
+Description: Retrieves actor's angular velocity
+*/
+float Actor::GetAngularVelocity()
+{
+	return m_fAngularVelocity;
+}
+
+/*
+Function:	 SetAngularVelocity
+Input/s:	 float
+Description: Sets actor's angular velocity
+*/
+void Actor::SetAngularVelocity(float angularVelocity)
+{
+	m_fAngularVelocity = angularVelocity;
+}
+
+/*
+Function:	 GetDrag
+Output:		 float
+Description: Retrieves actor's drag
+*/
+float Actor::GetDrag()
+{
+	return m_fDrag;
+}
+
+/*
+Function:	 SetDrag
+Input/s:	 float
+Description: Sets actor's angular velocity
+*/
+void Actor::SetDrag(float drag)
+{
+	m_fDrag = drag;
+}
+
+/*
+Function:	 GetMass
+Output:		 float
+Description: Retrieves actor's mass
+*/
+float Actor::GetMass()
+{
+	return m_fMass;
+}
+
+/*
+Function:	 SetMass
+Input/s:	 float
+Description: Sets actor's mass
+*/
+void Actor::SetMass(float mass)
+{
+	m_fMass = mass;
+}
+
+/*
 Function:	 GetCollidedThisFrame
 Output:		 bool
 Description: Retrieve actor's collidedThisFrame flag

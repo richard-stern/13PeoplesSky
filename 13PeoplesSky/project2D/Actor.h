@@ -43,6 +43,16 @@ public:
 	void SetMaxHealth(int maxHealth);
 	void ModifyHealth(int value);
 
+	/* physics get/set */
+	Vector2 GetVelocity();
+	void SetVelocity(Vector2 velocity);
+	float GetAngularVelocity();
+	void SetAngularVelocity(float angularVelocity);
+	float GetDrag();
+	void SetDrag(float drag);
+	float GetMass();
+	void SetMass(float mass);
+
 	/* collidedThisFrame get/set */
 	bool GetCollidedThisFrame();
 	void SetCollidedThisFrame(bool toggle);
