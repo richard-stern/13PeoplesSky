@@ -2,7 +2,7 @@
 #include "GUI.h"
 #include "Level.h"
 #include "CollisionManager.h"
-
+#include "StateMachine.h"
 GameState::GameState()
 {
 	level = nullptr;
@@ -29,6 +29,11 @@ void GameState::Update(float fDeltaTime, StateMachine* pStateMachine)
 {
 	level->Update(fDeltaTime);
 	CollisionManager::GetInstance()->Update();
+	int lives = GUI::GetInstance()->GetLives();
+	if (lives <= 0)
+	{
+		pStateMachine->ChangeState(ESTATE_GAMEOVER);
+	}
 }
 
 void GameState::Draw(aie::Renderer2D* pRenderer)
