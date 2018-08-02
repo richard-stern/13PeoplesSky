@@ -26,12 +26,12 @@ protected:
 	Matrix3 m_m3LocalMatrix;
 	Matrix3 m_m3GlobalMatrix;
 
-	Vector2 m_v2Velocity;
-	//DEFAULT: 1.f
-	float m_fDrag;
-	//DEFAULT: 10.f
-	//Object weight to be considered in collision
-	float m_fMass;
+	//Vector2 m_v2Velocity;
+	////DEFAULT: 1.f
+	//float m_fDrag;
+	////DEFAULT: 10.f
+	////Object weight to be considered in collision
+	//float m_fMass;
 
 	//DEFAULT: true
 	//Should the object be drawn
@@ -69,15 +69,6 @@ public:
 
 	void SetRotation(float _rotation);
 	float GetRotation();
-
-	void SetVelocity(Vector2 _velocity);
-	Vector2 GetVelocity();
-
-	void SetDrag(float _drag);
-	float GetDrag();
-
-	void SetMass(float _mass);
-	float GetMass();
 
 	void SetVisible(bool _visible);
 	bool GetVisible();

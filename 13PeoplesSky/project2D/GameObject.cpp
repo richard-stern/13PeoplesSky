@@ -8,12 +8,9 @@ GameObject::GameObject(Vector2 _spawn_position)
 	m_iColor = 0xFFFFFFFF; //White
 	
 	m_v2Position = _spawn_position;
-	m_v2Velocity = Vector2{ 0.f,0.f };
 	//m_m3GlobalMatrix.SetPosition(_spawn_position);
 	m_v2Scale = Vector2{ 1.f,1.f };
 	m_fRotation = 0.f;
-
-	m_fDrag = 1.f;
 
 	m_bVisible = true;
 	m_bWrapAndRespawn = true;
@@ -33,9 +30,6 @@ GameObject::~GameObject()
 
 void GameObject::Update(float _delta_time)
 {
-	//Update our position and drag
-	m_v2Position += m_v2Velocity * _delta_time;
-	m_v2Velocity *= m_fDrag;
 	//Construct matrix
 	Matrix3 pos, rot, sca;
 	pos.SetPosition(m_v2Position);
@@ -127,36 +121,6 @@ void GameObject::SetRotation(float _rotation)
 float GameObject::GetRotation()
 {
 	return m_fRotation;
-}
-
-void GameObject::SetVelocity(Vector2 _velocity)
-{
-	m_v2Velocity = _velocity;
-}
-
-Vector2 GameObject::GetVelocity()
-{
-	return m_v2Velocity;
-}
-
-void GameObject::SetDrag(float _drag)
-{
-	m_fDrag = _drag;
-}
-
-float GameObject::GetDrag()
-{
-	return m_fDrag;
-}
-
-void GameObject::SetMass(float _mass)
-{
-	m_fMass = _mass;
-}
-
-float GameObject::GetMass()
-{
-	return m_fMass;
 }
 
 void GameObject::SetVisible(bool _visible)
