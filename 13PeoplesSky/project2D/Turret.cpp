@@ -27,7 +27,7 @@ void Turret::Update(float fDeltaTime)
 		m_pBullets->ShootBullet(GetPosition(), Vector2(cosf(fRot), sinf(fRot)));		//calls the shoot function in the bullet manager
 	}
 
-	float fTurn = atan2(input->getMouseY(), input->getMouseX());		//gets new rotation
+	float fTurn = (float)atan2(input->getMouseY(), input->getMouseX());		//gets new rotation
 
 	m_m3LocalMatrix.SetRotate2D(fTurn);		//sets the new rotation
 
