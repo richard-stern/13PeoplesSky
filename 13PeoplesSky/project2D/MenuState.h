@@ -55,5 +55,7 @@ private:
 	Vector2* m_v2ButtonSize;
 	Vector2* m_v2TitleSize;
 
+	bool m_bExiting;
+
 	Camera* m_pCamera;
 };

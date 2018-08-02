@@ -18,6 +18,8 @@ void MenuState::Enter()
 	// Get camera instance
 	m_pCamera = Camera::GetInstance();
 
+	m_bExiting = false;
+
 	// Get window width/height
 	m_v2WindowSize = new Vector2();
 	m_v2ButtonSize = new Vector2();
@@ -69,6 +71,7 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 	// Get input instance
 	aie::Input* pInput = aie::Input::getInstance();
 
+	// If left mouse button was clicked, find which button the mouse was over if any
 	if (pInput->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT))
 	{
 		// Store mouse position in Vector2
@@ -89,6 +92,7 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 		else if (v2MousePos > Vector2(v2QuitButtonPosition.x - v2HalfButtonSize.x, v2QuitButtonPosition.y - v2HalfButtonSize.y) && v2MousePos < Vector2(v2QuitButtonPosition.x + v2HalfButtonSize.x, v2QuitButtonPosition.y + v2HalfButtonSize.y))
 		{
 			// Quit application
+			Exit();
 			Application2D::quit();
 		}
 	}
@@ -96,17 +100,21 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 
 void MenuState::Draw(aie::Renderer2D* pRenderer)
 {
-	// Draw start button
-	pRenderer->drawSpriteTransformed3x3(m_pStartTexture, (float*)m_m3StartButton, m_v2ButtonSize->x, m_v2ButtonSize->y);
-	
-	// Draw quit button
-	pRenderer->drawSpriteTransformed3x3(m_pQuitTexture, (float*)m_m3QuitButton, m_v2ButtonSize->x, m_v2ButtonSize->y);
+	// Don't try to draw if menu is exiting
+	if (!m_bExiting)
+	{
+		// Draw start button
+		pRenderer->drawSpriteTransformed3x3(m_pStartTexture, (float*)m_m3StartButton, m_v2ButtonSize->x, m_v2ButtonSize->y);
 
-	// Draw game title
-	pRenderer->drawSpriteTransformed3x3(m_pGameTitle, (float*)m_m3GameTitle, m_v2TitleSize->x, m_v2TitleSize->y);
+		// Draw quit button
+		pRenderer->drawSpriteTransformed3x3(m_pQuitTexture, (float*)m_m3QuitButton, m_v2ButtonSize->x, m_v2ButtonSize->y);
 
-	// Draw menu background
-	pRenderer->drawSprite(m_pMenuBackground, 0.0f, 0.0f, m_v2WindowSize->x, m_v2WindowSize->y , 0.0f, 100.0f, 0.0f, 0.0f);
+		// Draw game title
+		pRenderer->drawSpriteTransformed3x3(m_pGameTitle, (float*)m_m3GameTitle, m_v2TitleSize->x, m_v2TitleSize->y);
+
+		// Draw menu background
+		pRenderer->drawSprite(m_pMenuBackground, 0.0f, 0.0f, m_v2WindowSize->x, m_v2WindowSize->y, 0.0f, 100.0f, 0.0f, 0.0f);
+	}
 }
 
 void MenuState::Exit()
@@ -129,4 +137,6 @@ void MenuState::Exit()
 
 	delete m_v2TitleSize;
 	m_v2TitleSize = nullptr;
+
+	m_bExiting = true;
 }
