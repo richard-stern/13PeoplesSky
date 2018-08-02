@@ -1,8 +1,9 @@
 #include "BulletManager.h"
 #include "Bullet.h"
 #include "Vector2.h"
+#include "Player.h"
 
-BulletManager::BulletManager()
+BulletManager::BulletManager(Player* player)
 {
 	m_bulletPool = new Bullet*[POOL_SIZE];
 
@@ -11,6 +12,8 @@ BulletManager::BulletManager()
 		m_bulletPool[i] = new Bullet();
 		AddChild(m_bulletPool[i]);
 	}
+
+	m_player = player;
 }
 
 BulletManager::~BulletManager()
@@ -31,7 +34,7 @@ void BulletManager::ShootBullet(Vector2 position, Vector2 velocity)
 	{
 		if (!m_bulletPool[i]->GetVisible())
 		{
-			m_bulletPool[i]->Shoot(position, velocity);
+			m_bulletPool[i]->Shoot(position, velocity, m_player->GetVelocity());
 			break;
 		}
 	}

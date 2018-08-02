@@ -5,11 +5,12 @@
 #define POOL_SIZE 20
 
 class Bullet;
+class Player;
 
 class BulletManager : public GameObject
 {
 public:
-	BulletManager();
+	BulletManager(Player* player);
 	~BulletManager();
 
 	//-----------------
@@ -24,5 +25,6 @@ public:
 	void Draw(aie::Renderer2D* pRenderer);
 
 	Bullet** m_bulletPool;
+	Player* m_player;
 };
 

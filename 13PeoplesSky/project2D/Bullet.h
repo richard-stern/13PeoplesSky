@@ -15,7 +15,7 @@ public:
 	// Params: initial position
 	//			initial velocity
 	//-----------------
-	void Shoot(Vector2 position, Vector2 velocity);
+	void Shoot(Vector2 position, Vector2 velocity, Vector2 playerVelocity);
 
 	//-----------------
 	// Destroys the bullet on collision

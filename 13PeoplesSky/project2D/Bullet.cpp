@@ -54,12 +54,13 @@ void Bullet::Update(float deltaTime)
 // Set new position and velocity
 // Set the bullet to visible
 //-----------------
-void Bullet::Shoot(Vector2 position, Vector2 velocity)
+void Bullet::Shoot(Vector2 position, Vector2 velocity, Vector2 playerVelocity)
 {
 	m_v2Position = position;
-	m_v2Velocity = velocity * 400;
+	m_v2Velocity = velocity * 600;
+	m_v2Velocity += playerVelocity;
+	
 	m_bVisible = true;
-	GetCollider()->UpdateBounds(&m_m3GlobalMatrix);
 }
 
 //-----------------
