@@ -15,8 +15,6 @@ MenuState::~MenuState()
 
 void MenuState::Enter()
 {
-	// EVERYTHING HERE IS PLACEHOLDER
-
 	// Get camera instance
 	m_pCamera = Camera::GetInstance();
 
