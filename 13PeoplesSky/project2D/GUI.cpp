@@ -14,7 +14,7 @@ GUI::GUI()
 {
 	health = 10;
 	score = 0;
-	lives = 0;
+	lives = 3;
 }
 
 /*

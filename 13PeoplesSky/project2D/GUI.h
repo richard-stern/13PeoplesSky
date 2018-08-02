@@ -2,6 +2,7 @@
 #include "Renderer2D.h"
 #include "Vector2.h"
 
+#define NUMBER_OF_LIVES 3
 #define GUI_FONT_SIZE 24
 #define CORNER_OFFSET_X 40.0f
 #define CORNER_OFFSET_Y 20.0f
