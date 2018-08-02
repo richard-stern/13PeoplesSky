@@ -6,12 +6,15 @@
 #include "Turret.h"
 #include "CollisionManager.h"
 #include "Primitives.h"
+#include "GUI.h"
 
 Player::Player()
 {
 	SetVisible(true);
 	SetMaxHealth(100);
 	SetHealth(GetMaxHealth());
+
+	GUI::GetInstance()->SetHealth(GetHealth());
 	// Request the TextureManager for the ship texture 
 	// Getting TextureManager  and CollisionManager Instance
 	CollisionManager* collisionMan = CollisionManager::GetInstance();
@@ -31,7 +34,7 @@ Player::Player()
 	m_v2Velocity = Vector2(0.0f, 0.0f);
 	m_fAngularVelocity = 0.0f;
 	m_fMaxSpeed = 150.0f;
-	m_fMaxRot = 0.5f;
+	m_fMaxRot = 1.7f;
 	m_fMass = 0.5f;
 	m_fDrag = 0.5f;
 
@@ -136,7 +139,7 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 		//formula for bouncing off of other rocks
 		currentPos -= data->m_v2Normal * data->m_fPenetration;
 		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
-		ModifyHealth(-1);
+		ModifyHealth(-2);
 		std::cout << "Player health -1, Health is " << GetHealth() << std::endl;
 		if (GetHealth() <= 0)
 			SetVisible(false);
@@ -154,11 +157,13 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 		//formula for bouncing off of health pickups
 		currentPos -= data->m_v2Normal * data->m_fPenetration;
 		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
-		ModifyHealth(2);
+		ModifyHealth(10);
 		std::cout << "Player health -1, Health is " << GetHealth() << std::endl;
 		if (GetHealth() > 100)
 			SetHealth(GetMaxHealth());
+		
 		break;
 	}
+	GUI::GetInstance()->SetHealth(GetHealth());
 	SetPosition(currentPos);
 }
