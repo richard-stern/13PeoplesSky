@@ -19,7 +19,11 @@ bool Application2D::startup() {
 	
 	m_2dRenderer = new aie::Renderer2D();
 
-	Camera::GetInstance();
+	float resX, resY;
+	resX = (float)getWindowWidth();
+	resY = (float)getWindowHeight();
+	Camera::GetInstance()->SetResolution(Vector2(resX, resY));
+
 	TextureManager::Create();
 
 	m_pStateMachine = new StateMachine();
@@ -50,7 +54,6 @@ void Application2D::update(float deltaTime) {
 	float resX, resY;
 	resX = (float)getWindowWidth();
 	resY = (float)getWindowHeight();
-
 	Camera::GetInstance()->SetResolution(Vector2(resX, resY));
 
 	m_pStateMachine->Update(deltaTime);
