@@ -6,6 +6,7 @@ Camera* Camera::m_instance = nullptr;
 Camera::Camera()
 {
 	m_fShakeDuration = 0.0f;
+	m_fShakeMagnitude = DEFAULT_SHAKE_MAGNITUDE;
 }
 
 Camera::~Camera()
@@ -46,7 +47,7 @@ void Camera::Update(float deltatime)
 		);
 
 		// Add unit vector to camera position multiplied by a magnitude.
-		m_CameraPosition += v2CamShakeOffset * SHAKE_MAGNITUDE;
+		m_CameraPosition += v2CamShakeOffset * m_fShakeMagnitude;
 
 		// Count down shake duration.
 		m_fShakeDuration -= deltatime;
@@ -61,6 +62,11 @@ void Camera::AddShakeDuration(float duration)
 void Camera::SetShakeDuration(float duration) 
 {
 	m_fShakeDuration = duration;
+}
+
+void Camera::SetShakeMagnitude(float magnitude) 
+{
+	m_fShakeMagnitude = magnitude;
 }
 
 Vector2 Camera::GetPosition()

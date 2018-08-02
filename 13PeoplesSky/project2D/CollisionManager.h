@@ -59,6 +59,11 @@ public:
 	*/
 	void Update();
 
+	/*
+	Description: Removes all objecs from the collision manager.
+	*/
+	void Clear();
+
 private:
 
 	/*

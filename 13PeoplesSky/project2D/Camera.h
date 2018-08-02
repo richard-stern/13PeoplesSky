@@ -1,7 +1,7 @@
 #pragma once
 #include "Vector2.h"
 
-#define SHAKE_MAGNITUDE 3.0f
+#define DEFAULT_SHAKE_MAGNITUDE 3.0f
 
 class Camera
 {
@@ -12,6 +12,7 @@ protected:
 	Vector2 m_CameraPosition;
 	Vector2 m_Resolution;
 	float m_fShakeDuration;
+	float m_fShakeMagnitude;
 public:
 	static Camera* GetInstance();
 	static void Destroy();
@@ -20,6 +21,7 @@ public:
 	void Update(float deltatime);
 	void AddShakeDuration(float duration);
 	void SetShakeDuration(float duration);
+	void SetShakeMagnitude(float magnitude);
 	void SetResolution(Vector2 resolution);
 	Vector2 GetResolution();
 	Vector2 GetPosition();

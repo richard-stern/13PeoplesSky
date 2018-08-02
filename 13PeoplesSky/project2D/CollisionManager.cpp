@@ -102,6 +102,13 @@ void CollisionManager::Update()
 	}
 }
 
+void CollisionManager::Clear() 
+{
+	m_actors->clear();
+	m_shape1Projections->clear();
+	m_shape2Projections->clear();
+}
+
 CollisionData CollisionManager::RunCollisionTest(Actor* pActor1, Actor* pActor2, Collider* pCollider1, Collider* pCollider2)
 {
 	// SAT...
