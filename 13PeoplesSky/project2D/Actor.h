@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "Matrix3.h"
 
-struct Collider;
+class Collider;
 struct CollisionData;
 
 class Actor : public GameObject
