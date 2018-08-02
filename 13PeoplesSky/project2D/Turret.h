@@ -6,13 +6,13 @@
 class Turret : public Actor
 {
 public:
-	Turret(Vector2 v2Pos);
+	Turret();		//default constuctor that sets position
 	~Turret();
 
-	void Update(float fDeltaTime);
-	void Draw(aie::Renderer2D* pRenderer);
+	void Update(float fDeltaTime);		//updates the turrets rotation, checks for shoot input
+	void Draw(aie::Renderer2D* pRenderer);		//draws turret
 
 private:
-	BulletManager * m_pBullets;
+	BulletManager * m_pBullets;		//bulletpool that is responsible for bullet management
 };
 

@@ -1,39 +1,37 @@
 #include "Turret.h"
 #include "Input.h"
 #include "Matrix3.h"
+#include <math.h>
 
-Turret::Turret(Vector2 v2Pos) : Actor(v2Pos)
-{		//need to add in constructor parameters for base class and turret
-		//create a bulletpool thing
+Turret::Turret() : Actor()
+{
 	m_pBullets = new BulletManager();
-	m_bWrapAndRespawn = false;
+	m_bWrapAndRespawn = false;		//stops bullets
 }
 
-Turret::~Turret()
+Turret::~Turret()		//cleanup
 {
 	delete m_pBullets;
 }
 
 void Turret::Update(float fDeltaTime)
 {
-	aie::Input* input = aie::Input::getInstance();
+	aie::Input* input = aie::Input::getInstance();		//gets the input instance
+	float fRot = GetRotation();		//gets rotation for bullet trajectory
 
-	if (input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT));
+	if (input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT));		//checks for LMB input
 	{
-		//need to know what parameters to pass though
-		//m_pBullets.ShootBullet()		//
+		m_pBullets->ShootBullet(GetPosition(), Vector2(cosf(fRot), sinf(fRot)));		//calls the shoot function in the bullet manager
 	}
 
-	float fTurn = atan2(input->getMouseY(), input->getMouseX());
+	float fTurn = atan2(input->getMouseY(), input->getMouseX());		//gets new rotation
 
-	m_m3LocalMatrix.SetRotate2D(fTurn);
+	m_m3LocalMatrix.SetRotate2D(fTurn);		//sets the new rotation
 
-	Actor::Update(fDeltaTime);
+	Actor::Update(fDeltaTime);		//update the actor
 }
 
 void Turret::Draw(aie::Renderer2D* pRenderer)
 {
-	aie::Input* input = aie::Input::getInstance();
-
-
+	pRenderer->drawSpriteTransformed3x3(m_pTexture, (float*)m_m3GlobalMatrix);
 }
