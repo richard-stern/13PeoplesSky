@@ -200,10 +200,6 @@ CollisionData CollisionManager::RunCollisionTest(Actor* pActor1, Actor* pActor2,
 			{
 				data.m_fPenetration = fCrossoverSize;
 				data.m_v2Normal = v2Axis;
-
-				// Swap collision normal and edge directions if the object direction indicates one object is above and to the right of another (dot product returns < 0).
-				if (v2ObjectDir.dot(data.m_v2Normal) < 0.0f) 
-					data.m_v2Normal = -data.m_v2Normal;
 			}
 				
 			++data.m_nProjectionCrossovers; // Increment crossover count.
@@ -216,10 +212,6 @@ CollisionData CollisionManager::RunCollisionTest(Actor* pActor1, Actor* pActor2,
 			{
 				data.m_fPenetration = fCrossoverSize;
 				data.m_v2Normal = v2Axis;
-
-				// Swap collision normal and edge directions if the object direction indicates one object is above and to the right of another (dot product returns < 0).
-				if (v2ObjectDir.dot(data.m_v2Normal) < 0.0f)
-					data.m_v2Normal = -data.m_v2Normal;
 			}
 
 			++data.m_nProjectionCrossovers; // Increment crossover count.
@@ -230,6 +222,10 @@ CollisionData CollisionManager::RunCollisionTest(Actor* pActor1, Actor* pActor2,
 			return data;
 		}
 	}
+
+	// Swap collision normal and edge directions if the object direction indicates one object is above and to the right of another (dot product returns < 0).
+	if (v2ObjectDir.dot(data.m_v2Normal) < 0.0f)
+		data.m_v2Normal = -data.m_v2Normal;
 
 	return data; // At this point the collision was probably successful.
 }
