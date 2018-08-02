@@ -89,8 +89,4 @@ public:
 	void SetParent(GameObject* _parent_object);
 	//Remove this GameObject from its parent
 	void RemoveParent();
-
-	//Collision Resolution
-	//This should be overwritten
-	virtual void OnCollision(GameObject* _other, CollisionData* _collision_data) = 0;
 };
