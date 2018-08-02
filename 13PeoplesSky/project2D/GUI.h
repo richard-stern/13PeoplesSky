@@ -29,8 +29,10 @@ public:
 	void DrawLives(aie::Renderer2D *renderer, Vector2 resolution, Vector2 position);
 
 	void SetHealth(int health); /* tell UI how much health to display */
+	int GetHealth();
 	void AddScore(int score); /* tell UI to increase player score */
 	int  GetScore(); /* retrieve final score */
 	void SetLives(int remainingLives); /* set the amount of player lives left */
+	int GetLives();
 };
 

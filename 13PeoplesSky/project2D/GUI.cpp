@@ -137,6 +137,16 @@ void GUI::SetHealth(int newHealth)
 }
 
 /*
+Function:	 GetHealth
+Output:		 int
+Description: Retrieves the health displayed on the UI
+*/
+int GUI::GetHealth()
+{
+	return health;
+}
+
+/*
 Function:	 AddScore
 Input/s:	 int
 Description: Increments the score displayed on the UI
@@ -164,4 +174,14 @@ Description: Set the number of lives displayed on the UI
 void GUI::SetLives(int remainingLives)
 {
 	lives = remainingLives;
+}
+
+/*
+Function:	 GetLives
+Output:		 int
+Description: Retrieves the number of lives displayed on the UI
+*/
+int GUI::GetLives()
+{
+	return lives;
 }
