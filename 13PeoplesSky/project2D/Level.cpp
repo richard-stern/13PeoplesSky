@@ -22,9 +22,9 @@ Level::Level()
 		}
 	}
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 3; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < 3; j++)
 		{
 			Rock* r = new Rock;
 			this->AddChild(r);
@@ -35,9 +35,9 @@ Level::Level()
 		}
 	}
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 1; i++)
 	{
-		for (int j = 0; j < 3; j++)
+		for (int j = 0; j < 1; j++)
 		{
 			HealthPickup* h = new HealthPickup;
 			this->AddChild(h);
@@ -48,9 +48,9 @@ Level::Level()
 		}
 	}
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 1; i++)
 	{
-		for (int j = 0; j < 4; j++)
+		for (int j = 0; j < 2; j++)
 		{
 			Enemy* e = new Enemy;
 			this->AddChild(e);
