@@ -6,6 +6,7 @@
 #include "TextureManager.h"
 #include "Vector2.h"
 #include "StateMachine.h"
+#include "CollisionManager.h"
 
 Application2D::Application2D() {
 	
@@ -25,6 +26,7 @@ bool Application2D::startup() {
 	Camera::GetInstance()->SetResolution(Vector2(resX, resY));
 
 	TextureManager::Create();
+	CollisionManager::CreateInstance();
 
 	m_pStateMachine = new StateMachine();
 	
@@ -42,6 +44,7 @@ void Application2D::shutdown() {
 
 	Camera::Destroy();
 	TextureManager::Destroy();
+	CollisionManager::DestroyInstance();
 
 	delete m_2dRenderer;
 }
