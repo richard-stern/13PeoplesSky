@@ -4,6 +4,7 @@
 #include "Renderer2D.h"
 
 class StateMachine;
+class Enemy;
 
 class Application2D : public aie::Application {
 public:

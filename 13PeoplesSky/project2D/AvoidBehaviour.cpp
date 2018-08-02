@@ -20,10 +20,10 @@ Vector2 AvoidBehaviour::update(Actor* pTarget, Enemy* pAvoider)
 {
 	Vector2 ToPlayer = pTarget->GetPosition() - pAvoider->GetPosition(); //Getting the distance between the pursuer and the target
 
-	double RelativeHeading = pAvoider->GetVelocity().dot(pTarget->GetVelocity());
+	float RelativeHeading = pAvoider->GetVelocity().dot(pTarget->GetVelocity());
 	
 	//Here we are almost looking into the future to see where the pursued object is going to be in the future, and we will be seeking that location
-	double LookAheadTime = ToPlayer.magnitude() / (pAvoider->GetMaxSpeed() + pTarget->GetVelocity().magnitude());
+	float LookAheadTime = ToPlayer.magnitude() / (pAvoider->GetMaxSpeed() + pTarget->GetVelocity().magnitude());
 
 	return m_flee->update(pTarget->GetPosition() + pTarget->GetVelocity() * LookAheadTime, pAvoider);
 }

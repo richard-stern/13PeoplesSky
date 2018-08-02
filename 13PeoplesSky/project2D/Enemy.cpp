@@ -8,16 +8,20 @@
 #include "ColliderManager.h"
 #include "Primitives.h"
 #include "GUI.h"
+#include "Level.h"
 
-
-Enemy::Enemy()
+Enemy::Enemy(Player* pPlayer) : Actor()
 {
 	//i'm loading me mum's car, broom broom
 	TextureManager* TextureManager = TextureManager::GetInstance();
 	SetTexture(TextureManager->LoadTexture("./textures/car.png"));
 
+	m_player = pPlayer;
+
 	//*slaps top of enemy* this bad boy can take so many bullets
 	SetHealth(3);
+
+	SetMass(20.0f);
 
 	//Creating the instances of the enemy's 2 behaviour types
 	m_pursue = new PursueBehaviour;
@@ -29,7 +33,6 @@ Enemy::Enemy()
 
 	//Making sure the enemy is actually drawn to start with
 	SetVisible(true);
-	
 }
 
 Enemy::~Enemy()
@@ -39,32 +42,33 @@ Enemy::~Enemy()
 	delete m_avoid;
 }
 
-void Enemy::Update(Player* pPlayer, Rock* pRock)
+void Enemy::Update(float DeltaTime)
 {
 	//Updates the distance between this class and the player every frame
-	m_distToPlayer = pPlayer->GetPosition().dot(GetPosition());
-	m_distToRock = pRock->GetPosition().dot(GetPosition());
+	m_distToPlayer = m_player->GetPosition() - GetPosition();
+	m_lengthToPlayer = m_distToPlayer.magnitude();
+	//m_distToRock = pRock->GetPosition().dot(GetPosition());
 
 	//When a destroyed enemy is far enough away from the player, redraw it
-	if (m_distToPlayer > 800.0f && GetVisible() == false)
+	if (m_lengthToPlayer > 800.0f && GetVisible() == false)
 	{
 		SetVisible(true);
 	}
 
 	//If player is within a certain radius, pursue player. Only pursues if the player is drawn
-	if (m_distToPlayer < 600.0f && GetVisible() == true)
+	if (m_lengthToPlayer < 600.0f && GetVisible() == true)
 	{
 		//first paramter is the object being sought, 2nd parameter is the pursuer
 		// Whilst it's pursuing the player, we want the enemy to try and avoid all of the rocks
-		m_pursue->update(pPlayer, this);
-		if(m_distToRock < 200.f)
-		m_avoid->update(pRock, this);
+		m_pursue->update(m_player, this);
+		/*if(m_distToRock < 200.f)
+		m_avoid->update(pRock, this);*/
 	}
 
 	//If the enemy has been destroyed, it will flee the player so that it can reach a distance where it can "respawn"
 	else if (GetVisible() == false)
 	{
-		m_avoid->update(pPlayer, this);
+		m_avoid->update(m_player, this);
 	}
 }
 
@@ -87,6 +91,7 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 		if (GetHealth() <= 0)
 		{
 			SetVisible(false);
+			//When the enemy is destroyed, add 5 to the player score
 			GUI::GetInstance()->AddScore(5);
 		}
 		break;

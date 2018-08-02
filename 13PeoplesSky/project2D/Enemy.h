@@ -7,14 +7,15 @@ class Player;
 class Rock;
 class PursueBehaviour;
 class AvoidBehaviour;
+class StateMachine;
 
 class Enemy : public Actor
 {
 public:
-	Enemy();
+	Enemy(Player* pPlayer);
 	~Enemy();
 
-	void Update(Player* pPlayer, Rock* pRock);
+	void Update(float DeltaTime);
 	void OnCollision(Actor* collidingObject, CollisionData* data);
 
 	void SetMaxSpeed(float speed);
@@ -23,9 +24,12 @@ public:
 protected:
 	//The speed at which the enemy will move
 	float m_maxSpeed = 300.0f;
-	float m_distToPlayer;
-	float m_distToRock;
+	Vector2 m_distToPlayer;
+	float m_lengthToPlayer;
+	Vector2 m_distToRock;
+	float m_lengthToRock;
 
+	Player* m_player;
 	PursueBehaviour* m_pursue;
 	AvoidBehaviour* m_avoid;
 };
