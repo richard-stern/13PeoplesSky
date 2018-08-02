@@ -33,8 +33,8 @@ Level::Level()
 			Enemy* e = new Enemy;
 			this->AddChild(e);
 			e->SetParent(this);
-			int randX = rand() % 220;
-			int randY = rand() % 225;
+			int randX = rand() % 1100;
+			int randY = rand() % 1100;
 			e->SetPosition(Vector2(j * 415.0f + randX, i * 445.0f + randY));
 		}
 	}
@@ -46,8 +46,8 @@ Level::Level()
 			HealthPickup* h = new HealthPickup;
 			this->AddChild(h);
 			h->SetParent(this);
-			int randX = rand() % 230;
-			int randY = rand() % 235;
+			int randX = rand() % 1300;
+			int randY = rand() % 1300;
 			h->SetPosition(Vector2(j * 425.0f + randX, i * 475.0f + randY));
 		}
 	}
@@ -59,9 +59,9 @@ Level::Level()
 			Star* s = new Star;
 			this->AddChild(s);
 			s->SetParent(this);
-			int randX = rand() % 240;
-			int randY = rand() % 245;
-			s->SetPosition(Vector2(j * 375.0f + randX, i * 450.0f + randY));
+			int randX = rand() % 2000;
+			int randY = rand() % 2000;
+			s->SetPosition(Vector2(j * 475.0f + randX, i * 450.0f + randY));
 		}
 	}
 
