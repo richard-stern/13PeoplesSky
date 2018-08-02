@@ -11,17 +11,18 @@ Bullet::Bullet()
 	m_fDrag = 0.0f;
 
 	TextureManager* textureMan = TextureManager::GetInstance();
-	m_pTexture = textureMan->LoadTexture("./textures/bullet");
+	m_pTexture = textureMan->LoadTexture("./textures/bullet");	
 
+	Collider* collider = new Collider();
 	
+	collider->m_nodes->push_back(new ColliderNode(Vector2(-2.5, 2.5), 1));
+	collider->m_nodes->push_back(new ColliderNode(Vector2(2.5, 2.5), 2));
+	collider->m_nodes->push_back(new ColliderNode(Vector2(2.5, -2.5), 3));
+	collider->m_nodes->push_back(new ColliderNode(Vector2(-2.5, -2.5), 0));
 
-	//m_pCollider = new Collider();
-	m_pCollider.m_nodes->push_back(new ColliderNode(Vector2(-2.5, 2.5), 1));
-	m_pCollider.m_nodes->push_back(new ColliderNode(Vector2(2.5, 2.5), 2));
-	m_pCollider.m_nodes->push_back(new ColliderNode(Vector2(2.5, -2.5), 3));
-	m_pCollider.m_nodes->push_back(new ColliderNode(Vector2(-2.5, -2.5), 0));
+	collider->SetLayer(ECOLLISIONLAYER_BULLET);
 
-	m_pCollider.SetLayer(ECOLLISIONLAYER_BULLET);
+	SetCollider(collider);
 }
 
 Bullet::~Bullet()
@@ -41,7 +42,7 @@ void Bullet::Update(float deltaTime)
 	}
 
 	Actor::Update(deltaTime);
-	m_pCollider.UpdateBounds(&m_m3GlobalMatrix);
+	GetCollider()->UpdateBounds(&m_m3GlobalMatrix);
 }
 
 //-----------------
@@ -61,7 +62,7 @@ void Bullet::Shoot(Vector2 position, Vector2 velocity)
 //-----------------
 void Bullet::OnCollision(Actor* collidingObject)
 {
-	switch (collidingObject->m_pCollider.m_eLayer)
+	switch (collidingObject->GetCollider()->m_eLayer)
 	{
 	case(ECOLLISIONLAYER_ENEMY):
 		m_bVisible = false;

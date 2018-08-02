@@ -1,12 +1,12 @@
 #pragma once
 #include "Vector2.h"
-#include "Actor.h"
+#include "GameObject.h"
 
 #define POOL_SIZE 10
 
 class Bullet;
 
-class BulletManager : public Actor
+class BulletManager : public GameObject
 {
 public:
 	BulletManager();
