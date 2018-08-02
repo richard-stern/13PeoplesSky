@@ -48,11 +48,13 @@ Level::Level()
 		}
 	}
 
+	Player* p = new Player;
+
 	for (int i = 0; i < 1; i++)
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			Enemy* e = new Enemy;
+			Enemy* e = new Enemy(p);
 			this->AddChild(e);
 			e->SetParent(this);
 			int randX = rand() % 1100;
@@ -61,7 +63,7 @@ Level::Level()
 		}
 	}
 
-	Player* p = new Player;
+	
 	this->AddChild(p);
 	p->SetParent(this);
 	
