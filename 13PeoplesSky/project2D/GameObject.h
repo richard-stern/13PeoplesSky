@@ -38,7 +38,7 @@ protected:
 	//DEFAULT: true
 	//Should the object be drawn
 	bool m_bVisible;
-	//DEFAULT: true
+	//DEFAULT: false
 	//Should the object wrap around the the other side of the screen when it leaves view
 	bool m_bWrapAndRespawn;
 
@@ -90,5 +90,5 @@ public:
 
 	//Collision Resolution
 	//This should be overwritten
-	virtual void OnCollision(GameObject* _other, CollisionData* _collision_data) = 0;
+	virtual void OnCollision(GameObject* _other, CollisionData* _collision_data);
 };

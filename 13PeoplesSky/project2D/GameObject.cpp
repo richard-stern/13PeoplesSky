@@ -15,7 +15,7 @@ GameObject::GameObject(Vector2 _spawn_position)
 	m_fRotation = 0.f;
 
 	m_bVisible = true;
-	m_bWrapAndRespawn = true;
+	m_bWrapAndRespawn = false;
 }
 
 GameObject::~GameObject()
@@ -44,7 +44,7 @@ void GameObject::Update(float _delta_time)
 	else
 		m_m3GlobalMatrix = m_m3LocalMatrix;
 
-	if (m_bWrapAndRespawn && false)
+	if (m_bWrapAndRespawn)
 	{
 		Vector2 camPos = Camera::GetInstance()->GetPosition();
 		Vector2 camRes = Camera::GetInstance()->GetResolution();
@@ -54,19 +54,19 @@ void GameObject::Update(float _delta_time)
 			m_bVisible = true;
 			if (m_v2Position.x > camPos.x)
 			{
-				m_v2Position.x -= (camRes.x / 2.f) + camPos.x;
+				m_v2Position.x = (camRes.x / 2.f) - (camPos.x + 50.f);
 			}
 			else
 			{
-				m_v2Position.x += camRes.x * 2.f;
+				m_v2Position.x = (camRes.x / 2.f) + (camPos.x + 50.f);
 			}
 			if (m_v2Position.y > camPos.y)
 			{
-				m_v2Position.y -= camRes.y * 2.f;
+				m_v2Position.y = (camRes.y / 2.f) - (camPos.y + 50.f);
 			}
 			else
 			{
-				m_v2Position.y += camRes.y * 2.f;
+				m_v2Position.y = (camRes.y / 2.f) + (camPos.y + 50.f);
 			}
 		}
 	}
