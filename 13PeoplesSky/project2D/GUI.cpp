@@ -59,23 +59,17 @@ Description: Draws the graphical user interface
 */
 void GUI::Draw(aie::Renderer2D *renderer)
 {
-	//Vector2 resolution = Camera::GetInstance()->GetResolution();
-	//aie::Font *font = TextureManager::GetInstance()->LoadFont("./font/consolas_bold.ttf", GUI_FONT_SIZE);
-	//float xPos = CORNER_OFFSET_X;
+	Vector2 cameraResolution = Camera::GetInstance()->GetResolution();
+	Vector2 cameraPosition = Camera::GetInstance()->GetPosition();
 
 	/* health */
 	/*float healthPosY = resolution.y - CORNER_OFFSET_Y;
 	renderer->drawText(font, "Health", xPos, healthPosY);
 	renderer->drawText(font, (char*)health, xPos + CORNER_OFFSET_X, healthPosY);*/
-	DrawHealthBar(renderer);
+	DrawHealthBar(renderer, cameraResolution, cameraPosition);
 
 	/* score */
-	/*float scorePosY = resolution.y - 2 * CORNER_OFFSET_Y;
-	char scoreDisplay[8];
-	renderer->drawText(font, "Score", xPos, scorePosY);
-	sprintf(scoreDisplay, "%i", score);
-	renderer->drawText(font, scoreDisplay, xPos + CORNER_OFFSET_X, scorePosY);*/
-	//DrawScore(renderer);
+	DrawScore(renderer, cameraResolution, cameraPosition);
 
 	/* lives */
 	/*float livesPosY = resolution.y - 3 * CORNER_OFFSET_Y;
@@ -89,11 +83,10 @@ Function:	 DrawHealthBar
 Input/s:	 Renderer2D
 Description: Draw the player's health bar
 */
-void GUI::DrawHealthBar(aie::Renderer2D *renderer)
+void GUI::DrawHealthBar(aie::Renderer2D *renderer, Vector2 resolution, Vector2 position)
 {
 	aie::Texture *healthBar = TextureManager::GetInstance()->LoadTexture("./textures/healthBar.png");
-	Vector2 resolution = Camera::GetInstance()->GetResolution();
-	Vector2 position = Camera::GetInstance()->GetPosition();
+
 	float healthPosX = position.x + CORNER_OFFSET_X;
 	float healthPosY = resolution.y + position.y - CORNER_OFFSET_Y;
 	float healthWidth = health * 5.6f;
@@ -109,9 +102,18 @@ Function:	 DrawScore
 Input/s:	 Renderer2D
 Description: Draw the player's current score
 */
-void GUI::DrawScore(aie::Renderer2D *renderer)
+void GUI::DrawScore(aie::Renderer2D *renderer, Vector2 resolution, Vector2 position)
 {
+	aie::Font *font = TextureManager::GetInstance()->LoadFont("./font/consolas_bold.ttf", GUI_FONT_SIZE);
+	
+	float scorePosX = position.x + 8.0f;
+	float scorePosY = resolution.y + position.y - 2.5f * CORNER_OFFSET_Y;
+	
+	renderer->drawText(font, "Score: ", scorePosX, scorePosY); /* Score: */
 
+	char scoreDisplay[8];
+	sprintf(scoreDisplay, "%i", score);
+	renderer->drawText(font, scoreDisplay, scorePosX + 100.0f, scorePosY);
 }
 
 /*
@@ -119,7 +121,7 @@ Function:	 DrawLives
 Input/s:	 Renderer2D
 Description: Draw the player's number of remaining lives
 */
-void GUI::DrawLives(aie::Renderer2D *renderer)
+void GUI::DrawLives(aie::Renderer2D *renderer, Vector2 resolution, Vector2 position)
 {
 
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Renderer2D.h"
+#include "Vector2.h"
 
 #define GUI_FONT_SIZE 24
 #define CORNER_OFFSET_X 40.0f
@@ -23,9 +24,9 @@ public:
 	static GUI *GetInstance(); /* retrieve single instance of GUI class */
 	
 	void Draw(aie::Renderer2D *renderer); /* draw the UI */
-	void DrawHealthBar(aie::Renderer2D *renderer);
-	void DrawScore(aie::Renderer2D *renderer);
-	void DrawLives(aie::Renderer2D *renderer);
+	void DrawHealthBar(aie::Renderer2D *renderer, Vector2 resolution, Vector2 position);
+	void DrawScore(aie::Renderer2D *renderer, Vector2 resolution, Vector2 position);
+	void DrawLives(aie::Renderer2D *renderer, Vector2 resolution, Vector2 position);
 
 	void SetHealth(int health); /* tell UI how much health to display */
 	void AddScore(int score); /* tell UI to increase player score */
