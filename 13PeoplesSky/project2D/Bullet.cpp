@@ -3,6 +3,7 @@
 #include "Matrix3.h"
 #include "TextureManager.h"
 #include "Camera.h"
+#include "CollisionManager.h"
 
 Bullet::Bullet()
 {
@@ -23,10 +24,6 @@ Bullet::Bullet()
 	collider->SetLayer(ECOLLISIONLAYER_BULLET);
 
 	SetCollider(collider);
-}
-
-Bullet::~Bullet()
-{
 }
 
 void Bullet::Update(float deltaTime)
@@ -60,7 +57,7 @@ void Bullet::Shoot(Vector2 position, Vector2 velocity)
 // Bullet is set to not visible when it collides with an
 // enemy, health pack or a rock
 //-----------------
-void Bullet::OnCollision(Actor* collidingObject)
+void Bullet::OnCollision(Actor* collidingObject, CollisionData* _collision_data)
 {
 	switch (collidingObject->GetCollider()->m_eLayer)
 	{

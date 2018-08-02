@@ -1,11 +1,12 @@
 #pragma once
 #include "Actor.h"
 
+class CollisionData;
+
 class Bullet : public Actor
 {
 public:
 	Bullet();
-	~Bullet();
 
 	void Update(float deltaTime);
 
@@ -19,7 +20,7 @@ public:
 	//-----------------
 	// Destroys the bullet on collision
 	//-----------------
-	void OnCollision(Actor* collidingObject);
+	void OnCollision(Actor* collidingObject, CollisionData* _collision_data);
 
 private:
 
