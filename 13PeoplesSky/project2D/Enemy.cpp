@@ -80,13 +80,12 @@ void Enemy::Update(float DeltaTime)
 	}
 
 	Actor::Update(DeltaTime);
-	//GetCollider()->UpdateBounds(&m_m3LocalMatrix);
 }
 
 //When the enemy collides with another object, rather than being "destroyed", it simply becomes invisible and runs away
 void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 {
-	Vector2 currentPos = GetPosition();
+	/*Vector2 currentPos = GetPosition();*/
 
 		switch (collidingObject->GetCollider()->GetLayer())
 	{
@@ -99,8 +98,8 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 		collidingObject->ModifyHealth(-1);
 		SetVisible(false);
 		//Bouncing off the player
-		currentPos -= data->m_v2Normal * data->m_fPenetration;
-		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
+		/*currentPos -= data->m_v2Normal * data->m_fPenetration;
+		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));*/
 		break;
 
 	case(ECOLLISIONLAYER_BULLET):
