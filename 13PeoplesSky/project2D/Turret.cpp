@@ -8,6 +8,7 @@
 Turret::Turret() : Actor()
 {
 	m_pBullets = new BulletManager();
+	AddChild(m_pBullets);		//adds bullets to child list for updating
 	m_bWrapAndRespawn = false;		//stops bullets from wrapping around the screen
 	m_pTexture = TextureManager::GetInstance()->LoadTexture("./textures/BarrelBlue.png");		//loads texture from texture manager
 }
