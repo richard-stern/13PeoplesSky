@@ -1,9 +1,6 @@
 #include <Renderer2D.h>
 #include <Texture.h>
-#include "Matrix3.h"
-#include "Vector2.h"
 #include "Actor.h"
-#include "CollisionManager.h"
 
 class Turret;
 class Collider;

@@ -1,16 +1,19 @@
 #include <Input.h>
+#include <iostream>
 #include "Player.h"
 #include "Camera.h"
 #include "TextureManager.h"
 #include "Turret.h"
-#include "Collider.h"
+#include "CollisionManager.h"
+#include "Primitives.h"
 
 Player::Player()
 {
 	SetVisible(true);
 	SetHealth(GetMaxHealth());
 	// Request the TextureManager for the ship texture 
-	// Getting TextureManager Instance
+	// Getting TextureManager  and CollisionManager Instance
+	CollisionManager* collisionMan = CollisionManager::GetInstance();
 	TextureManager* textureInstance = TextureManager::GetInstance();
 	// Initializing m_pTexture to ship texture
 	SetTexture(textureInstance->LoadTexture("./textures/ship.png"));
@@ -26,10 +29,23 @@ Player::Player()
 	// Default Values
 	m_v2Velocity = Vector2(0.0f, 0.0f);
 	m_fAngularVelocity = 0.0f;
-	m_fMaxSpeed = 300.0f;
-	m_fMaxRot = 1.0f;
+	m_fMaxSpeed = 150.0f;
+	m_fMaxRot = 0.5f;
 	m_fMass = 0.5f;
 	m_fDrag = 0.5f;
+
+	Collider* collider = new Collider;
+	auto colliderNodes = collider->GetNodes();
+
+	colliderNodes->push_back(new ColliderNode(Vector2(0, 40), 1));
+	colliderNodes->push_back(new ColliderNode(Vector2(93 / 2, -8), 2));
+	colliderNodes->push_back(new ColliderNode(Vector2(20, -40), 3));
+	colliderNodes->push_back(new ColliderNode(Vector2(-20, -40), 4));
+	colliderNodes->push_back(new ColliderNode(Vector2(-93 / 2, -8), 0));
+
+	collider->SetLayer(ECOLLISIONLAYER_PLAYER);
+	SetCollider(collider);
+	collisionMan->AddObject(this);
 }
 
 Player::~Player()
@@ -108,5 +124,36 @@ void Player::Update(float deltaTime)
 
 void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 {
-
+	Vector2 currentPos = GetPosition();
+	switch (collidingObject->GetCollider()->GetLayer())
+	{
+	//case(ECOLLISIONLAYER_BULLET):
+		//take damage from the bullet, bullet should also be destroyed on impact
+		//ModifyHealth(-1);
+		//if (GetHealth() <= 0)
+		//	SetVisible(false);
+		//break;
+	case(ECOLLISIONLAYER_ROCK):
+		//formula for bouncing off of other rocks
+		ModifyHealth(-1);
+		std::cout << "Player health -1, Health is " << GetHealth() << std::endl;
+		if (GetHealth() <= 0)
+			SetVisible(false);
+		break;
+	case(ECOLLISIONLAYER_ENEMY):
+		//formula for bouncing off of enemies
+		ModifyHealth(-2);
+		std::cout << "Player health -1, Health is " << GetHealth() << std::endl;
+		if (GetHealth() <= 0)
+			SetVisible(false);
+		break;
+	case(ECOLLISIONLAYER_HEALTH):
+		//formula for bouncing off of health pickups
+		ModifyHealth(2);
+		std::cout << "Player health -1, Health is " << GetHealth() << std::endl;
+		if (GetHealth() > 10)
+			SetHealth(10);
+		break;
+	}
+	SetPosition(currentPos);
 }
