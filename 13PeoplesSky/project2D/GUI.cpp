@@ -12,7 +12,7 @@ Description: Memory allocation. Private to restrict initialisation of singleton 
 */
 GUI::GUI()
 {
-	health = 0;
+	health = 10;
 	score = 0;
 	lives = 0;
 }

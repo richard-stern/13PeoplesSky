@@ -2,7 +2,7 @@
 #include "Renderer2D.h"
 
 #define GUI_FONT_SIZE 24
-#define CORNER_OFFSET_X 20.0f
+#define CORNER_OFFSET_X 40.0f
 #define CORNER_OFFSET_Y 20.0f
 
 class GUI
