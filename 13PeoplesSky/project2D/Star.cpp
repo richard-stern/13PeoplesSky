@@ -14,5 +14,6 @@ Star::~Star()
 
 void Star::Draw(aie::Renderer2D* pRenderer)
 {
+	//pRenderer->drawBox(GetGlobalTransform().GetPosition().x, GetGlobalTransform().GetPosition().y,1, 1);
 	pRenderer->drawSpriteTransformed3x3(m_pTexture, (float*)m_m3GlobalMatrix);
 }

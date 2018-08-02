@@ -10,7 +10,7 @@ public:
 	~Turret();
 
 	void Update(float fDeltaTime);		//updates the turrets rotation, checks for shoot input
-	void Draw(aie::Renderer2D* pRenderer);		//draws turret
+	//void Draw(aie::Renderer2D* pRenderer);		//draws turret
 
 	inline void OnCollision(Actor* collidingObject, CollisionData* data) {};		//doesnt do anything, needed for override
 
