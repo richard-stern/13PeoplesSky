@@ -2,6 +2,8 @@
 #include <vector>
 #include "Vector2.h"
 
+//#define PRINT_COLLISION_INFORMATION
+
 // Forward declarations...
 class Collider;
 class Actor;

@@ -87,8 +87,10 @@ void CollisionManager::Update()
 					CollisionData data = RunCollisionTest(currentActor, otherActor, currentCollider, otherCollider); // Get collision data.
 					if(data.m_bCollided) // If the collision result was positive...
 					{
+#ifdef PRINT_COLLISION_INFORMATION
 						// Print information to console...
 						PrintCollisionInfo(currentCollider, otherCollider);
+#endif
 
 						// Run OnCollision() functions.
 						currentActor->OnCollision(otherActor, &data);
