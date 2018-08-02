@@ -7,6 +7,8 @@
 #include "Vector2.h"
 #include "Matrix3.h"
 
+struct CollisionData;
+
 class GameObject
 {
 protected:
@@ -88,5 +90,5 @@ public:
 
 	//Collision Resolution
 	//This should be overwritten
-	virtual void OnCollision(GameObject* _other);
+	virtual void OnCollision(GameObject* _other, CollisionData* _collision_data) = 0;
 };

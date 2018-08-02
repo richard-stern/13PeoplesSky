@@ -1,5 +1,7 @@
 #include "GameObject.h"
 
+#include "Camera.h"
+
 GameObject::GameObject(Vector2 _spawn_position)
 {
 	m_pParent = nullptr;
@@ -42,9 +44,31 @@ void GameObject::Update(float _delta_time)
 	else
 		m_m3GlobalMatrix = m_m3LocalMatrix;
 
-	if (m_bWrapAndRespawn)
+	if (m_bWrapAndRespawn && false)
 	{
-		//
+		Vector2 camPos = Camera::GetInstance()->GetPosition();
+		Vector2 camRes = Camera::GetInstance()->GetResolution();
+		Vector2 distance = camPos - m_v2Position;
+		if (distance.magnitudeSqr() > camRes.magnitudeSqr())
+		{
+			m_bVisible = true;
+			if (m_v2Position.x > camPos.x)
+			{
+				m_v2Position.x -= (camRes.x / 2.f) + camPos.x;
+			}
+			else
+			{
+				m_v2Position.x += camRes.x * 2.f;
+			}
+			if (m_v2Position.y > camPos.y)
+			{
+				m_v2Position.y -= camRes.y * 2.f;
+			}
+			else
+			{
+				m_v2Position.y += camRes.y * 2.f;
+			}
+		}
 	}
 	//Update all of our children
 	for (auto iter = m_Children.begin(); iter != m_Children.end(); ++iter)
@@ -194,7 +218,7 @@ void GameObject::RemoveParent()
 	m_pParent = nullptr;
 }
 
-void GameObject::OnCollision(GameObject* _other)
+void GameObject::OnCollision(GameObject* _other, CollisionData* _collision_data)
 {
 	//Doesn't do anything
 }
