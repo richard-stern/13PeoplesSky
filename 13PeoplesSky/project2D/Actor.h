@@ -27,7 +27,7 @@ public:
 	virtual ~Actor(); /* destructor */
 
 	virtual void Update(float deltaTime); /* virtual update function */
-	virtual void OnCollision(Actor *collidingObject) = 0; /* virtual OnCollision function */
+	virtual void OnCollision(Actor *collidingObject) = 0; /* pure virtual OnCollision function */
 
 	/* collider get/set */
 	Collider GetCollider();
