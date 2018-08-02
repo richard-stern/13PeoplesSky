@@ -5,7 +5,7 @@
 #include "TextureManager.h"
 #include "PursueBehaviour.h"
 #include "AvoidBehaviour.h"
-#include "ColliderManager.h"
+#include "CollisionManager.h"
 #include "Primitives.h"
 #include "GUI.h"
 #include "Level.h"
