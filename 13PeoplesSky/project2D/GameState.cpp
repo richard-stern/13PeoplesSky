@@ -22,6 +22,7 @@ GameState::~GameState()
 
 void GameState::Enter()
 {
+	CollisionManager::GetInstance()->Clear();
 	level = new Level;
 	GUI::GetInstance()->Reset();
 }
@@ -39,16 +40,19 @@ void GameState::Update(float fDeltaTime, StateMachine* pStateMachine)
 	if (health <= 0)
 	{
 		lives--;
+		if (lives <= 0)
+		{
+			pStateMachine->ChangeState(ESTATE_GAMEOVER);
+			return;
+		}
+
 		gui->SetLives(lives);
 
 		// RESET level ... poor mans way
+		CollisionManager::GetInstance()->Clear();
 		delete level;
 		level = new Level;
-	}
 
-	if (lives <= 0)
-	{
-		pStateMachine->ChangeState(ESTATE_GAMEOVER);
 	}
 }
 
