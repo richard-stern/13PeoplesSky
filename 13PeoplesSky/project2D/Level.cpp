@@ -4,14 +4,15 @@
 #include "Enemy.h"
 #include "HealthPickup.h"
 #include "Star.h"
+#define STAR_COUNT 30
 
 Level::Level()
 {
 	m_bWrapAndRespawn = false;
 
-	for (int i = 0; i < 40; i++)
+	for (int i = 0; i < STAR_COUNT; i++)
 	{
-		for (int j = 0; j < 40; j++)
+		for (int j = 0; j < STAR_COUNT; j++)
 		{
 			Star* s = new Star;
 			this->AddChild(s); 
