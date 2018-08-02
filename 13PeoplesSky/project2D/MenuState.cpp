@@ -28,12 +28,12 @@ void MenuState::Enter()
 	m_m3GameTitle = new Matrix3();
 
 	// Find centre of window on x axis
-	unsigned int nWindowMiddleX = m_v2WindowSize->x / 2;
+	unsigned int nWindowMiddleX = (unsigned int)m_v2WindowSize->x / 2;
 
 	// Set button positions
-	m_m3StartButton->SetPosition(nWindowMiddleX, m_v2WindowSize->y * 0.67);
-	m_m3QuitButton->SetPosition(nWindowMiddleX, m_v2WindowSize->y * 0.33);
-	m_m3GameTitle->SetPosition(nWindowMiddleX, m_v2WindowSize->y - 32);
+	m_m3StartButton->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * (float)0.67);
+	m_m3QuitButton->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * (float)0.33);
+	m_m3GameTitle->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y - (float)32);
 
 	// Load button textures
 	TextureManager* textureMan = TextureManager::GetInstance();
@@ -51,7 +51,7 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 	if (pInput->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT))
 	{
 		// Store mouse position in Vector2
-		Vector2 v2MousePos = Vector2(pInput->getMouseX(), pInput->getMouseY());
+		Vector2 v2MousePos = Vector2((float)pInput->getMouseX(), (float)pInput->getMouseY());
 
 		// Store button positions in Vector2
 		Vector2 v2StartButtonPosition = m_m3StartButton->GetPosition();
