@@ -1,8 +1,8 @@
 #pragma once
 #include "GameObject.h"
-#include "Collider.h"
 #include "Matrix3.h"
 
+struct Collider;
 struct CollisionData;
 
 class Actor : public GameObject

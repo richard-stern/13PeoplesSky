@@ -63,16 +63,49 @@ void GUI::Draw(aie::Renderer2D *renderer)
 	float healthPosY = resolution.y - CORNER_OFFSET_Y;
 	renderer->drawText(font, "Health", xPos, healthPosY);
 	renderer->drawText(font, (char*)health, xPos + CORNER_OFFSET_X, healthPosY);
+	//DrawHealthBar(renderer);
 
 	/* score */
 	float scorePosY = resolution.y - 2 * CORNER_OFFSET_Y;
 	renderer->drawText(font, "Score", xPos, scorePosY);
 	renderer->drawText(font, (char*)score, xPos + CORNER_OFFSET_X, scorePosY);
+	//DrawScore(renderer);
 
 	/* lives */
 	float livesPosY = resolution.y - 3 * CORNER_OFFSET_Y;
 	renderer->drawText(font, "Lives", xPos, livesPosY);
 	renderer->drawText(font, (char*)lives, xPos + CORNER_OFFSET_X, scorePosY);
+	//DrawLives(renderer);
+}
+
+/*
+Function:	 DrawHealthBar
+Input/s:	 Renderer2D
+Description: Draw the player's health bar
+*/
+void GUI::DrawHealthBar(aie::Renderer2D *renderer)
+{
+
+}
+
+/*
+Function:	 DrawScore
+Input/s:	 Renderer2D
+Description: Draw the player's current score
+*/
+void GUI::DrawScore(aie::Renderer2D *renderer)
+{
+
+}
+
+/*
+Function:	 DrawLives
+Input/s:	 Renderer2D
+Description: Draw the player's number of remaining lives
+*/
+void GUI::DrawLives(aie::Renderer2D *renderer)
+{
+
 }
 
 /*
