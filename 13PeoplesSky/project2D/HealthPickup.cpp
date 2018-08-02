@@ -9,6 +9,9 @@ HealthPickup::HealthPickup()
 	TextureManager* textureMan = TextureManager::GetInstance();
 	CollisionManager* collisionMan = CollisionManager::GetInstance();
 
+	//set self to visible
+	SetVisible(true);
+
 	//set texture to health texture
 	//TEMP TEXTURE, replace when new texture made
 	SetTexture(textureMan->LoadTexture("./textures/health.png"));

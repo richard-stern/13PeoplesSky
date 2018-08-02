@@ -9,6 +9,9 @@ Rock::Rock()
 	SetMaxHealth((rand() % 3) + 1);
 	SetHealth(GetMaxHealth());
 
+	//set self to visible
+	SetVisible(true);
+
 	//get instance of texture manager
 	TextureManager* textureMan = TextureManager::GetInstance();
 	CollisionManager* collisionMan = CollisionManager::GetInstance();
