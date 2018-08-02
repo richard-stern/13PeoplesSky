@@ -28,6 +28,9 @@ Bullet::Bullet()
 	collider->SetIgnoreLayer(ECOLLISIONLAYER_PLAYER);
 
 	SetCollider(collider);
+
+	CollisionManager* cm = CollisionManager::GetInstance();
+	cm->AddObject(this);
 }
 
 void Bullet::Update(float deltaTime)
