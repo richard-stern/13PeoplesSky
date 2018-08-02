@@ -17,8 +17,8 @@ HealthPickup::HealthPickup()
 	SetVelocity(Vector2((float)(rand() % 360), (float)(rand() % 360)));
 
 	//Creates a collider, sets neccesary variables. 
-	PrimRectangle* collider = new PrimRectangle(64, 64);
-	collider->SetLayer(ECOLLISIONLAYER_ROCK);
+	PrimRectangle* collider = new PrimRectangle(32, 32);
+	collider->SetLayer(ECOLLISIONLAYER_HEALTH);
 	SetCollider(collider);
 	collisionMan->AddObject(this);
 }
