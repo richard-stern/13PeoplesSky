@@ -37,5 +37,5 @@ void TestActor::Update(float deltatime)
 
 void TestActor::OnCollision(Actor* collidingActor, CollisionData* data) 
 {
-	std::cout << "Collision!" << std::endl;
+	std::cout << data->m_v2Normal.x << " , " << data->m_v2Normal.y << std::endl;
 }

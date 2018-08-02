@@ -147,7 +147,6 @@ CollisionData CollisionManager::RunCollisionTest(Actor* pActor1, Actor* pActor2,
 
 		// Set axis to the normal of the edge direction.
 		v2Axis = v2EdgeDir.perpCW();
-		data.m_v2Normal = v2Axis;
 
 		// Get vector projections and the closet and furthest projections from the axis origin...
 
@@ -188,9 +187,12 @@ CollisionData CollisionManager::RunCollisionTest(Actor* pActor1, Actor* pActor2,
 		{
 			float fCrossoverSize = fShape1FurthDist - fShape2CloseDist; // Get crossover penetration.
 
-			if (fCrossoverSize < data.m_fPenetration)
+			if (fCrossoverSize < data.m_fPenetration) 
+			{
 				data.m_fPenetration = fCrossoverSize;
-
+				data.m_v2Normal = v2Axis;
+			}
+				
 			++data.m_nProjectionCrossovers; // Increment crossover count.
 		}
 		else if (fShape1FurthDist > fShape2FurthDist && fShape2FurthDist >= fShape1CloseDist) // Other intersection scenario
@@ -198,7 +200,10 @@ CollisionData CollisionManager::RunCollisionTest(Actor* pActor1, Actor* pActor2,
 			float fCrossoverSize = fShape2FurthDist - fShape1CloseDist; // Get crossover penetration.
 
 			if (fCrossoverSize < data.m_fPenetration)
+			{
 				data.m_fPenetration = fCrossoverSize;
+				data.m_v2Normal = v2Axis;
+			}
 
 			++data.m_nProjectionCrossovers; // Increment crossover count.
 		}
