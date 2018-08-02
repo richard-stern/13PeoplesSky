@@ -91,7 +91,7 @@ void Collider::DrawCollider(Vector2 v2Origin ,aie::Renderer2D* pRenderer)
 	}
 }
 
-const std::vector<ColliderNode*>* Collider::GetNodes() 
+std::vector<ColliderNode*>* Collider::GetNodes() 
 {
 	return m_nodes;
 }

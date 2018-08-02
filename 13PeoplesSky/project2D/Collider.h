@@ -81,7 +81,7 @@ public:
 	Description: Returns a pointer to the nodes of this collider.
 	Return Type: std::vector<ColliderNode*>* (PTR)
 	*/
-	const std::vector<ColliderNode*>* GetNodes();
+	std::vector<ColliderNode*>* GetNodes();
 
 protected:
 

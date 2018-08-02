@@ -189,7 +189,6 @@
     <ClCompile Include="Rock.cpp" />
     <ClCompile Include="Star.cpp" />
     <ClCompile Include="Primitives.cpp" />
-    <ClCompile Include="TempObj.cpp" />
     <ClCompile Include="TestActor.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="MenuState.cpp" />
@@ -210,7 +209,6 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Primitives.h" />
-    <ClInclude Include="TempObj.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameOverState.h" />
