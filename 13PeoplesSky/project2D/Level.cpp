@@ -19,6 +19,10 @@ Level::Level()
 			int randX = rand() % 50;
 			int randY = rand() % 50;
 			s->SetPosition(Vector2(j * 100.0f + randX, i * 100.0f + randY));
+			//s->SetScale(Vector2((float)((rand() % 10) / 10), (float)((rand() % 10) / 10)));
+			float scale = ((float)((rand() % 2) - 1)) / 10;
+			s->SetScale(Vector2(scale, scale));
+
 		}
 	}
 
