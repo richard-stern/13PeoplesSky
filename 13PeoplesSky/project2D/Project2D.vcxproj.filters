@@ -189,9 +189,6 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
@@ -243,11 +240,14 @@
     <ClCompile Include="TestActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Primitives.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TestActor2.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Source Files\Collider\ColliderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Primitives.cpp">
+      <Filter>Source Files\Collider\ColliderManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -279,9 +279,6 @@
       <Filter>Header Files\AI Behaviours</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TextureManager.h">
@@ -332,17 +329,20 @@
     <ClInclude Include="GameOverState.h">
       <Filter>Header Files\BaseState\GameOverState</Filter>
     </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TestActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Primitives.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestActor2.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Header Files\Collider\ColliderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Primitives.h">
+      <Filter>Header Files\Collider\ColliderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files\BaseState\GameState</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
