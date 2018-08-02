@@ -23,7 +23,7 @@ public:
 
 protected:
 	//The speed at which the enemy will move
-	float m_maxSpeed = 300.0f;
+	float m_maxSpeed = 200.0f;
 	Vector2 m_distToPlayer;
 	float m_lengthToPlayer;
 	Vector2 m_distToRock;

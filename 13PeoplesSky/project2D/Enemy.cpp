@@ -58,6 +58,7 @@ void Enemy::Update(float DeltaTime)
 	if (m_lengthToPlayer > 800.0f && GetVisible() == false)
 	{
 		SetVisible(true);
+		SetWrapAndRespawn(true);
 	}
 
 	//If player is within a certain radius, pursue player. Only pursues if the player is drawn
@@ -101,6 +102,7 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 		if (GetHealth() <= 0)
 		{
 			SetVisible(false);
+			SetWrapAndRespawn(false);
 			//When the enemy is destroyed, add 5 to the player score
 			GUI::GetInstance()->AddScore(5);
 		}
