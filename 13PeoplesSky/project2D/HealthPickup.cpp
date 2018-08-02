@@ -1,6 +1,7 @@
 #include "HealthPickup.h"
 #include "TextureManager.h"
 #include "CollisionManager.h"
+#include "Collider.h"
 
 HealthPickup::HealthPickup()
 {

@@ -1,6 +1,7 @@
 #include "Rock.h"
 #include "TextureManager.h"
 #include "CollisionManager.h"
+#include "Collider.h"
 
 Rock::Rock()
 {
