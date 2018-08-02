@@ -25,13 +25,13 @@ Camera* Camera::GetInstance()
 
 void Camera::SetPosition(float x, float y)
 {
-	m_CameraPosition.x = x;
-	m_CameraPosition.y = y;
+	m_CameraPosition.x = x - (m_Resolution.x * 0.5f);
+	m_CameraPosition.y = y - (m_Resolution.y * 0.5f);
 }
 
 void Camera::SetPosition(Vector2 position)
 {
-	m_CameraPosition = position;
+	m_CameraPosition = position - (m_Resolution * 0.5f);
 }
 
 Vector2 Camera::GetPosition()

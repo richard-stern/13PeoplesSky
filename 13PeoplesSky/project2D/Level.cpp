@@ -14,7 +14,7 @@ Level::Level()
 		for (int j = 0; j < 40; j++)
 		{
 			Star* s = new Star;
-			this->AddChild(s);
+			this->AddChild(s); 
 			s->SetParent(this);
 			int randX = rand() % 50;
 			int randY = rand() % 50;
@@ -50,7 +50,7 @@ Level::Level()
 
 	for (int i = 0; i < 1; i++)
 	{
-		for (int j = 0; j < 2; j++)
+		for (int j = 0; j < 3; j++)
 		{
 			Enemy* e = new Enemy;
 			this->AddChild(e);
