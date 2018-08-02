@@ -6,6 +6,8 @@ Actor::Actor()
 {
 	m_nMaxHealth = 10;
 	m_nHealth = m_nMaxHealth;
+	m_bCollidedThisFrame = false;
+	m_pCollider = nullptr;
 }
 
 Actor::Actor(Matrix3 m_m3StartPosition)
