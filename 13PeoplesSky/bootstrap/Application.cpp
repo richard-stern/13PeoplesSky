@@ -8,6 +8,8 @@
 
 namespace aie {
 
+	bool Application::m_gameOver = false;
+
 Application::Application()
 	: m_fps(0) 
 {
