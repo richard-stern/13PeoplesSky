@@ -4,7 +4,6 @@
 #include "TextureManager.h"
 #include "PursueBehaviour.h"
 #include "AvoidBehaviour.h"
-#include "CollisionManager.h"
 
 
 Enemy::Enemy()
@@ -25,7 +24,7 @@ Enemy::~Enemy()
 void Enemy::Update(Player* pPlayer, Rock* pRock)
 {
 	//Updates the distance between this class and the player every frame
-	m_distBetween = pPlayer->GetPosition().dot(this->GetPosition().magnitude);
+	m_distBetween = pPlayer->GetPosition().dot(this->GetPosition());
 
 	//If player is within a certain radius, pursue player
 	if (m_distBetween < 200.0f)
@@ -33,17 +32,12 @@ void Enemy::Update(Player* pPlayer, Rock* pRock)
 		m_pursue->update(pPlayer, this);
 	}
 
-	m_avoid->update(pRock, this);
-
-	//Checking if the enemy is colliding with the player, and if so, calls collision function
-	if (m_distBetween < 5.0f)
-	{
-	}
+	m_avoid->update(pRock, this);	
 }
 
 void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 {
-
+	this->SetVisible(false);
 }
 
 float Enemy::GetMaxSpeed()

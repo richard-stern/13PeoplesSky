@@ -6,7 +6,6 @@ class Player;
 class Rock;
 class PursueBehaviour;
 class AvoidBehaviour;
-class CollisionData;
 
 class Enemy : public Actor
 {
@@ -24,7 +23,6 @@ protected:
 	float m_distBetween;
 
 	TextureManager* pTexture;
-
 	PursueBehaviour* m_pursue;
 	AvoidBehaviour* m_avoid;
 };
