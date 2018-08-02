@@ -1,6 +1,7 @@
 #include "GameState.h"
 #include "GUI.h"
 #include "Level.h"
+#include "CollisionManager.h"
 
 GameState::GameState()
 {
@@ -27,7 +28,7 @@ void GameState::Enter()
 void GameState::Update(float fDeltaTime, StateMachine* pStateMachine)
 {
 	level->Update(fDeltaTime);
-
+	CollisionManager::GetInstance()->Update();
 }
 
 void GameState::Draw(aie::Renderer2D* pRenderer)
