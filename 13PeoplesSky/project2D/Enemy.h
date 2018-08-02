@@ -24,7 +24,6 @@ protected:
 	float m_maxSpeed = 300.0f;
 	float m_distBetween;
 
-	TextureManager* m_texture;
 	PursueBehaviour* m_pursue;
 	AvoidBehaviour* m_avoid;
 };

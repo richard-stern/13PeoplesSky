@@ -12,7 +12,8 @@
 Enemy::Enemy()
 {
 	//i'm loading me mum's car, broom broom
-	m_texture->LoadTexture("./car.png");
+	TextureManager* TextureManager = TextureManager::GetInstance();
+	SetTexture(TextureManager->LoadTexture("./textures/car.png"));
 
 	//*slaps top of enemy* this bad boy can take so many shots
 	SetHealth(3);
