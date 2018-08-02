@@ -4,6 +4,7 @@
 #include "TextureManager.h"
 #include "Camera.h"
 #include "CollisionManager.h"
+#include "Primitives.h"
 
 Bullet::Bullet()
 {
@@ -15,11 +16,13 @@ Bullet::Bullet()
 	m_pTexture = textureMan->LoadTexture("./textures/bullet");	
 
 	Collider* collider = new Collider();
+
+	auto colliderNodes = collider->GetNodes();
 	
-	collider->m_nodes->push_back(new ColliderNode(Vector2(-2.5, 2.5), 1));
-	collider->m_nodes->push_back(new ColliderNode(Vector2(2.5, 2.5), 2));
-	collider->m_nodes->push_back(new ColliderNode(Vector2(2.5, -2.5), 3));
-	collider->m_nodes->push_back(new ColliderNode(Vector2(-2.5, -2.5), 0));
+	colliderNodes->push_back(new ColliderNode(Vector2(-2.5, 2.5), 1));
+	colliderNodes->push_back(new ColliderNode(Vector2(2.5, 2.5), 2));
+	colliderNodes->push_back(new ColliderNode(Vector2(2.5, -2.5), 3));
+	colliderNodes->push_back(new ColliderNode(Vector2(-2.5, -2.5), 0));
 
 	collider->SetLayer(ECOLLISIONLAYER_BULLET);
 
@@ -59,7 +62,7 @@ void Bullet::Shoot(Vector2 position, Vector2 velocity)
 //-----------------
 void Bullet::OnCollision(Actor* collidingObject, CollisionData* _collision_data)
 {
-	switch (collidingObject->GetCollider()->m_eLayer)
+	switch (collidingObject->GetCollider()->GetLayer())
 	{
 	case(ECOLLISIONLAYER_ENEMY):
 		m_bVisible = false;
