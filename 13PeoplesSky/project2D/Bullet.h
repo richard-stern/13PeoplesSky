@@ -1,7 +1,7 @@
 #pragma once
 #include "Actor.h"
 
-class CollisionData;
+struct CollisionData;
 
 class Bullet : public Actor
 {
