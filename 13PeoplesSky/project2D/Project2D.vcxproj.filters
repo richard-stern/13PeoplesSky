@@ -237,12 +237,6 @@
     <ClCompile Include="GameState.cpp">
       <Filter>Source Files\BaseState\GameState</Filter>
     </ClCompile>
-    <ClCompile Include="TestActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TestActor2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
       <Filter>Source Files\Collider\CollisionManager</Filter>
     </ClCompile>
@@ -328,12 +322,6 @@
     </ClInclude>
     <ClInclude Include="GameOverState.h">
       <Filter>Header Files\BaseState\GameOverState</Filter>
-    </ClInclude>
-    <ClInclude Include="TestActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TestActor2.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
       <Filter>Header Files\Collider\CollisionManager</Filter>
