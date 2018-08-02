@@ -93,14 +93,16 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 	case(ECOLLISIONLAYER_NONE):
 		//failsafe code, shouldn't ever be called
 		break;
+
 	case(ECOLLISIONLAYER_PLAYER):
 		//When the enemy hits a player, the enemy gets destroyed and the player takes 1 point of damage
-		SetVisible(false);
 		collidingObject->ModifyHealth(-1);
+		SetVisible(false);
 		//Bouncing off the player
 		currentPos -= data->m_v2Normal * data->m_fPenetration;
 		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
 		break;
+
 	case(ECOLLISIONLAYER_BULLET):
 		//take damage from the bullet, bullet should also be destroyed on impact
 		ModifyHealth(-1);
@@ -108,18 +110,22 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 		{
 			SetVisible(false);
 			SetWrapAndRespawn(false);
+
 			//When the enemy is destroyed, add 5 to the player score
 			GUI::GetInstance()->AddScore(5);
 		}
 		break;
+
 	case(ECOLLISIONLAYER_ROCK):
 		//formula for bouncing off of other rocks
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
 		break;
+
 	case(ECOLLISIONLAYER_ENEMY):
 		//formula for bouncing off of enemies
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
 		break;
+
 	case(ECOLLISIONLAYER_HEALTH):
 		//We don't want the enemy to interact with the health pickups at all, so we ignore them
 		break;
