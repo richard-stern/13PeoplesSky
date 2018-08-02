@@ -14,6 +14,7 @@ Actor::Actor(Matrix3 m_m3StartPosition)
 	m_nMaxHealth = 10;
 	m_nHealth = m_nMaxHealth;
 	m_bCollidedThisFrame = false;
+	m_pCollider = nullptr;
 }
 
 Actor::~Actor()
@@ -41,7 +42,16 @@ void Actor::Update(float deltaTime)
 	m_m3LocalMatrix = rotation * translation; /* update local transform */
 
 	GameObject::Update(deltaTime); /* call base object update */
-	m_pCollider->UpdateBounds(&m_m3GlobalMatrix); /* update collision settings */
+	
+	if (m_pCollider)
+	{
+		m_pCollider->UpdateBounds(&m_m3GlobalMatrix); /* update collision settings */
+	}
+}
+
+void Actor::Draw(aie::Renderer2D *renderer)
+{
+	m_pCollider->DrawCollider(m_v2Position, renderer); /* draws bounding box */
 }
 
 /*

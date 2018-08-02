@@ -30,6 +30,7 @@ public:
 	virtual ~Actor(); /* destructor */
 
 	virtual void Update(float deltaTime); /* virtual update function */
+	void Draw(aie::Renderer2D *renderer);
 	virtual void OnCollision(Actor *collidingObject, CollisionData *data) = 0; /* pure virtual OnCollision function */
 
 	/* collider get/set */
