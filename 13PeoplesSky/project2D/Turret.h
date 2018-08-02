@@ -12,7 +12,7 @@ public:
 	void Update(float fDeltaTime);		//updates the turrets rotation, checks for shoot input
 	void Draw(aie::Renderer2D* pRenderer);		//draws turret
 
-	inline void OnCollision(GameObject *collidingObject) {};		//doesnt do anything, needed for override
+	inline void OnCollision(GameObject *collidingObject, CollisionData *data) {};		//doesnt do anything, needed for override
 
 private:
 	BulletManager * m_pBullets;		//bulletpool that is responsible for bullet management
