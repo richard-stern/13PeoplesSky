@@ -25,6 +25,7 @@ Bullet::Bullet()
 	colliderNodes->push_back(new ColliderNode(Vector2(-2.5, -2.5), 0));
 
 	collider->SetLayer(ECOLLISIONLAYER_BULLET);
+	collider->SetIgnoreLayer(ECOLLISIONLAYER_PLAYER);
 
 	SetCollider(collider);
 }
