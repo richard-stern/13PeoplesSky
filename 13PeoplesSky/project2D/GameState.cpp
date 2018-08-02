@@ -5,7 +5,7 @@
 
 GameState::GameState()
 {
-	
+	level = nullptr;
 }
 
 GameState::~GameState()
