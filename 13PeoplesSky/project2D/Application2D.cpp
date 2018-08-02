@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include "TextureManager.h"
 #include "Vector2.h"
+#include "StateMachine.h"
 
 Application2D::Application2D() {
 	
@@ -20,6 +21,8 @@ bool Application2D::startup() {
 
 	Camera::GetInstance();
 	TextureManager::Create();
+
+	m_pStateMachine = new StateMachine();
 	
 	m_cameraX = 0;
 	m_cameraY = 0;
@@ -31,6 +34,8 @@ bool Application2D::startup() {
 
 void Application2D::shutdown() {
 	
+	delete m_pStateMachine;
+
 	Camera::Destroy();
 	TextureManager::Destroy();
 
@@ -47,6 +52,8 @@ void Application2D::update(float deltaTime) {
 	resY = (float)getWindowHeight();
 
 	Camera::GetInstance()->SetResolution(Vector2(resX, resY));
+
+	m_pStateMachine->Update(deltaTime);
 
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
@@ -66,6 +73,7 @@ void Application2D::draw() {
 	// begin drawing sprites
 	m_2dRenderer->begin();
 
+	m_pStateMachine->Draw(m_2dRenderer);
 
 	// done drawing sprites
 	m_2dRenderer->end();

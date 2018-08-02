@@ -3,6 +3,8 @@
 #include "Application.h"
 #include "Renderer2D.h"
 
+class StateMachine;
+
 class Application2D : public aie::Application {
 public:
 
@@ -16,6 +18,8 @@ public:
 	virtual void draw();
 
 protected:
+
+	StateMachine * m_pStateMachine;
 
 	aie::Renderer2D*	m_2dRenderer;
 
