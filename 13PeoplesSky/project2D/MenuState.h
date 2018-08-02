@@ -2,6 +2,7 @@
 #include "BaseState.h"
 #include "Matrix3.h"
 #include "Texture.h"
+class Camera;
 class MenuState : public BaseState
 {
 public:
@@ -44,8 +45,12 @@ private:
 	Matrix3* m_m3StartButton;
 	Matrix3* m_m3QuitButton;
 	Matrix3* m_m3GameTitle;
+
 	aie::Texture* m_pStartTexture;
 	aie::Texture* m_pQuitTexture;
 	aie::Texture* m_pGameTitle;
 	aie::Texture* m_pMenuBackground;
+
+	Vector2* m_v2WindowSize;
+	Camera* m_pCamera;
 };

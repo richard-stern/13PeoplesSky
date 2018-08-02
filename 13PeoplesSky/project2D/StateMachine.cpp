@@ -16,6 +16,7 @@ StateMachine::StateMachine()
 
 StateMachine::~StateMachine()
 {
+	delete[] m_pStates;
 }
 
 void StateMachine::ChangeState(ESTATE eState)

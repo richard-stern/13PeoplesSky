@@ -4,6 +4,7 @@
 #include "Input.h"
 #include "Vector2.h"
 #include "Application2D.h"
+#include "Camera.h"
 MenuState::MenuState()
 {
 }
@@ -15,16 +16,24 @@ MenuState::~MenuState()
 void MenuState::Enter()
 {
 	// EVERYTHING HERE IS PLACEHOLDER
+	m_pCamera = Camera::GetInstance();
+
+	// Get window width/height
+	m_v2WindowSize = new Vector2();
+	*m_v2WindowSize = m_pCamera->GetResolution();
 
 	// Allocate button matrices
 	m_m3StartButton = new Matrix3();
 	m_m3QuitButton = new Matrix3();
 	m_m3GameTitle = new Matrix3();
 
+	// Find centre of window on x axis
+	unsigned int nWindowMiddleX = m_v2WindowSize->x / 2;
+
 	// Set button positions
-	m_m3StartButton->SetPosition(640, 400);
-	m_m3QuitButton->SetPosition(640, 200);
-	m_m3GameTitle->SetPosition(640, 600);
+	m_m3StartButton->SetPosition(nWindowMiddleX, m_v2WindowSize->y * 0.67);
+	m_m3QuitButton->SetPosition(nWindowMiddleX, m_v2WindowSize->y * 0.33);
+	m_m3GameTitle->SetPosition(nWindowMiddleX, m_v2WindowSize->y - 32);
 
 	// Load button textures
 	TextureManager* textureMan = TextureManager::GetInstance();
@@ -74,7 +83,7 @@ void MenuState::Draw(aie::Renderer2D* pRenderer)
 	pRenderer->drawSpriteTransformed3x3(m_pGameTitle, (float*)m_m3GameTitle);
 
 	// Draw menu background
-	pRenderer->drawSprite(m_pMenuBackground, 0.0f, 0.0f, Application2D::getWindowWidth(), Application2D::getWindowHeight() , 0.0f, 100.0f, 0.0f, 0.0f);
+	pRenderer->drawSprite(m_pMenuBackground, 0.0f, 0.0f, m_v2WindowSize->x, m_v2WindowSize->y , 0.0f, 100.0f, 0.0f, 0.0f);
 }
 
 void MenuState::Exit()
@@ -88,4 +97,7 @@ void MenuState::Exit()
 
 	delete m_m3GameTitle;
 	m_m3GameTitle = nullptr;
+
+	delete m_v2WindowSize;
+	m_v2WindowSize = nullptr;
 }
