@@ -143,7 +143,7 @@ bool GameObject::WrapAndRespawn()
 	Vector2 camPos = Camera::GetInstance()->GetPosition();
 	Vector2 camRes = Camera::GetInstance()->GetResolution();
 	////Fix camera position
-	camPos += Vector2{ camRes.x / 1.5f, camRes.y / 1.5f };
+	camPos += Vector2{ camRes.x / 2.0f, camRes.y / 2.0f };
 
 	Vector2 distance = camPos - m_v2Position;
 	bool wrapped = false;
@@ -151,23 +151,23 @@ bool GameObject::WrapAndRespawn()
 	//X
 	if (distance.x > camRes.x)
 	{
-		m_v2Position.x += camRes.x * 1.5f;
+		m_v2Position.x += camRes.x * 2.0f;
 		wrapped = true;
 	}
 	else if (distance.x < -camRes.x)
 	{
-		m_v2Position.x -= camRes.x * 1.5f;
+		m_v2Position.x -= camRes.x * 2.0f;
 		wrapped = true;
 	}
 	//Y
 	if (distance.y > camRes.y)
 	{
-		m_v2Position.y += camRes.y * 1.5f;
+		m_v2Position.y += camRes.y * 2.0f;
 		wrapped = true;
 	}
 	else if (distance.y < -camRes.y)
 	{
-		m_v2Position.y -= camRes.y * 1.5f;
+		m_v2Position.y -= camRes.y * 2.0f;
 		wrapped = true;
 	}
 	return wrapped;
