@@ -74,7 +74,7 @@ void CollisionManager::Update()
 		Actor* currentActor = actorsRef[i];
 		Collider* currentCollider = currentActor->GetCollider(); // Will be replaced with GetCollider()
 
-		if (true && currentCollider->GetLayer() != ECOLLISIONLAYER_NONE) // "true" will be replaced with actor is visible..
+		if (currentActor->GetVisible() && currentCollider->GetLayer() != ECOLLISIONLAYER_NONE) // "true" will be replaced with actor is visible..
 		{
 			// Iterate through all other objects...
 			for (unsigned int j = 0; j < actorsRef.size(); ++j)
@@ -82,7 +82,7 @@ void CollisionManager::Update()
 				Actor* otherActor = actorsRef[j];
 				Collider* otherCollider = otherActor->GetCollider();
 
-				if(otherActor != currentActor && otherCollider->GetLayer() != currentCollider->GetLayer()) 
+				if(otherActor != currentActor && otherActor->GetVisible() && currentCollider->GetIgnoreLayer() != otherCollider->GetLayer()) 
 				{
 					CollisionData data = RunCollisionTest(currentActor, otherActor, currentCollider, otherCollider); // Get collision data.
 					if(data.m_bCollided) // If the collision result was positive...
@@ -110,6 +110,9 @@ CollisionData CollisionManager::RunCollisionTest(Actor* pActor1, Actor* pActor2,
 	// Get node arrays of both colliders.
 	const std::vector<ColliderNode*>& collider1Nodes = *pCollider1->GetNodes();
 	const std::vector<ColliderNode*>& collider2Nodes = *pCollider2->GetNodes();
+
+	Vector2 v2ObjectDir = (pActor1->GetPosition() - pActor2->GetPosition()); // The direction between the colliding objects.
+	v2ObjectDir.normalise();
 
 	// Iterate through all vertices of both colliders combined.
 	for (unsigned int i = 0; i < (collider1Nodes.size() + collider2Nodes.size()); ++i)
@@ -197,6 +200,10 @@ CollisionData CollisionManager::RunCollisionTest(Actor* pActor1, Actor* pActor2,
 			{
 				data.m_fPenetration = fCrossoverSize;
 				data.m_v2Normal = v2Axis;
+
+				// Swap collision normal and edge directions if the object direction indicates one object is above and to the right of another (dot product returns < 0).
+				if (v2ObjectDir.dot(data.m_v2Normal) < 0.0f) 
+					data.m_v2Normal = -data.m_v2Normal;
 			}
 				
 			++data.m_nProjectionCrossovers; // Increment crossover count.
@@ -209,6 +216,10 @@ CollisionData CollisionManager::RunCollisionTest(Actor* pActor1, Actor* pActor2,
 			{
 				data.m_fPenetration = fCrossoverSize;
 				data.m_v2Normal = v2Axis;
+
+				// Swap collision normal and edge directions if the object direction indicates one object is above and to the right of another (dot product returns < 0).
+				if (v2ObjectDir.dot(data.m_v2Normal) < 0.0f)
+					data.m_v2Normal = -data.m_v2Normal;
 			}
 
 			++data.m_nProjectionCrossovers; // Increment crossover count.
