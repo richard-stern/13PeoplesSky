@@ -2,13 +2,13 @@
 #include "Actor.h"
 #include "CollisionManager.h"
 
-class TestActor : public Actor
+class TestActor2 : public Actor
 {
 public:
 
-	TestActor();
+	TestActor2();
 
-	~TestActor();
+	~TestActor2();
 
 	void Update(float deltaTime) override;
 

@@ -190,6 +190,7 @@
     <ClCompile Include="Star.cpp" />
     <ClCompile Include="Primitives.cpp" />
     <ClCompile Include="TestActor.cpp" />
+    <ClCompile Include="TestActor2.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="StateMachine.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="Star.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="TestActor.h" />
+    <ClInclude Include="TestActor2.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="BaseState.h" />
