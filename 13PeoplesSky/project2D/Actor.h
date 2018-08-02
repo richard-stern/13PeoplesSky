@@ -3,6 +3,8 @@
 #include "Collider.h"
 #include "Matrix3.h"
 
+struct CollisionData;
+
 class Actor : public GameObject
 {
 private:
@@ -28,7 +30,7 @@ public:
 	virtual ~Actor(); /* destructor */
 
 	virtual void Update(float deltaTime); /* virtual update function */
-	virtual void OnCollision(Actor *collidingObject) = 0; /* pure virtual OnCollision function */
+	virtual void OnCollision(Actor *collidingObject, CollisionData *data) = 0; /* pure virtual OnCollision function */
 
 	/* collider get/set */
 	Collider* GetCollider();
