@@ -1,8 +1,5 @@
 #pragma once
 #include "Renderer2D.h"
-#include "Font.h"
-#include "Camera.h"
-#include "TextureManager.h"
 
 #define GUI_FONT_SIZE 24
 #define CORNER_OFFSET_X 20.0f
