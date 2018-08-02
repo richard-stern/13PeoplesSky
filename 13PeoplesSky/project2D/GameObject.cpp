@@ -82,7 +82,9 @@ void GameObject::Draw(aie::Renderer2D* _render)
 	if (m_bVisible)
 	{
 		_render->setRenderColour(m_iColor);
-		_render->drawSpriteTransformed3x3(m_pTexture, (float*)m_m3GlobalMatrix);
+		//Dont draw it if texture is nullptr
+		if(m_pTexture)
+			_render->drawSpriteTransformed3x3(m_pTexture, (float*)m_m3GlobalMatrix);
 		//Draw all of our children
 		for (auto iter = m_Children.begin(); iter != m_Children.end(); ++iter)
 		{
