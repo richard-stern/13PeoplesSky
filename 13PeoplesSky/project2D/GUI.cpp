@@ -71,8 +71,10 @@ void GUI::Draw(aie::Renderer2D *renderer)
 
 	/* score */
 	/*float scorePosY = resolution.y - 2 * CORNER_OFFSET_Y;
+	char scoreDisplay[8];
 	renderer->drawText(font, "Score", xPos, scorePosY);
-	renderer->drawText(font, (char*)score, xPos + CORNER_OFFSET_X, scorePosY);*/
+	sprintf(scoreDisplay, "%i", score);
+	renderer->drawText(font, scoreDisplay, xPos + CORNER_OFFSET_X, scorePosY);*/
 	//DrawScore(renderer);
 
 	/* lives */
@@ -91,12 +93,14 @@ void GUI::DrawHealthBar(aie::Renderer2D *renderer)
 {
 	aie::Texture *healthBar = TextureManager::GetInstance()->LoadTexture("./textures/healthBar.png");
 	Vector2 resolution = Camera::GetInstance()->GetResolution();
-	float healthPosY = resolution.y - CORNER_OFFSET_Y;
+	Vector2 position = Camera::GetInstance()->GetPosition();
+	float healthPosX = position.x + CORNER_OFFSET_X;
+	float healthPosY = resolution.y + position.y - CORNER_OFFSET_Y;
 	float healthWidth = health * 5.6f;
 
-	renderer->drawSprite(healthBar, CORNER_OFFSET_X, healthPosY - 2);
+	renderer->drawSprite(healthBar, healthPosX, healthPosY);
 	renderer->setRenderColour(0x70DD54FF);
-	renderer->drawBox(CORNER_OFFSET_X, healthPosY - 2, healthWidth, 12);
+	renderer->drawBox(healthPosX, healthPosY, healthWidth, 12);
 	renderer->setRenderColour(0xFFFFFFFF);
 }
 
