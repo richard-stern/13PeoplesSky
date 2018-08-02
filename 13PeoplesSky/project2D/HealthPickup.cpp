@@ -1,22 +1,26 @@
 #include "HealthPickup.h"
 #include "TextureManager.h"
 #include "CollisionManager.h"
-#include "Collider.h"
+#include "Primitives.h"
 
 HealthPickup::HealthPickup()
 {
 	//get instance of texture manager
 	TextureManager* textureMan = TextureManager::GetInstance();
+	CollisionManager* collisionMan = CollisionManager::GetInstance();
 
 	//set texture to health texture
 	//TEMP TEXTURE, replace when new texture made
-	this->SetTexture(textureMan->LoadTexture("./textures/health.png"));
+	SetTexture(textureMan->LoadTexture("./textures/health.png"));
 
 	//Sets random velocity, change numbers as neccesary
-	this->SetVelocity(Vector2((float)(rand() % 360), (float)(rand() % 360)));
+	SetVelocity(Vector2((float)(rand() % 360), (float)(rand() % 360)));
 
-	//set collision layer so other objects can correctly detect that this collider is a rock
-	this->GetCollider()->SetLayer(ECOLLISIONLAYER_HEALTH);
+	//Creates a collider, sets neccesary variables. 
+	PrimRectangle* collider = new PrimRectangle(64, 64);
+	collider->SetLayer(ECOLLISIONLAYER_ROCK);
+	SetCollider(collider);
+	collisionMan->AddObject(this);
 }
 
 HealthPickup::~HealthPickup()

@@ -1,26 +1,31 @@
 #include "Rock.h"
 #include "TextureManager.h"
 #include "CollisionManager.h"
-#include "Collider.h"
+#include "Primitives.h"
 
 Rock::Rock()
 {
 	//set health and max health to a random value between 2 and 4
-	this->SetMaxHealth((rand() % 3) + 1);
-	this->SetHealth(this->GetMaxHealth());
+	SetMaxHealth((rand() % 3) + 1);
+	SetHealth(GetMaxHealth());
 
 	//get instance of texture manager
 	TextureManager* textureMan = TextureManager::GetInstance();
+	CollisionManager* collisionMan = CollisionManager::GetInstance();
 
 	//set texture to rock texture
 	//TEMP TEXTURE, replace when new texture made
-	this->SetTexture(textureMan->LoadTexture("./textures/rock_large.png"));
+	SetTexture(textureMan->LoadTexture("./textures/rock_large.png"));
 
 	//Sets random velocity, change numbers as neccesary
-	this->SetVelocity(Vector2((float)(rand() % 360), (float)(rand() % 360)));
+	SetVelocity(Vector2((float)(rand() % 360), (float)(rand() % 360)));
 
-	//set collision layer so other objects can correctly detect that this collider is a rock
-	this->GetCollider()->SetLayer(ECOLLISIONLAYER_ROCK);
+	//Creates a collider, sets neccesary variables. 
+	PrimRectangle* collider = new PrimRectangle(64, 64);
+	collider->SetLayer(ECOLLISIONLAYER_ROCK);
+	SetCollider(collider);
+	collisionMan->AddObject(this);
+
 }
 
 Rock::~Rock()
@@ -40,9 +45,9 @@ void Rock::OnCollision(Actor* collidingObject, CollisionData* data)
 		break;
 	case(ECOLLISIONLAYER_BULLET):
 		//take damage from the bullet, bullet should also be destroyed on impact
-		this->ModifyHealth(-1);
-		if (this->GetHealth() <= 0)
-			this->SetVisible(false);
+		ModifyHealth(-1);
+		if (GetHealth() <= 0)
+			SetVisible(false);
 		break;
 	case(ECOLLISIONLAYER_ROCK):
 		//formula for bouncing off of other rocks
