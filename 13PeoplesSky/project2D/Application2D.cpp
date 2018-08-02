@@ -8,26 +8,34 @@
 #include "StateMachine.h"
 #include "CollisionManager.h"
 
-Application2D::Application2D() {
+Application2D::Application2D() 
+{
 	
 }
 
-Application2D::~Application2D() {
+Application2D::~Application2D() 
+{
 
 }
 
-bool Application2D::startup() {
-	
+bool Application2D::startup() 
+{
+	// Create Renderer
 	m_2dRenderer = new aie::Renderer2D();
 
+	// Set Camera Resolution and Create Camera
 	float resX, resY;
 	resX = (float)getWindowWidth();
 	resY = (float)getWindowHeight();
 	Camera::GetInstance()->SetResolution(Vector2(resX, resY));
 
+	// Create Texture Manager
 	TextureManager::Create();
+
+	// Create Collider Manager
 	CollisionManager::CreateInstance();
 
+	// Create StateMachine
 	m_pStateMachine = new StateMachine();
 	
 	m_cameraX = 0;
@@ -38,10 +46,12 @@ bool Application2D::startup() {
 	return true;
 }
 
-void Application2D::shutdown() {
-	
+void Application2D::shutdown() 
+{
+	// delete StateMachine
 	delete m_pStateMachine;
 
+	// Destroy Singletons
 	Camera::Destroy();
 	TextureManager::Destroy();
 	CollisionManager::DestroyInstance();
@@ -49,16 +59,19 @@ void Application2D::shutdown() {
 	delete m_2dRenderer;
 }
 
-void Application2D::update(float deltaTime) {
+void Application2D::update(float deltaTime)
+{
 
 	// input
 	aie::Input* input = aie::Input::getInstance();
 
+	// Reset Camera Resolution
 	float resX, resY;
 	resX = (float)getWindowWidth();
 	resY = (float)getWindowHeight();
 	Camera::GetInstance()->SetResolution(Vector2(resX, resY));
 
+	// Update StateMachine
 	m_pStateMachine->Update(deltaTime);
 
 	// exit the application
@@ -66,11 +79,13 @@ void Application2D::update(float deltaTime) {
 		quit();
 }
 
-void Application2D::draw() {
+void Application2D::draw() 
+{
 
 	// wipe the screen to the background colour
 	clearScreen();
 
+	// Get CameraPosition
 	Vector2 cameraPos = Camera::GetInstance()->GetPosition();
 
 	// set the camera position before we begin rendering
@@ -79,6 +94,7 @@ void Application2D::draw() {
 	// begin drawing sprites
 	m_2dRenderer->begin();
 
+	// Draw StateMachine
 	m_pStateMachine->Draw(m_2dRenderer);
 
 	// done drawing sprites
