@@ -58,12 +58,12 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 		Vector2 v2QuitButtonPosition = m_m3QuitButton->GetPosition();
 
 		// Find if mouse is over start or quit button
-		if (v2MousePos > Vector2(v2StartButtonPosition.x - 256, v2StartButtonPosition.y - 64) && v2MousePos < Vector2(v2StartButtonPosition.x + 256, v2StartButtonPosition.y + 64))
+		if (v2MousePos > m_m3StartButton->GetPosition() + Vector2(v2StartButtonPosition.x - 256, v2StartButtonPosition.y - 64) && v2MousePos < m_m3StartButton->GetPosition() + Vector2(v2StartButtonPosition.x + 256, v2StartButtonPosition.y + 64))
 		{
 			// Enter game state
 			pStateMachine->ChangeState(ESTATE_GAME);
 		}
-		else if (v2MousePos > Vector2(v2QuitButtonPosition.x - 256, v2QuitButtonPosition.y - 64) && v2MousePos < Vector2(v2QuitButtonPosition.x + 256, v2QuitButtonPosition.y + 64))
+		else if (v2MousePos > m_m3QuitButton->GetPosition() + Vector2(v2QuitButtonPosition.x - 256, v2QuitButtonPosition.y - 64) && v2MousePos < m_m3QuitButton->GetPosition() + Vector2(v2QuitButtonPosition.x + 256, v2QuitButtonPosition.y + 64))
 		{
 			// Quit application
 			Application2D::quit();
