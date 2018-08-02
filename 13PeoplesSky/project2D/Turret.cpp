@@ -40,7 +40,7 @@ void Turret::Update(float fDeltaTime)
 		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn), sinf(fTurn)));		//calls the shoot function in the bullet manager
 	}
 
-	m_fRotation = fTurn - M_PI/2;		//sets the new rotation
+	m_fRotation = fTurn - M_PI/2 - m_pParent->GetRotation();		//sets the new rotation
 	Actor::Update(fDeltaTime);		//update the actor
 }
 
