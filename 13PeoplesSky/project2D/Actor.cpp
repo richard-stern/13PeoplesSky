@@ -237,13 +237,12 @@ void Actor::SetCollidedThisFrame(bool toggle)
 
 /*
 Function:	 WrapAndRespawn
+Output:		 bool
 Description: Ensures actor's health resets upon death
 */
-void Actor::WrapAndRespawn()
+bool Actor::WrapAndRespawn()
 {
-	GameObject::WrapAndRespawn(); /* call base class wrap & respawn function */
-
-	if (!m_bVisible)
+	if (GameObject::WrapAndRespawn() && !m_bVisible) /* call base class wrap & respawn function */
 	{
 		SetHealth(GetMaxHealth()); /* reset health to full */
 		SetVisible(true);
