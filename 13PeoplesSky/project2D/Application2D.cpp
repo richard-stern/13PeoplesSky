@@ -79,6 +79,9 @@ void Application2D::update(float deltaTime)
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
+
+	if (input->wasKeyPressed(aie::INPUT_KEY_P))
+		m_pStateMachine->ChangeState(ESTATE_GAMEOVER);
 }
 
 void Application2D::draw() 
