@@ -3,6 +3,7 @@
 #include "TextureManager.h"
 #include "Input.h"
 #include "Vector2.h"
+#include "Application2D.h"
 MenuState::MenuState()
 {
 }
@@ -43,7 +44,16 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 		Vector2 v2MousePos = Vector2(pInput->getMouseX(), pInput->getMouseY());
 
 		// USE MOUSE POS TO FIND IF OVER EACH BUTTON
-
+		Vector2 v2StartButtonPosition = m_m3StartButton->GetPosition();
+		Vector2 v2QuitButtonPosition = m_m3QuitButton->GetPosition();
+		if (v2MousePos > Vector2(v2StartButtonPosition.x - 256, v2StartButtonPosition.y - 64) && v2MousePos < Vector2(v2StartButtonPosition.x + 256, v2StartButtonPosition.y + 64))
+		{
+			pStateMachine->ChangeState(ESTATE_GAME);
+		}
+		else if (v2MousePos > Vector2(v2QuitButtonPosition.x - 256, v2QuitButtonPosition.y - 64) && v2MousePos < Vector2(v2QuitButtonPosition.x + 256, v2QuitButtonPosition.y + 64))
+		{
+			Application2D::quit();
+		}
 	}
 }
 

@@ -37,7 +37,7 @@ public:
 	void setVSync(bool enabled);
 
 	// sets m_gameOver to true which will close the application safely when the frame ends
-	void quit() { m_gameOver = true; }
+	static void quit() { m_gameOver = true; }
 
 	// access to the GLFW window
 	GLFWwindow* getWindowPtr() const { return m_window; }
@@ -63,7 +63,7 @@ protected:
 	GLFWwindow*		m_window;
 
 	// if set to false, the main game loop will exit
-	bool			m_gameOver;
+	static bool			m_gameOver;
 	
 	unsigned int	m_fps;
 
