@@ -49,7 +49,7 @@ void Rock::OnCollision(Actor* collidingObject, CollisionData* data)
 	case(ECOLLISIONLAYER_PLAYER):
 		//formula for bouncing off of player
 		currentPos -= data->m_v2Normal * data->m_fPenetration;
-		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
+		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
 		break;
 	case(ECOLLISIONLAYER_BULLET):
 		//take damage from the bullet, bullet should also be destroyed on impact
@@ -60,17 +60,17 @@ void Rock::OnCollision(Actor* collidingObject, CollisionData* data)
 	case(ECOLLISIONLAYER_ROCK):
 		//formula for bouncing off of other rocks
 		currentPos -= data->m_v2Normal * data->m_fPenetration;
-		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
+		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
 		break;
 	case(ECOLLISIONLAYER_ENEMY):
 		//formula for bouncing off of enemies
 		currentPos -= data->m_v2Normal * data->m_fPenetration;
-		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
+		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
 		break;
 	case(ECOLLISIONLAYER_HEALTH):
 		//formula for bouncing off of health pickups
 		currentPos -= data->m_v2Normal * data->m_fPenetration;
-		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
+		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
 		break;
 	}
 	SetPosition(currentPos);
