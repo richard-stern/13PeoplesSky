@@ -2,7 +2,7 @@
 #include "Vector2.h"
 #include "GameObject.h"
 
-#define POOL_SIZE 10
+#define POOL_SIZE 20
 
 class Bullet;
 
