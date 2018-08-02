@@ -1,6 +1,8 @@
 #pragma once
 #include "Actor.h"
 
+struct CollisionData;
+
 class HealthPickup : public Actor
 {
 public:
@@ -26,6 +28,6 @@ public:
 	//If the player or a bullet collides with the health pickup, the pickup should be destroyed. 
 	//If anything else collides, it should bounce off harmlessly. 
 	//------------------------------------
-	void OnCollision(Actor* collide);
+	void OnCollision(Actor* collidingObject, CollisionData* data);
 };
 

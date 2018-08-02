@@ -1,6 +1,6 @@
 #include "HealthPickup.h"
 #include "TextureManager.h"
-
+#include "CollisionManager.h"
 
 HealthPickup::HealthPickup()
 {
@@ -12,39 +12,39 @@ HealthPickup::HealthPickup()
 	this->SetTexture(textureMan->LoadTexture("./textures/health.png"));
 
 	//Sets random velocity, change numbers as neccesary
-	this->SetVelocity(Vector2(rand() % 360, rand() % 360));
+	m_v2Velocity = Vector2(rand() % 360, rand() % 360);
 
 	//set collision layer so other objects can correctly detect that this collider is a rock
-	this->m_pCollider.SetLayer(ECOLLISIONLAYER_HEALTH);
+	this->GetCollider()->SetLayer(ECOLLISIONLAYER_HEALTH);
 }
-
 
 HealthPickup::~HealthPickup()
 {
 }
 
-void HealthPickup::OnCollision(Actor* collide)
+void HealthPickup::OnCollision(Actor* collidingObject, CollisionData* data)
 {
-	switch (collide->m_pCollider.m_eLayer)
+	switch (collidingObject->GetCollider()->m_eLayer)
 	{
 	case(ECOLLISIONLAYER_NONE):
+		//failsafe code, shouldn't ever be called
 		break;
 	case(ECOLLISIONLAYER_PLAYER):
 		//player should also gain health, code done in player class
 		this->SetVisible(false);
 		break;
 	case(ECOLLISIONLAYER_BULLET):
-		//bullet should also be destroyed
+		//bullet should also be destroyed, code would be done in bullet class
 		this->SetVisible(false);
 		break;
 	case(ECOLLISIONLAYER_ROCK):
-		//bounce off
+		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity * 1 /*replace with collider normal*/) * 1/*replace with collider normal*/));
 		break;
 	case(ECOLLISIONLAYER_ENEMY):
-		//bounce off
+		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity * 1 /*replace with collider normal*/) * 1/*replace with collider normal*/));
 		break;
 	case(ECOLLISIONLAYER_HEALTH):
-		//bounce off
+		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity * 1 /*replace with collider normal*/) * 1/*replace with collider normal*/));
 		break;
 	}
 }
