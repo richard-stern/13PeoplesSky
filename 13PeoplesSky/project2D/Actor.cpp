@@ -11,6 +11,7 @@ Actor::Actor()
 
 	m_fAngularVelocity = 0.0f;
 	m_fDrag = 0.0f;
+	m_fMass = 1.0f;
 }
 
 Actor::Actor(Matrix3 m_m3StartPosition)
@@ -23,6 +24,7 @@ Actor::Actor(Matrix3 m_m3StartPosition)
 
 	m_fAngularVelocity = 0.0f;
 	m_fDrag = 0.0f;
+	m_fMass = 1.0f;
 }
 
 Actor::~Actor()
@@ -231,4 +233,18 @@ Description: Set actor's collidedThisFrame flag
 void Actor::SetCollidedThisFrame(bool toggle)
 {
 	m_bCollidedThisFrame = toggle;
+}
+
+/*
+Function:	 WrapAndRespawn
+Description: Ensures actor's health resets upon death
+*/
+void Actor::WrapAndRespawn()
+{
+	GameObject::WrapAndRespawn(); /* call base class wrap & respawn function */
+
+	if (!m_bVisible)
+	{
+		SetHealth(GetMaxHealth()); /* reset health to full */
+	}
 }

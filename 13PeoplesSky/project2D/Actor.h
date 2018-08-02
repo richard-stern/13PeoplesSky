@@ -57,5 +57,6 @@ public:
 	/* collidedThisFrame get/set */
 	bool GetCollidedThisFrame();
 	void SetCollidedThisFrame(bool toggle);
+	void WrapAndRespawn();
 };
 
