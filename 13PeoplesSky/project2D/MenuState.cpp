@@ -31,9 +31,9 @@ void MenuState::Enter()
 	unsigned int nWindowMiddleX = (unsigned int)m_v2WindowSize->x / 2;
 
 	// Set button positions
-	m_m3StartButton->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * (float)0.5);
-	m_m3QuitButton->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * (float)0.2);
-	m_m3GameTitle->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y - (float)96);
+	m_m3StartButton->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * 0.5f);
+	m_m3QuitButton->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * 0.2f);
+	m_m3GameTitle->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * 0.8f);
 
 	// Load button textures
 	TextureManager* textureMan = TextureManager::GetInstance();
@@ -52,9 +52,9 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 	unsigned int nWindowMiddleX = (unsigned int)m_v2WindowSize->x / 2;
 
 	// Set button positions based on window resolution (in case of window resize)
-	m_m3StartButton->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * (float)0.5);
-	m_m3QuitButton->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * (float)0.2);
-	m_m3GameTitle->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y - (float)96);
+	m_m3StartButton->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * 0.5f);
+	m_m3QuitButton->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * 0.2f);
+	m_m3GameTitle->SetPosition((float)nWindowMiddleX, m_v2WindowSize->y * 0.8f);
 
 	// Get input instance
 	aie::Input* pInput = aie::Input::getInstance();
@@ -85,13 +85,13 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 void MenuState::Draw(aie::Renderer2D* pRenderer)
 {
 	// Draw start button
-	pRenderer->drawSpriteTransformed3x3(m_pStartTexture, (float*)m_m3StartButton);
+	pRenderer->drawSpriteTransformed3x3(m_pStartTexture, (float*)m_m3StartButton, m_v2WindowSize->x * 0.45f, m_v2WindowSize->y * 0.2f);
 	
 	// Draw quit button
-	pRenderer->drawSpriteTransformed3x3(m_pQuitTexture, (float*)m_m3QuitButton);
+	pRenderer->drawSpriteTransformed3x3(m_pQuitTexture, (float*)m_m3QuitButton, m_v2WindowSize->x * 0.45f, m_v2WindowSize->y * 0.2f);
 
 	// Draw game title
-	pRenderer->drawSpriteTransformed3x3(m_pGameTitle, (float*)m_m3GameTitle);
+	pRenderer->drawSpriteTransformed3x3(m_pGameTitle, (float*)m_m3GameTitle, m_v2WindowSize->x * 0.8f, m_v2WindowSize->y * 0.2f);
 
 	// Draw menu background
 	pRenderer->drawSprite(m_pMenuBackground, 0.0f, 0.0f, m_v2WindowSize->x, m_v2WindowSize->y , 0.0f, 100.0f, 0.0f, 0.0f);
