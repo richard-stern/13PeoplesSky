@@ -91,12 +91,13 @@ void GUI::DrawHealthBar(aie::Renderer2D *renderer)
 {
 	aie::Texture *healthBar = TextureManager::GetInstance()->LoadTexture("./textures/healthBar.png");
 	Vector2 resolution = Camera::GetInstance()->GetResolution();
-	float healthPosX = CORNER_OFFSET_X + 2 + health * 1.4f;
 	float healthPosY = resolution.y - CORNER_OFFSET_Y;
-	float healthWidth = health * 2.8f;
+	float healthWidth = health * 5.6f;
 
 	renderer->drawSprite(healthBar, CORNER_OFFSET_X, healthPosY - 2);
-	renderer->drawBox(healthPosX, healthPosY, healthWidth, 12);
+	renderer->setRenderColour(0x70DD54FF);
+	renderer->drawBox(CORNER_OFFSET_X, healthPosY - 2, healthWidth, 12);
+	renderer->setRenderColour(0xFFFFFFFF);
 }
 
 /*
