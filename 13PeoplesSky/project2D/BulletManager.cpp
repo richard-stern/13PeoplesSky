@@ -9,6 +9,7 @@ BulletManager::BulletManager()
 	for (int i = 0; i < POOL_SIZE; i++)
 	{
 		m_bulletPool[i] = new Bullet();
+		AddChild(m_bulletPool[i]);
 	}
 }
 
@@ -34,4 +35,9 @@ void BulletManager::ShootBullet(Vector2 position, Vector2 velocity)
 			break;
 		}
 	}
+}
+
+void BulletManager::Update(float deltaTime)
+{
+	Actor::Update(deltaTime);
 }

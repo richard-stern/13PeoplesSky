@@ -1,11 +1,12 @@
 #pragma once
 #include "Vector2.h"
+#include "Actor.h"
 
 #define POOL_SIZE 10
 
 class Bullet;
 
-class BulletManager
+class BulletManager : public Actor
 {
 public:
 	BulletManager();
@@ -18,6 +19,8 @@ public:
 	//			initial velocity (turret facing)
 	//-----------------
 	void ShootBullet(Vector2 position, Vector2 velocity);
+
+	void Update(float deltaTime);
 
 	Bullet** m_bulletPool;
 };
