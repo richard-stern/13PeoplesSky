@@ -15,7 +15,7 @@ Enemy::Enemy()
 	TextureManager* TextureManager = TextureManager::GetInstance();
 	SetTexture(TextureManager->LoadTexture("./textures/car.png"));
 
-	//*slaps top of enemy* this bad boy can take so many shots
+	//*slaps top of enemy* this bad boy can take so many bullets
 	SetHealth(3);
 
 	//Creating the instances of the enemy's 2 behaviour types
@@ -28,6 +28,7 @@ Enemy::Enemy()
 
 	//Making sure the enemy is actually drawn to start with
 	SetVisible(true);
+	
 }
 
 Enemy::~Enemy()
@@ -52,7 +53,9 @@ void Enemy::Update(Player* pPlayer, Rock* pRock)
 	if (m_distBetween < 600.0f && GetVisible() == true)
 	{
 		//first paramter is the object being sought, 2nd parameter is the pursuer
+		// Whilst it's pursuing the player, we want the enemy to try and avoid all of the rocks
 		m_pursue->update(pPlayer, this);
+		m_avoid->update(pRock, this);
 	}
 
 	//If the enemy has been destroyed, it will flee the player so that it can reach a distance where it can "respawn"
@@ -60,8 +63,6 @@ void Enemy::Update(Player* pPlayer, Rock* pRock)
 	{
 		m_avoid->update(pPlayer, this);
 	}
-
-	m_avoid->update(pRock, this);	
 }
 
 //When the enemy collides with another object, rather than being "destroyed", it simply becomes invisible and runs away
