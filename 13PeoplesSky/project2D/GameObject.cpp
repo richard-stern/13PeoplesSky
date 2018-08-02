@@ -158,6 +158,16 @@ bool GameObject::GetVisible()
 	return m_bVisible;
 }
 
+void GameObject::SetWrapAndRespawn(bool _wrap_and_respawn)
+{
+	m_bWrapAndRespawn = _wrap_and_respawn;
+}
+
+bool GameObject::GetWrapAndRespawn()
+{
+	return m_bWrapAndRespawn;
+}
+
 Matrix3 GameObject::GetGlobalTransform()
 {
 	return m_m3GlobalMatrix;

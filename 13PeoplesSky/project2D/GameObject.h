@@ -77,6 +77,9 @@ public:
 	void SetVisible(bool _visible);
 	bool GetVisible();
 
+	void SetWrapAndRespawn(bool _wrap_and_respawn);
+	bool GetWrapAndRespawn();
+
 	Matrix3 GetGlobalTransform();
 	Matrix3 GetLocalTransform();
 
