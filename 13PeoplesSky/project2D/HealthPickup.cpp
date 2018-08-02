@@ -13,7 +13,7 @@ HealthPickup::HealthPickup()
 	this->SetTexture(textureMan->LoadTexture("./textures/health.png"));
 
 	//Sets random velocity, change numbers as neccesary
-	m_v2Velocity = Vector2(rand() % 360, rand() % 360);
+	this->SetVelocity(Vector2((float)(rand() % 360), (float)(rand() % 360)));
 
 	//set collision layer so other objects can correctly detect that this collider is a rock
 	this->GetCollider()->SetLayer(ECOLLISIONLAYER_HEALTH);
@@ -25,7 +25,7 @@ HealthPickup::~HealthPickup()
 
 void HealthPickup::OnCollision(Actor* collidingObject, CollisionData* data)
 {
-	switch (collidingObject->GetCollider()->m_eLayer)
+	switch (collidingObject->GetCollider()->GetLayer())
 	{
 	case(ECOLLISIONLAYER_NONE):
 		//failsafe code, shouldn't ever be called
