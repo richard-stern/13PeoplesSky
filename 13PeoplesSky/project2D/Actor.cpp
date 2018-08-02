@@ -8,6 +8,9 @@ Actor::Actor()
 	m_nHealth = m_nMaxHealth;
 	m_bCollidedThisFrame = false;
 	m_pCollider = nullptr;
+
+	m_fAngularVelocity = 0.0f;
+	m_fDrag = 0.0f;
 }
 
 Actor::Actor(Matrix3 m_m3StartPosition)
@@ -17,6 +20,9 @@ Actor::Actor(Matrix3 m_m3StartPosition)
 	m_nHealth = m_nMaxHealth;
 	m_bCollidedThisFrame = false;
 	m_pCollider = nullptr;
+
+	m_fAngularVelocity = 0.0f;
+	m_fDrag = 0.0f;
 }
 
 Actor::~Actor()
