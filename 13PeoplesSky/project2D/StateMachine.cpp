@@ -12,6 +12,9 @@ StateMachine::StateMachine()
 	m_pStates[0] = new MenuState();
 	m_pStates[1] = new GameState();
 	m_pStates[2] = new GameOverState();
+
+	// Enter first state
+	m_pStates[0]->Enter();
 }
 
 StateMachine::~StateMachine()
