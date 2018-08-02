@@ -30,20 +30,25 @@ void HealthPickup::OnCollision(Actor* collidingObject, CollisionData* data)
 		//failsafe code, shouldn't ever be called
 		break;
 	case(ECOLLISIONLAYER_PLAYER):
+		//destroy health pickup
 		//player should also gain health, code done in player class
 		this->SetVisible(false);
 		break;
 	case(ECOLLISIONLAYER_BULLET):
+		//destroy health pickup
 		//bullet should also be destroyed, code would be done in bullet class
 		this->SetVisible(false);
 		break;
 	case(ECOLLISIONLAYER_ROCK):
+		//formula for bouncing off of rocks
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity * 1 /*replace with collider normal*/) * 1/*replace with collider normal*/));
 		break;
 	case(ECOLLISIONLAYER_ENEMY):
+		//formula for bouncing off of enemies
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity * 1 /*replace with collider normal*/) * 1/*replace with collider normal*/));
 		break;
 	case(ECOLLISIONLAYER_HEALTH):
+		//formula for bouncing off of other health pickups
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity * 1 /*replace with collider normal*/) * 1/*replace with collider normal*/));
 		break;
 	}

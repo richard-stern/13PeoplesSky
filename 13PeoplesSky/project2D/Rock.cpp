@@ -34,20 +34,25 @@ void Rock::OnCollision(Actor* collidingObject, CollisionData* data)
 		//failsafe code, shouldn't ever be called
 		break;
 	case(ECOLLISIONLAYER_PLAYER):
+		//formula for bouncing off of player
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity * 1 /*replace with collider normal*/) * 1/*replace with collider normal*/));
 		break;
 	case(ECOLLISIONLAYER_BULLET):
+		//take damage from the bullet, bullet should also be destroyed on impact
 		this->ModifyHealth(-1);
 		if (this->GetHealth() <= 0)
 			this->SetVisible(false);
 		break;
 	case(ECOLLISIONLAYER_ROCK):
+		//formula for bouncing off of other rocks
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity * 1 /*replace with collider normal*/) * 1/*replace with collider normal*/));
 		break;
 	case(ECOLLISIONLAYER_ENEMY):
+		//formula for bouncing off of enemies
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity * 1 /*replace with collider normal*/) * 1/*replace with collider normal*/));
 		break;
 	case(ECOLLISIONLAYER_HEALTH):
+		//formula for bouncing off of health pickups
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity * 1 /*replace with collider normal*/) * 1/*replace with collider normal*/));
 		break;
 	}
