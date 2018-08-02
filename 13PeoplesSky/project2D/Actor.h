@@ -37,7 +37,7 @@ public:
 	int GetHealth();
 	void SetHealth(int health);
 	int GetMaxHealth();
-	void GetMaxHealth(int maxHealth);
+	void SetMaxHealth(int maxHealth);
 
 	/* collidedThisFrame get/set */
 	bool GetCollidedThisFrame();

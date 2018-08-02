@@ -92,7 +92,7 @@ Function:	 SetMaxHealth
 Input/s:	 int
 Description: Set actor's health
 */
-void Actor::GetMaxHealth(int maxHealth)
+void Actor::SetMaxHealth(int maxHealth)
 {
 	m_nMaxHealth = maxHealth;
 }
