@@ -37,11 +37,8 @@ collider object (bounding boxes & other collision data)
 void Actor::Update(float deltaTime)
 {
 	/* make new translation & rotation matrices */
-	Matrix3 translation, rotation;
-	translation.SetPosition(m_m3LocalMatrix.GetPosition() + m_v2Velocity * deltaTime);
-	rotation.SetRotate2D(m_fRotation + m_fAngularVelocity * deltaTime);
-
-	m_m3LocalMatrix = rotation * translation; /* update local transform */
+	SetPosition(GetPosition() + m_v2Velocity * deltaTime);
+	SetRotation(GetRotation() + m_fAngularVelocity * deltaTime);
 
 	GameObject::Update(deltaTime); /* call base object update */
 	
