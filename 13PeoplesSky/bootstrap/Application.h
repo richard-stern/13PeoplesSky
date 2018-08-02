@@ -49,8 +49,8 @@ public:
 	unsigned int getFPS() const { return m_fps; }
 
 	// returns the width / height of the game window
-	unsigned int getWindowWidth() const;
-	unsigned int getWindowHeight() const;
+	static unsigned int getWindowWidth();
+	static unsigned int getWindowHeight();
 	
 	// returns time since application started
 	float getTime() const;
@@ -60,7 +60,7 @@ protected:
 	virtual bool createWindow(const char* title, int width, int height, bool fullscreen);
 	virtual void destroyWindow();
 
-	GLFWwindow*		m_window;
+	static GLFWwindow*		m_window;
 
 	// if set to false, the main game loop will exit
 	static bool			m_gameOver;

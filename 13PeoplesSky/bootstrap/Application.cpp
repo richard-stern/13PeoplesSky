@@ -9,10 +9,10 @@
 namespace aie {
 
 Application::Application()
-	: m_window(nullptr),
-	m_fps(0) 
+	: m_fps(0) 
 {
 	m_gameOver = false;
+	m_window = nullptr;
 }
 
 Application::~Application() {
@@ -148,13 +148,13 @@ void Application::setShowCursor(bool visible) {
 	ShowCursor(visible);
 }
 
-unsigned int Application::getWindowWidth() const {
+unsigned int Application::getWindowWidth() {
 	int w = 0, h = 0;
 	glfwGetWindowSize(m_window, &w, &h);
 	return w;
 }
 
-unsigned int Application::getWindowHeight() const {
+unsigned int Application::getWindowHeight() {
 	int w = 0, h = 0;
 	glfwGetWindowSize(m_window, &w, &h);
 	return h;

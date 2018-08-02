@@ -31,6 +31,7 @@ void MenuState::Enter()
 	m_pStartTexture = textureMan->LoadTexture("./textures/startButton.png");
 	m_pQuitTexture = textureMan->LoadTexture("./textures/quitButton.png");
 	m_pGameTitle = textureMan->LoadTexture("./textures/gameTitle.png");
+	m_pMenuBackground = textureMan->LoadTexture("./textures/menuBackground.png");
 }
 
 void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
@@ -73,7 +74,7 @@ void MenuState::Draw(aie::Renderer2D* pRenderer)
 	pRenderer->drawSpriteTransformed3x3(m_pGameTitle, (float*)m_m3GameTitle);
 
 	// Draw menu background
-	pRenderer->drawSprite(m_pMenuBackground, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 100.0f, 0.0f, 0.0f);
+	pRenderer->drawSprite(m_pMenuBackground, 0.0f, 0.0f, Application2D::getWindowWidth(), Application2D::getWindowHeight() , 0.0f, 100.0f, 0.0f, 0.0f);
 }
 
 void MenuState::Exit()
