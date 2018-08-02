@@ -52,5 +52,8 @@ private:
 	aie::Texture* m_pMenuBackground;
 
 	Vector2* m_v2WindowSize;
+	Vector2* m_v2ButtonSize;
+	Vector2* m_v2TitleSize;
+
 	Camera* m_pCamera;
 };
