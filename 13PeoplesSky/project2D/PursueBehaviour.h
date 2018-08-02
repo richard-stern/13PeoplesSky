@@ -10,7 +10,7 @@ public:
 	PursueBehaviour();
 	~PursueBehaviour();
 
-	Vector2 update(Actor* pPlayer, Enemy* pEnemy);
+	Vector2 update(Actor* pTarget, Enemy* pPursuer);
 
 	SeekBehaviour* m_seek;
 };

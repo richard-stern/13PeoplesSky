@@ -10,5 +10,6 @@ public:
 	FleeBehaviour();
 	~FleeBehaviour();
 
-	Vector2 update(Actor* pPlayer, Enemy* pEnemy);
+	Vector2 update(Actor* pTarget, Enemy* pFleeing);
+	Vector2 update(Vector2 targetPos, Enemy* pFleeing);
 };

@@ -15,18 +15,21 @@ PursueBehaviour::~PursueBehaviour()
 	delete m_seek;
 }
 
-Vector2 PursueBehaviour::update(Actor* pPlayer, Enemy* pEnemy)
+Vector2 PursueBehaviour::update(Actor* pTarget, Enemy* pPursuer)
 {
-	Vector2 ToPlayer = pPlayer->GetPosition() - pEnemy->GetPosition(); //Getting the distance between the pursuer and the target
+	Vector2 ToPlayer = pTarget->GetPosition() - pPursuer->GetPosition(); //Getting the distance between the pursuer and the target
 
-	double RelativeHeading = pEnemy->GetVelocity().dot(pPlayer->GetVelocity());
+	double RelativeHeading = pPursuer->GetVelocity().dot(pTarget->GetVelocity());
 
-	//If the pursued target is facing us, and travelling in our direction, then we don't need to pursue them, we can simply seek to their current position
+	//If the pursued target is facing us and travelling in our direction, then we don't need to pursue them, we can simply seek to their current position
 	// We calculate whether or not they are facing us if they're heading is within 18 degrees of our own
-	if (ToPlayer.dot(pEnemy->GetVelocity()) > 0 && RelativeHeading < -0.95) //acos(0.95)=18 degrees
+	if (ToPlayer.dot(pPursuer->GetVelocity()) > 0 && RelativeHeading < -0.95) //acos(0.95)=18 degrees
 	{
-		return m_seek->update(pPlayer, pEnemy);
+		return m_seek->update(pTarget, pPursuer);
 	}
 
-	double LookAheadTime = ToPlayer.magnitude() / (pEnemy->GetMaxSpeed() + pPlayer->GetVelocity());  //Need to get player's speed, not it's velocity.
+	//Here we are almost looking into the future to see where the pursued object is going to be in the future, and we will be seeking that location
+	double LookAheadTime = ToPlayer.magnitude() / (pPursuer->GetMaxSpeed() + pTarget->GetVelocity().magnitude());
+
+	return m_seek->update(pTarget->GetPosition() + pTarget->GetVelocity() * LookAheadTime, pPursuer);
 }

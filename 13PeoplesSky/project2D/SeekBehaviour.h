@@ -7,6 +7,7 @@ public:
 	SeekBehaviour();
 	~SeekBehaviour();
 
-	Vector2 update(Actor* pPlayer, Enemy* pEnemy);
+	Vector2 update(Actor* pTarget, Enemy* pSeeker);
+	Vector2 update(Vector2 targetPos, Enemy* pSeeker);
 };
 
