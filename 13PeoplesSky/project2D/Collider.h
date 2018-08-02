@@ -1,8 +1,9 @@
 #include "Vector3.h"
+#include "Vector2.h"
 #include "Renderer2D.h"
 #include <vector>
 
-// Forward declatations...
+// Forward declarations...
 struct Matrix3;
 
 enum ELayer 
@@ -21,7 +22,7 @@ struct ColliderNode
 
 	~ColliderNode();
 
-	Vector3 m_v3Offset; // Current offset of this node.
+	Vector2 m_v2Offset; // Current offset of this node.
 	Vector3 m_v3LocalOffset; // Original offset of this node, used as reference for transformations of the collider.
 
 	int m_nConnection; // The index of the node this node is connected to (to form an edge) in the node dynamic array.
@@ -43,11 +44,30 @@ public:
 	void UpdateBounds(Matrix3* pObjMatrix);
 
 	/*
-	Description: Sets the collision layer of the object.
+	Description: Sets the collision layer of this collider.
 	Param:
 	    Elayer eLayer: The layer to move the object onto.
 	*/
 	void SetLayer(ELayer eLayer);
+
+	/*
+	Description: Returns the collision layer value of this collider.
+	Return Type: ELayer (VALUE)
+	*/
+	ELayer GetLayer();
+
+	/*
+	Description: Sets the collision layer for this collider to ignore.
+	Param:
+	    Elayer eLayer: The layer for this object to ignore during collision detection.
+	*/
+	void SetIgnoreLayer(ELayer eLayer);
+
+	/*
+	Description: Returns the collision layer that this collider will ignore.
+	Return Type: ELayer (VALUE)
+	*/
+	ELayer GetIgnoreLayer();
 
 	/*
 	Description: Draws the collider shape out of lines. (For debug purposes.)
@@ -57,7 +77,16 @@ public:
 	*/
 	void DrawCollider(Vector2 v2Origin, aie::Renderer2D* pRenderer);
 
+	/*
+	Description: Returns a pointer to the nodes of this collider.
+	Return Type: std::vector<ColliderNode*>* (PTR)
+	*/
+	const std::vector<ColliderNode*>* GetNodes();
+
+protected:
 
 	std::vector<ColliderNode*>* m_nodes;
+
 	ELayer m_eLayer;
+	ELayer m_eIgnoreLayer;
 };

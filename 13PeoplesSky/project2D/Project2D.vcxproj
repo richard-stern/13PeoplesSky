@@ -190,6 +190,7 @@
     <ClCompile Include="Star.cpp" />
     <ClCompile Include="Primatives.cpp" />
     <ClCompile Include="TempObj.cpp" />
+    <ClCompile Include="TestActor.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="StateMachine.cpp" />
@@ -204,7 +205,7 @@
     <ClInclude Include="PursueBehaviour.h" />
     <ClInclude Include="SeekBehaviour.h" />
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="BulletManager.h" />  
+    <ClInclude Include="BulletManager.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
@@ -219,6 +220,7 @@
     <ClInclude Include="Rock.h" />
     <ClInclude Include="Star.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="TestActor.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="BaseState.h" />

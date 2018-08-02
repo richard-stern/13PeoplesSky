@@ -8,7 +8,7 @@
 ColliderNode::ColliderNode(Vector2 v2LocalOffset, int nConnection)
 {
 	m_v3LocalOffset = Vector3(v2LocalOffset.x, v2LocalOffset.y, 0);
-	m_v3Offset = m_v3LocalOffset; // Set current offset to local offset.
+	m_v2Offset = v2LocalOffset; // Set current offset to local offset.
 	m_nConnection = nConnection;
 }
 
@@ -23,6 +23,7 @@ Collider::Collider()
 {
 	m_nodes = new std::vector<ColliderNode*>();
 	m_eLayer = ECOLLISIONLAYER_NONE;
+	m_eIgnoreLayer = ECOLLISIONLAYER_NONE;
 }
 
 Collider::~Collider() 
@@ -45,7 +46,8 @@ void Collider::UpdateBounds(Matrix3* pObjMatrix)
 		ColliderNode& currentNode = *nodesRef[i];
 
 		// Multiply local offset and matrix to create the correctly transformed node offset.
-		currentNode.m_v3Offset = *pObjMatrix * currentNode.m_v3LocalOffset;
+		Vector3 v3TransformedVec = *pObjMatrix * currentNode.m_v3LocalOffset;
+		currentNode.m_v2Offset = static_cast<Vector2>(v3TransformedVec);
 	}
 }
 
@@ -54,11 +56,24 @@ void Collider::SetLayer(ELayer eLayer)
 	m_eLayer = eLayer;
 }
 
+ELayer Collider::GetLayer() 
+{
+	return m_eLayer;
+}
+
+void Collider::SetIgnoreLayer(ELayer eLayer) 
+{
+	m_eIgnoreLayer = eLayer;
+}
+
+ELayer Collider::GetIgnoreLayer() 
+{
+	return m_eIgnoreLayer;
+}
+
 void Collider::DrawCollider(Vector2 v2Origin ,aie::Renderer2D* pRenderer) 
 {
 	std::vector<ColliderNode*>& nodesRef = *m_nodes;
-
-	Vector3 v3Origin = Vector3(v2Origin.x, v2Origin.y, 0);
 
 	// Iterate through all nodes and call drawLine() using their offsets.
 	for (int i = 0; i < nodesRef.size(); ++i)
@@ -68,10 +83,15 @@ void Collider::DrawCollider(Vector2 v2Origin ,aie::Renderer2D* pRenderer)
 		ColliderNode& connectedNode = *nodesRef[currentNode.m_nConnection];
 		
 		// Get worldspace positions.
-		Vector3 v2CurrentNodePos = v3Origin + currentNode.m_v3Offset;
-		Vector3 v2ConnectedNodePos = v3Origin + connectedNode.m_v3Offset;
+		Vector2 v2CurrentNodePos = v2Origin + currentNode.m_v2Offset;
+		Vector2 v2ConnectedNodePos = v2Origin + connectedNode.m_v2Offset;
 
 		// Draw line using worldspace positions.
 		pRenderer->drawLine(v2CurrentNodePos.x, v2CurrentNodePos.y, v2ConnectedNodePos.x, v2ConnectedNodePos.y);
 	}
+}
+
+const std::vector<ColliderNode*>* Collider::GetNodes() 
+{
+	return m_nodes;
 }
