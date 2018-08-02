@@ -19,7 +19,7 @@ Enemy::Enemy(Player* pPlayer) : Actor()
 	m_player = pPlayer;
 
 	//*slaps top of enemy* this bad boy can take so many bullets
-	SetHealth(3);
+	SetHealth(1);
 
 	SetMass(0.5f);
 
@@ -86,6 +86,8 @@ void Enemy::Update(float DeltaTime)
 //When the enemy collides with another object, rather than being "destroyed", it simply becomes invisible and runs away
 void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 {
+	Vector2 currentPos = GetPosition();
+
 		switch (collidingObject->GetCollider()->GetLayer())
 	{
 	case(ECOLLISIONLAYER_NONE):
@@ -95,6 +97,9 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 		//When the enemy hits a player, the enemy gets destroyed and the player takes 1 point of damage
 		SetVisible(false);
 		collidingObject->ModifyHealth(-1);
+		//Bouncing off the player
+		currentPos -= data->m_v2Normal * data->m_fPenetration;
+		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
 		break;
 	case(ECOLLISIONLAYER_BULLET):
 		//take damage from the bullet, bullet should also be destroyed on impact
@@ -109,11 +114,11 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 		break;
 	case(ECOLLISIONLAYER_ROCK):
 		//formula for bouncing off of other rocks
-		//m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
+		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
 		break;
 	case(ECOLLISIONLAYER_ENEMY):
 		//formula for bouncing off of enemies
-		//m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
+		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
 		break;
 	case(ECOLLISIONLAYER_HEALTH):
 		//We don't want the enemy to interact with the health pickups at all, so we ignore them
