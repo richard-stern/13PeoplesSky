@@ -46,7 +46,7 @@ protected:
 
 public:
 	GameObject(Vector2 _spawn_position = Vector2{ 0.f,0.f });
-	~GameObject();
+	virtual ~GameObject();
 
 	//Overridable update function
 	//Updates all of its children itself
