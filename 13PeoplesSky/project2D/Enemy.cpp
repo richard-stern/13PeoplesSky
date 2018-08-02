@@ -21,15 +21,18 @@ Enemy::Enemy(Player* pPlayer) : Actor()
 	//*slaps top of enemy* this bad boy can take so many bullets
 	SetHealth(3);
 
-	SetMass(20.0f);
+	SetMass(0.5f);
 
 	//Creating the instances of the enemy's 2 behaviour types
 	m_pursue = new PursueBehaviour;
 	m_avoid = new AvoidBehaviour;
 
+	CollisionManager* collisionMan = CollisionManager::GetInstance();
+
 	PrimRectangle* collider = new PrimRectangle(36, 42);
 	collider->SetLayer(ECOLLISIONLAYER_ENEMY);
 	SetCollider(collider);
+	collisionMan->AddObject(this);
 
 	//Making sure the enemy is actually drawn to start with
 	SetVisible(true);
@@ -60,7 +63,8 @@ void Enemy::Update(float DeltaTime)
 	{
 		//first paramter is the object being sought, 2nd parameter is the pursuer
 		// Whilst it's pursuing the player, we want the enemy to try and avoid all of the rocks
-		m_pursue->update(m_player, this);
+		Vector2 pursueForce = m_pursue->update(m_player, this);
+		SetVelocity(GetVelocity() + pursueForce * DeltaTime);
 		/*if(m_distToRock < 200.f)
 		m_avoid->update(pRock, this);*/
 	}
@@ -68,8 +72,12 @@ void Enemy::Update(float DeltaTime)
 	//If the enemy has been destroyed, it will flee the player so that it can reach a distance where it can "respawn"
 	else if (GetVisible() == false)
 	{
-		m_avoid->update(m_player, this);
+		Vector2 avoidForce = m_avoid->update(m_player, this);
+		SetVelocity(GetVelocity() + avoidForce * DeltaTime);
 	}
+
+	Actor::Update(DeltaTime);
+	//GetCollider()->UpdateBounds(&m_m3LocalMatrix);
 }
 
 //When the enemy collides with another object, rather than being "destroyed", it simply becomes invisible and runs away
