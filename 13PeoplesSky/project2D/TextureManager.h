@@ -42,7 +42,7 @@ public:
 	// and if the texture has not been loaded, it creates it and stores it
 	//
 	// e.g. 
-	//	aie::Texture* shipTexture = textureManager->LoadTexture("./ship.png");
+	//	aie::Texture* shipTexture = textureManager->LoadTexture("./textures/ship.png");
 	//
 	// fileName: Name of the file in relation to the /bin/ directory
 	// returns a pointer to an aie::Texture containing the image
