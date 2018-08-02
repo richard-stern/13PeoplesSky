@@ -1,5 +1,5 @@
 #include "Actor.h"
-#include "Primatives.h"
+#include "Primitives.h"
 #include "CollisionManager.h"
 
 Actor::Actor()
