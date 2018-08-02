@@ -38,27 +38,21 @@ void GameObject::Update(float _delta_time)
 	{
 		Vector2 camPos = Camera::GetInstance()->GetPosition();
 		Vector2 camRes = Camera::GetInstance()->GetResolution();
+		////Fix camera position
+		camPos += Vector2{ camRes.x / 2.f, camRes.y / 2.f };
+
 		Vector2 distance = camPos - m_v2Position;
-		if (distance.magnitudeSqr() > camRes.magnitudeSqr())
-		{
-			m_bVisible = true;
-			if (m_v2Position.x > camPos.x)
-			{
-				m_v2Position.x = (camRes.x / 2.f) - (camPos.x + WRAP_OFFSET);
-			}
-			else
-			{
-				m_v2Position.x = (camRes.x / 2.f) + (camPos.x + WRAP_OFFSET);
-			}
-			if (m_v2Position.y > camPos.y)
-			{
-				m_v2Position.y = (camRes.y / 2.f) - (camPos.y + WRAP_OFFSET);
-			}
-			else
-			{
-				m_v2Position.y = (camRes.y / 2.f) + (camPos.y + WRAP_OFFSET);
-			}
-		}
+
+		//X
+		if(distance.x > camRes.x / 2.f)
+			m_v2Position.x += camRes.x;
+		else if(distance.x < -camRes.x / 2.f)
+			m_v2Position.x -= camRes.x;
+		//Y
+		if (distance.y > camRes.y / 2.f)
+			m_v2Position.y += camRes.y;
+		else if(distance.y < -camRes.y / 2.f)
+			m_v2Position.y -= camRes.y;
 	}
 	//Update all of our children
 	for (auto iter = m_Children.begin(); iter != m_Children.end(); ++iter)
