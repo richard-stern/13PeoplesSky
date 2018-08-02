@@ -24,7 +24,6 @@ bool Application2D::startup() {
 	m_cameraX = 0;
 	m_cameraY = 0;
 	m_timer = 0;
-	obj = new TempObj(new aie::Texture("./textures/ship.png"), Vector2(300.0f, 300.0f));
 
 
 	return true;
@@ -33,7 +32,6 @@ bool Application2D::startup() {
 void Application2D::shutdown() {
 	
 	Camera::Destroy();
-	delete obj;
 	TextureManager::Destroy();
 
 	delete m_2dRenderer;
@@ -47,8 +45,6 @@ void Application2D::update(float deltaTime) {
 	float resX, resY;
 	resX = (float)getWindowWidth();
 	resY = (float)getWindowHeight();
-	obj->Update(deltaTime);
-	obj->UpdateTransform();
 
 	Camera::GetInstance()->SetResolution(Vector2(resX, resY));
 
@@ -69,8 +65,6 @@ void Application2D::draw() {
 
 	// begin drawing sprites
 	m_2dRenderer->begin();
-
-	obj->Draw(m_2dRenderer);
 
 
 	// done drawing sprites

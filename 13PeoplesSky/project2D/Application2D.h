@@ -3,8 +3,6 @@
 #include "Application.h"
 #include "Renderer2D.h"
 
-#include "TempObj.h"
-
 class Application2D : public aie::Application {
 public:
 
@@ -23,6 +21,4 @@ protected:
 
 	float m_cameraX, m_cameraY;
 	float m_timer;
-	
-	TempObj* obj;
 };
