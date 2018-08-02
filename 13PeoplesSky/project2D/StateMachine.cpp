@@ -19,7 +19,10 @@ StateMachine::StateMachine()
 
 StateMachine::~StateMachine()
 {
-	delete[] *m_pStates;
+	for (int i = 0; i < 3; ++i)
+	{
+		delete m_pStates[i];
+	}
 }
 
 void StateMachine::ChangeState(ESTATE eState)
