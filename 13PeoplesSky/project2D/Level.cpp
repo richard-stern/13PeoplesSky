@@ -20,7 +20,7 @@ Level::Level()
 			Rock* r = new Rock;
 			this->AddChild(r);
 			r->SetParent(this);
-			r->SetPosition(Vector2( j * 200, i * 200));
+			r->SetPosition(Vector2( j * 200.0f, i * 200.0f));
 		}
 	}
 	
@@ -31,7 +31,7 @@ Level::Level()
 			Enemy* e = new Enemy;
 			this->AddChild(e);
 			e->SetParent(this);
-			e->SetPosition(Vector2(j * 175, i * 175));
+			e->SetPosition(Vector2(j * 175.0f, i * 175.0f));
 		}
 	}
 	
@@ -42,7 +42,7 @@ Level::Level()
 			HealthPickup* h = new HealthPickup;
 			this->AddChild(h);
 			h->SetParent(this);
-			h->SetPosition(Vector2(j * 225, i * 225));
+			h->SetPosition(Vector2(j * 225.0f, i * 225.0f));
 		}
 	}
 	
@@ -53,7 +53,7 @@ Level::Level()
 			Star* s = new Star;
 			this->AddChild(s);
 			s->SetParent(this);
-			s->SetPosition(Vector2(j * 150, i * 150));
+			s->SetPosition(Vector2(j * 150.0f, i * 150.0f));
 		}
 	}
 
