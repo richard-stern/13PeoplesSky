@@ -12,6 +12,9 @@ Rock::Rock()
 	//set self to visible
 	SetVisible(true);
 
+	//set wrap to true
+	m_bWrapAndRespawn = true;
+
 	//get instance of texture manager
 	TextureManager* textureMan = TextureManager::GetInstance();
 	CollisionManager* collisionMan = CollisionManager::GetInstance();
@@ -21,7 +24,7 @@ Rock::Rock()
 	SetTexture(textureMan->LoadTexture("./textures/rock_large.png"));
 
 	//Sets random velocity, change numbers as neccesary
-	SetVelocity(Vector2((float)(rand() % 360), (float)(rand() % 360)));
+	SetVelocity(Vector2((float)((rand() % 50) - 25), (float)((rand() % 30) - 50)));
 
 	//Creates a collider, sets neccesary variables. 
 	PrimRectangle* collider = new PrimRectangle(64, 64);
@@ -37,6 +40,7 @@ Rock::~Rock()
 
 void Rock::OnCollision(Actor* collidingObject, CollisionData* data)
 {
+	Vector2 currentPos = GetPosition();
 	switch (collidingObject->GetCollider()->GetLayer())
 	{
 	case(ECOLLISIONLAYER_NONE):
@@ -44,6 +48,7 @@ void Rock::OnCollision(Actor* collidingObject, CollisionData* data)
 		break;
 	case(ECOLLISIONLAYER_PLAYER):
 		//formula for bouncing off of player
+		currentPos -= data->m_v2Normal * data->m_fPenetration;
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
 		break;
 	case(ECOLLISIONLAYER_BULLET):
@@ -54,15 +59,19 @@ void Rock::OnCollision(Actor* collidingObject, CollisionData* data)
 		break;
 	case(ECOLLISIONLAYER_ROCK):
 		//formula for bouncing off of other rocks
+		currentPos -= data->m_v2Normal * data->m_fPenetration;
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
 		break;
 	case(ECOLLISIONLAYER_ENEMY):
 		//formula for bouncing off of enemies
+		currentPos -= data->m_v2Normal * data->m_fPenetration;
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
 		break;
 	case(ECOLLISIONLAYER_HEALTH):
 		//formula for bouncing off of health pickups
+		currentPos -= data->m_v2Normal * data->m_fPenetration;
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
 		break;
 	}
+	SetPosition(currentPos);
 }

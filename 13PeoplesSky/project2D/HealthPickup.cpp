@@ -12,12 +12,15 @@ HealthPickup::HealthPickup()
 	//set self to visible
 	SetVisible(true);
 
+	//set wrap to true
+	m_bWrapAndRespawn = true;
+
 	//set texture to health texture
 	//TEMP TEXTURE, replace when new texture made
 	SetTexture(textureMan->LoadTexture("./textures/health.png"));
 
 	//Sets random velocity, change numbers as neccesary
-	SetVelocity(Vector2((float)(rand() % 360), (float)(rand() % 360)));
+	SetVelocity(Vector2((float)((rand() % 72) - 36), (float)((rand() % 72) - 36)));
 
 	//Creates a collider, sets neccesary variables. 
 	PrimRectangle* collider = new PrimRectangle(32, 32);
@@ -32,6 +35,7 @@ HealthPickup::~HealthPickup()
 
 void HealthPickup::OnCollision(Actor* collidingObject, CollisionData* data)
 {
+	Vector2 currentPos = GetPosition();
 	switch (collidingObject->GetCollider()->GetLayer())
 	{
 	case(ECOLLISIONLAYER_NONE):
@@ -49,15 +53,19 @@ void HealthPickup::OnCollision(Actor* collidingObject, CollisionData* data)
 		break;
 	case(ECOLLISIONLAYER_ROCK):
 		//formula for bouncing off of rocks
+		currentPos -= data->m_v2Normal * data->m_fPenetration;
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
 		break;
 	case(ECOLLISIONLAYER_ENEMY):
 		//formula for bouncing off of enemies
+		currentPos -= data->m_v2Normal * data->m_fPenetration;
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
 		break;
 	case(ECOLLISIONLAYER_HEALTH):
 		//formula for bouncing off of other health pickups
+		currentPos -= data->m_v2Normal * data->m_fPenetration;
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
 		break;
 	}
+	SetPosition(currentPos);
 }
