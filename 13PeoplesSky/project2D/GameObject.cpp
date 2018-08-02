@@ -18,17 +18,7 @@ GameObject::GameObject(Vector2 _spawn_position)
 	m_bWrapAndRespawn = false;
 }
 
-GameObject::~GameObject()
-{
-	//Remove this GameObject from all childrens 'parent'
-	for (auto iter = m_Children.begin(); iter != m_Children.end(); ++iter)
-	{
-		(*iter)->RemoveParent();
-	}
-	//Remove this GameObject from any parent it may have
-	if (m_pParent)
-		m_pParent->RemoveChild(this);
-}
+GameObject::~GameObject() {}
 
 void GameObject::Update(float _delta_time)
 {
