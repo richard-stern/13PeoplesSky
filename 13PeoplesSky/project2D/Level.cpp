@@ -9,10 +9,19 @@ Level::Level()
 {
 	m_bWrapAndRespawn = false;
 
-	Player* p = new Player;
-	this->AddChild(p);
-	p->SetParent(this);
-	
+	for (int i = 0; i < 40; i++)
+	{
+		for (int j = 0; j < 40; j++)
+		{
+			Star* s = new Star;
+			this->AddChild(s);
+			s->SetParent(this);
+			int randX = rand() % 50;
+			int randY = rand() % 50;
+			s->SetPosition(Vector2(j * 100.0f + randX, i * 100.0f + randY));
+		}
+	}
+
 	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < 10; j++)
@@ -25,20 +34,7 @@ Level::Level()
 			r->SetPosition(Vector2( j * 400.0f + randX, i * 400.0f + randY));
 		}
 	}
-	
-	for (int i = 0; i < 4; i++)
-	{
-		for (int j = 0; j < 4; j++)
-		{
-			Enemy* e = new Enemy;
-			this->AddChild(e);
-			e->SetParent(this);
-			int randX = rand() % 1100;
-			int randY = rand() % 1100;
-			e->SetPosition(Vector2(j * 415.0f + randX, i * 445.0f + randY));
-		}
-	}
-	
+
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
@@ -51,20 +47,24 @@ Level::Level()
 			h->SetPosition(Vector2(j * 425.0f + randX, i * 475.0f + randY));
 		}
 	}
-	
-	for (int i = 0; i < 1; i++)
+
+	for (int i = 0; i < 4; i++)
 	{
-		for (int j = 0; j < 1 ; j++)
+		for (int j = 0; j < 4; j++)
 		{
-			Star* s = new Star;
-			this->AddChild(s);
-			s->SetParent(this);
-			int randX = rand() % 2000;
-			int randY = rand() % 2000;
-			s->SetPosition(Vector2(j * 475.0f + randX, i * 450.0f + randY));
+			Enemy* e = new Enemy;
+			this->AddChild(e);
+			e->SetParent(this);
+			int randX = rand() % 1100;
+			int randY = rand() % 1100;
+			e->SetPosition(Vector2(j * 415.0f + randX, i * 445.0f + randY));
 		}
 	}
 
+	Player* p = new Player;
+	this->AddChild(p);
+	p->SetParent(this);
+	
 }
 
 Level::~Level()
