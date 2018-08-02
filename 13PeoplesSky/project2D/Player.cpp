@@ -2,9 +2,15 @@
 #include "Player.h"
 #include "Camera.h"
 #include "TextureManager.h"
+#include "Turret.h"
 
 Player::Player()
 {
+	// Create turret
+	m_ShipTurret = new Turret();
+
+	this->AddChild(m_ShipTurret);
+	m_ShipTurret->SetParent(this);
 	// Request the TextureManager for the ship texture 
 	// Getting TextureManager Instance
 	TextureManager* textureInstance = TextureManager::GetInstance();
@@ -23,7 +29,8 @@ Player::Player()
 
 Player::~Player()
 {
-	// TODO delete some stuff
+	// Deleting the turret
+	delete m_ShipTurret;
 }
 
 void Player::update(float deltaTime)
@@ -36,9 +43,7 @@ void Player::update(float deltaTime)
 	m_v2Position = m_m3LocalMatrix.GetPosition();
 
 	// resetting values
-	Vector2 v2Acceleration = Vector2(0.0f, 0.0f);
-	Vector2 v2Dampening = Vector2(0.0f, 0.0f);
-	Vector2 v2ForceSum = Vector2(0.0f, 0.0f);
+	Vector2 v2Acceleration, v2Dampening, v2ForceSum = Vector2(0.0f, 0.0f);
 
 	// use WASD keys to move camera
 	if (input->isKeyDown(aie::INPUT_KEY_W))
@@ -59,10 +64,13 @@ void Player::update(float deltaTime)
 	v2Dampening = (m_v2Velocity * m_fDrag) * -1.0f;
 	m_v2Velocity += (v2Acceleration + v2Dampening) * deltaTime;
 
-	// Below code is done in Actor
+	// This code is done in Actor
 	/*m_v2Position = m_v2Position + (m_v2Velocity * deltaTime);
 	m_m3Position.SetPosition(m_v2Position);
 	m_m3LocalMatrix = m_m3Scale * m_m3Position;*/
+	// code end
+
+	// Calls the actor's update
 	Actor::Update(deltaTime);
 
 	// Setting positon of camera
@@ -82,4 +90,9 @@ void Player::draw(aie::Renderer2D* pRenderer)
 		50.0f, 
 		50.0f
 	);
+	m_ShipTurret->Draw(pRenderer);
+}
+
+void Player::OnCollision(Actor* collidingObject, CollisionData* data)
+{
 }

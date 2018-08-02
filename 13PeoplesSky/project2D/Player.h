@@ -3,6 +3,10 @@
 #include "Matrix3.h"
 #include "Vector2.h"
 #include "Actor.h"
+#include "CollisionManager.h"
+
+class Turret;
+struct CollisionData;
 
 class Player : public Actor
 {
@@ -27,6 +31,10 @@ public:
 	// Just renders player for now
 	void draw(aie::Renderer2D* pRenderer);
 
+	// Does nothing at the moment
+	void OnCollision(Actor* collidingObject, CollisionData* data);
+
 protected:
 	float m_fMaxSpeed;
+	Turret* m_ShipTurret;
 };
