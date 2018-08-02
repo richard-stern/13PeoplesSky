@@ -7,6 +7,7 @@
 #include "AvoidBehaviour.h"
 #include "ColliderManager.h"
 #include "Primitives.h"
+#include "GUI.h"
 
 
 Enemy::Enemy()
@@ -41,20 +42,22 @@ Enemy::~Enemy()
 void Enemy::Update(Player* pPlayer, Rock* pRock)
 {
 	//Updates the distance between this class and the player every frame
-	m_distBetween = pPlayer->GetPosition().dot(GetPosition());
+	m_distToPlayer = pPlayer->GetPosition().dot(GetPosition());
+	m_distToRock = pRock->GetPosition().dot(GetPosition());
 
 	//When a destroyed enemy is far enough away from the player, redraw it
-	if (m_distBetween > 800.0f && GetVisible() == false)
+	if (m_distToPlayer > 800.0f && GetVisible() == false)
 	{
 		SetVisible(true);
 	}
 
 	//If player is within a certain radius, pursue player. Only pursues if the player is drawn
-	if (m_distBetween < 600.0f && GetVisible() == true)
+	if (m_distToPlayer < 600.0f && GetVisible() == true)
 	{
 		//first paramter is the object being sought, 2nd parameter is the pursuer
 		// Whilst it's pursuing the player, we want the enemy to try and avoid all of the rocks
 		m_pursue->update(pPlayer, this);
+		if(m_distToRock < 200.f)
 		m_avoid->update(pRock, this);
 	}
 
@@ -82,7 +85,10 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 		//take damage from the bullet, bullet should also be destroyed on impact
 		ModifyHealth(-1);
 		if (GetHealth() <= 0)
+		{
 			SetVisible(false);
+			GUI::GetInstance()->AddScore(5);
+		}
 		break;
 	case(ECOLLISIONLAYER_ROCK):
 		//formula for bouncing off of other rocks

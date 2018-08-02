@@ -23,7 +23,8 @@ public:
 protected:
 	//The speed at which the enemy will move
 	float m_maxSpeed = 300.0f;
-	float m_distBetween;
+	float m_distToPlayer;
+	float m_distToRock;
 
 	PursueBehaviour* m_pursue;
 	AvoidBehaviour* m_avoid;
