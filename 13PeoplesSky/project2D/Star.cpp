@@ -5,8 +5,8 @@ Star::Star()
 {
 	m_bVisible = true;
 	m_bWrapAndRespawn = true;
-	m_pTexture = TextureManager::GetInstance()->LoadTexture("./ball.png");		//loads texture from texture manager
-}
+	m_pTexture = TextureManager::GetInstance()->LoadTexture("./textures/ball.png");		//loads texture from texture manager
+} 
 
 Star::~Star()
 {

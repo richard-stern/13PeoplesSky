@@ -9,8 +9,7 @@ Turret::Turret() : Actor()
 {
 	m_pBullets = new BulletManager();
 	m_bWrapAndRespawn = false;		//stops bullets from wrapping around the screen
-	m_pTexture = TextureManager::GetInstance()->LoadTexture("./BarrelBlue.png");		//loads texture from texture manager
-
+	m_pTexture = TextureManager::GetInstance()->LoadTexture("./textures/BarrelBlue.png");		//loads texture from texture manager
 }
 
 Turret::~Turret()		//cleanup
