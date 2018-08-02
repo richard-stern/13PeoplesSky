@@ -1,6 +1,7 @@
 #include "CollisionManager.h"
 #include "Primitives.h"
 #include "Actor.h"
+#include <iostream>
 
 CollisionManager::CollisionManager()
 {
@@ -86,6 +87,9 @@ void CollisionManager::Update()
 					CollisionData data = RunCollisionTest(currentActor, otherActor, currentCollider, otherCollider); // Get collision data.
 					if(data.m_bCollided) // If the collision result was positive...
 					{
+						// Print information to console...
+						PrintCollisionInfo(currentCollider, otherCollider);
+
 						// Run OnCollision() functions.
 						currentActor->OnCollision(otherActor, &data);
 						otherActor->OnCollision(currentActor, &data);
@@ -215,6 +219,73 @@ CollisionData CollisionManager::RunCollisionTest(Actor* pActor1, Actor* pActor2,
 	}
 
 	return data; // At this point the collision was probably successful.
+}
+
+void CollisionManager::PrintCollisionInfo(Collider* pCollider1, Collider* pCollider2)
+{
+	// Print out collider 1 layer.
+	switch (pCollider1->GetLayer())
+	{
+	case ECOLLISIONLAYER_NONE:
+		std::cout << "NO COLLISION";
+		break;
+
+	case ECOLLISIONLAYER_PLAYER:
+		std::cout << "PLAYER";
+		break;
+
+	case ECOLLISIONLAYER_BULLET:
+		std::cout << "BULLET";
+		break;
+
+	case ECOLLISIONLAYER_ROCK:
+		std::cout << "ROCK";
+		break;
+
+	case ECOLLISIONLAYER_ENEMY:
+		std::cout << "ENEMY";
+		break;
+
+	case ECOLLISIONLAYER_HEALTH:
+		std::cout << "HEALTH";
+		break;
+
+	default:
+		break;
+	}
+
+	std::cout << " COLLIDED WITH ";
+
+	// Print out collider 2 layer.
+	switch (pCollider2->GetLayer())
+	{
+	case ECOLLISIONLAYER_NONE:
+		std::cout << "NO COLLISION\n";
+		break;
+
+	case ECOLLISIONLAYER_PLAYER:
+		std::cout << "PLAYER\n";
+		break;
+
+	case ECOLLISIONLAYER_BULLET:
+		std::cout << "BULLET\n";
+		break;
+
+	case ECOLLISIONLAYER_ROCK:
+		std::cout << "ROCK\n";
+		break;
+
+	case ECOLLISIONLAYER_ENEMY:
+		std::cout << "ENEMY\n";
+		break;
+
+	case ECOLLISIONLAYER_HEALTH:
+		std::cout << "HEALTH\n";
+		break;
+
+	default:
+		break;
+	}
 }
 
 CollisionManager* CollisionManager::m_instance = nullptr;

@@ -52,9 +52,6 @@
     <Filter Include="Header Files\GameObject\Level">
       <UniqueIdentifier>{13346d77-288b-43d7-97ea-f5ba7ef45366}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Collider\ColliderManager">
-      <UniqueIdentifier>{35e516ae-b5a2-4ac3-84b9-c320afa0a090}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\BaseState\StateMachine">
       <UniqueIdentifier>{52fb1849-85ec-469c-b9f4-683b78c6d761}</UniqueIdentifier>
     </Filter>
@@ -124,9 +121,6 @@
     <Filter Include="Source Files\Collider">
       <UniqueIdentifier>{188cc7c8-dcbe-43c4-acff-b1d34a641983}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Collider\ColliderManager">
-      <UniqueIdentifier>{1e7629e6-b697-412f-94d3-4a84eaaabe1b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\TextureManager">
       <UniqueIdentifier>{d831139f-a8a3-4c21-aa56-48cc38e7e835}</UniqueIdentifier>
     </Filter>
@@ -150,6 +144,12 @@
     </Filter>
     <Filter Include="Source Files\Camera">
       <UniqueIdentifier>{7b756b4b-e6dc-4f82-a940-8ffe3421d42c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Collider\CollisionManager">
+      <UniqueIdentifier>{1e7629e6-b697-412f-94d3-4a84eaaabe1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Collider\CollisionManager">
+      <UniqueIdentifier>{35e516ae-b5a2-4ac3-84b9-c320afa0a090}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -244,10 +244,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
-      <Filter>Source Files\Collider\ColliderManager</Filter>
+      <Filter>Source Files\Collider\CollisionManager</Filter>
     </ClCompile>
     <ClCompile Include="Primitives.cpp">
-      <Filter>Source Files\Collider\ColliderManager</Filter>
+      <Filter>Source Files\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -336,13 +336,13 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
-      <Filter>Header Files\Collider\ColliderManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Primitives.h">
-      <Filter>Header Files\Collider\ColliderManager</Filter>
+      <Filter>Header Files\Collider\CollisionManager</Filter>
     </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Header Files\BaseState\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="Primitives.h">
+      <Filter>Header Files\Collider</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

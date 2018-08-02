@@ -70,6 +70,16 @@ private:
 	*/
 	CollisionData RunCollisionTest(Actor* pActor1, Actor* pActor2, Collider* pCollider1, Collider* pCollider2);
 
+	/*
+	Description: Prints information about a collision to the console.
+	Param:
+	    Actor* pActor1: The first actor.
+		Actor* pActor2: The second actor.
+	    Collider* pCollider1: The collider of the first actor. 
+		Collider* pCollider2: The collider of the second actor.
+	*/
+	void PrintCollisionInfo(Collider* pCollider1, Collider* pCollider2);
+
 	static CollisionManager* m_instance;
 
 	std::vector<Actor*>* m_actors;
