@@ -61,25 +61,24 @@ void GUI::Draw(aie::Renderer2D *renderer)
 
 	/* health */
 	float healthPosY = resolution.y - CORNER_OFFSET_Y;
-	
 	renderer->drawText(font, "Health", xPos, healthPosY);
 	renderer->drawText(font, (char*)health, xPos + CORNER_OFFSET_X, healthPosY);
 
 	/* score */
 	float scorePosY = resolution.y - 2 * CORNER_OFFSET_Y;
-
 	renderer->drawText(font, "Score", xPos, scorePosY);
 	renderer->drawText(font, (char*)score, xPos + CORNER_OFFSET_X, scorePosY);
 
 	/* lives */
 	float livesPosY = resolution.y - 3 * CORNER_OFFSET_Y;
 	renderer->drawText(font, "Lives", xPos, livesPosY);
+	renderer->drawText(font, (char*)lives, xPos + CORNER_OFFSET_X, scorePosY);
 }
 
 /*
 Function:	 SetHealth
 Input/s:	 int
-Description: Sets 
+Description: Sets the health displayed on the UI
 */
 void GUI::SetHealth(int newHealth)
 {
@@ -89,7 +88,7 @@ void GUI::SetHealth(int newHealth)
 /*
 Function:	 AddScore
 Input/s:	 int
-Description: 
+Description: Increments the score displayed on the UI
 */
 void GUI::AddScore(int value)
 {
@@ -99,7 +98,7 @@ void GUI::AddScore(int value)
 /*
 Function:	 GetScore
 Output:		 int
-Description: 
+Description: Retrieves the score displayed on the UI
 */
 int GUI::GetScore()
 {
@@ -109,7 +108,7 @@ int GUI::GetScore()
 /*
 Function:	 SetLives
 Input/s:	 int
-Description: 
+Description: Set the number of lives displayed on the UI
 */
 void GUI::SetLives(int remainingLives)
 {
