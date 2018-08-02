@@ -11,7 +11,7 @@ public:
 	BaseBehaviour();
 	virtual ~BaseBehaviour();
 
-	virtual Vector2 update(Actor* pActor, float deltatime) = 0;
+	virtual Vector2 update(Actor* pActor, Enemy* pEnemy) = 0;
 
 	Vector2 GetHeading();
 

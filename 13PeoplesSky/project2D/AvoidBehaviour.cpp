@@ -5,11 +5,13 @@
 
 AvoidBehaviour::AvoidBehaviour()
 {
+	m_flee = new FleeBehaviour;
 }
 
 
 AvoidBehaviour::~AvoidBehaviour()
 {
+	delete m_flee;
 }
 
 
