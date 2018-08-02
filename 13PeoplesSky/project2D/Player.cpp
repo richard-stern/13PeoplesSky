@@ -1,36 +1,46 @@
 #include <Input.h>
 #include "Player.h"
-//#include "TextureManager.h"
+#include "Camera.h"
+#include "TextureManager.h"
 
 Player::Player()
 {
-	// Requests a texture from TextureManager
-	m_m3LocalMatrix.SetPosition(Vector2(600.0f, 600.0f));
+	// Request the TextureManager for the ship texture 
+	// Getting TextureManager Instance
+	TextureManager* textureInstance = TextureManager::GetInstance();
+	// Initializing m_pTexture to ship texture
+	m_pTexture = textureInstance->LoadTexture("./ship.png");
+
+	// Setting initial position
+	m_m3LocalMatrix.SetPosition(Vector2(640.0f, 360.0f));
+
+	// Default Values
 	m_v2Velocity = Vector2(0.0f, 0.0f);
-	m_fMaxSpeed = 100.0f;
-	m_timer = 0.0f;
+	m_fMaxSpeed = m_v2Velocity.magnitude();
 	m_fMass = 0.5f;
 	m_fDrag = 0.5f;
 }
 
 Player::~Player()
 {
-	
+	// TODO delete some stuff
 }
 
 void Player::update(float deltaTime)
 {
+	// Getting instance on input and camera
 	aie::Input* input = aie::Input::getInstance();
+	Camera* m_cLevelCamera = Camera::GetInstance();
 
-	Matrix3 mScale;
-	Vector2 v2Pos = m_m3LocalMatrix.GetPosition();
+	// Getting latest position
+	m_v2Position = m_m3LocalMatrix.GetPosition();
+
+	// resetting values
 	Vector2 v2Acceleration = Vector2(0.0f, 0.0f);
 	Vector2 v2Dampening = Vector2(0.0f, 0.0f);
 	Vector2 v2ForceSum = Vector2(0.0f, 0.0f);
 
-
-	//Actor::update(deltaTime, 150.0f);
-	// use arrow keys to move camera
+	// use WASD keys to move camera
 	if (input->isKeyDown(aie::INPUT_KEY_W))
 		v2ForceSum.y += m_fMaxSpeed;
 		
@@ -43,23 +53,33 @@ void Player::update(float deltaTime)
 	if (input->isKeyDown(aie::INPUT_KEY_D))
 		v2ForceSum.x += m_fMaxSpeed;
 
+	// Calculating velocity
 	v2Acceleration.x = v2ForceSum.x / m_fMass;
 	v2Acceleration.y = v2ForceSum.y / m_fMass;
 	v2Dampening = (m_v2Velocity * m_fDrag) * -1.0f;
 	m_v2Velocity += (v2Acceleration + v2Dampening) * deltaTime;
-	v2Pos = v2Pos + (m_v2Velocity * deltaTime);
-	mPosition.SetPosition(v2Pos);
-	m_m3LocalMatrix = mScale * mPosition;
 
-	// update GlobalTransform
-	//m_cLevelCamera.SetPosition();
+	// Below code is done in Actor
+	/*m_v2Position = m_v2Position + (m_v2Velocity * deltaTime);
+	m_m3Position.SetPosition(m_v2Position);
+	m_m3LocalMatrix = m_m3Scale * m_m3Position;*/
+	Actor::Update(deltaTime);
+
+	// Setting positon of camera
+	m_cLevelCamera->SetPosition(
+		m_m3LocalMatrix.GetPosition().x, 
+		m_m3LocalMatrix.GetPosition().y
+	);
+
 }
 
 void Player::draw(aie::Renderer2D* pRenderer)
 {
-	//insert GlobalTransform
-	pRenderer->drawSpriteTransformed3x3(nullptr, (float*)m_m3LocalMatrix, 50.0f, 50.0f);
+	// Drawing player
+	pRenderer->drawSpriteTransformed3x3(
+		nullptr, 
+		(float*)m_m3GlobalMatrix, 
+		50.0f, 
+		50.0f
+	);
 }
-
-int Player::GetHealth(){ return 100; } //TODO Return Health
-//void Player::SetCamera(Camera * LevelCamera){ m_cLevelCamera = LevelCamera; }
