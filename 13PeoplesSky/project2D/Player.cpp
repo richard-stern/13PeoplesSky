@@ -59,12 +59,12 @@ void Player::Update(float deltaTime)
 	// use WASD keys to move camera
 	if (input->isKeyDown(aie::INPUT_KEY_W))
 	{
-		v2ForceSum.y += m_fMaxSpeed;
+		v2ForceSum += m_m3GlobalMatrix.GetFacing2D() * m_fMaxSpeed;
 	}
 		
 	if (input->isKeyDown(aie::INPUT_KEY_S))
 	{
-		v2ForceSum.y -= m_fMaxSpeed;
+		v2ForceSum -= m_m3GlobalMatrix.GetFacing2D() * m_fMaxSpeed;
 	}
 
 	if (input->isKeyDown(aie::INPUT_KEY_A))
