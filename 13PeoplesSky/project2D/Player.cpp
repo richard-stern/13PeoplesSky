@@ -69,12 +69,12 @@ void Player::Update(float deltaTime)
 
 	if (input->isKeyDown(aie::INPUT_KEY_A))
 	{
-		fForceRot -= m_fMaxRot;
+		fForceRot += m_fMaxRot;
 	}
 
 	if (input->isKeyDown(aie::INPUT_KEY_D))
 	{
-		fForceRot += m_fMaxRot;
+		fForceRot -= m_fMaxRot;
 	}
 
 	// Calculating velocity
@@ -84,6 +84,7 @@ void Player::Update(float deltaTime)
 	m_v2Velocity += (v2Acceleration + v2Dampening) * deltaTime;
 
 
+	// Calculating Rotation
 	fAcceleration = fForceRot / m_fMass;
 	fDampening = (m_fAngularVelocity * m_fDrag) * -1.0f;
 	m_fAngularVelocity += (fAcceleration + fDampening) * deltaTime;
