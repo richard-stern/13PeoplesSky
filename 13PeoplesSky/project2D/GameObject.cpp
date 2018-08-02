@@ -145,12 +145,13 @@ Matrix3 GameObject::GetLocalTransform()
 
 void GameObject::AddChild(GameObject* _child_object)
 {
-	//If the child had a previous parent, remove it from the relationship
-	if (_child_object->m_pParent)
-		_child_object->m_pParent->RemoveChild(_child_object);
-	//Make the object know that we are its parent
-	_child_object->m_pParent = this;
-	//Add it to our list of children
+	////If the child had a previous parent, remove it from the relationship
+	//if (_child_object->m_pParent)
+	//	_child_object->m_pParent->RemoveChild(_child_object);
+	////Make the object know that we are its parent
+	//_child_object->m_pParent = this;
+	////Add it to our list of children
+	//m_Children.push_back(_child_object);
 	m_Children.push_back(_child_object);
 }
 
@@ -160,34 +161,36 @@ void GameObject::RemoveChild(GameObject* _child_object)
 	//Search for the child
 	for (; iter != m_Children.end(); ++iter)
 	{
-		//If we find it, remove its relationship
+		//If we find it, remove it
 		if ((*iter) == _child_object)
 		{
-			(*iter)->m_pParent = nullptr;
 			m_Children.erase(iter);
 			break;
 		}
 	}
+
 }
 
 void GameObject::SetParent(GameObject* _parent_object)
 {
-	//If we had a parent tell it that we're leaving it
-	if (m_pParent)
-		m_pParent->RemoveChild(this);
-	//Setup our new parent
-	_parent_object->AddChild(this);
+	////If we had a parent tell it that we're leaving it
+	//if (m_pParent)
+	//	m_pParent->RemoveChild(this);
+	////Setup our new parent
+	//_parent_object->AddChild(this);
+	//m_pParent = _parent_object;
 	m_pParent = _parent_object;
 }
 
 void GameObject::RemoveParent()
 {
-	if (m_pParent)
-	{
-		//Tell the parent we noone longer are part of its children
-		m_pParent->RemoveChild(this);
-		m_pParent = nullptr;
-	}
+	//if (m_pParent)
+	//{
+	//	//Tell the parent we noone longer are part of its children
+	//	m_pParent->RemoveChild(this);
+	//	m_pParent = nullptr;
+	//}
+	m_pParent = nullptr;
 }
 
 void GameObject::OnCollision(GameObject* _other)
