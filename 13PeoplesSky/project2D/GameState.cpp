@@ -47,6 +47,7 @@ void GameState::Update(float fDeltaTime, StateMachine* pStateMachine)
 		}
 
 		gui->SetLives(lives);
+		gui->SetAmmo(1);
 
 		// RESET level ... poor mans way
 		CollisionManager::GetInstance()->Clear();
