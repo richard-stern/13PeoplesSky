@@ -47,11 +47,11 @@ private:
 	float m_bloodPoolSize;
 	bool m_bloodPoolSpreading;
 
-
 	Vector2 m_bannerSize;
 
 	float m_arrowTimer;
 	float m_holdTimer;
+	float m_upPulse, m_downPulse;
 
 	// the latest score
 	int m_lastScore;

@@ -49,6 +49,8 @@ void GameOverState::Enter()
 	m_nameIndex = 0;
 
 	m_arrowTimer = 0.0f;
+	m_upPulse = 1.0f;
+	m_downPulse = 1.0f;
 
 	Vector2 windowSize = Camera::GetInstance()->GetResolution();
 	Camera::GetInstance()->SetPosition(windowSize.x / 2, windowSize.y / 2);
@@ -123,6 +125,17 @@ void GameOverState::UpdateNameSelection(float fDeltaTime)
 {
 	m_arrowTimer += fDeltaTime;
 
+	const float pulseSpeed = 10.0f;
+	if (m_upPulse > 1.0f)
+		m_upPulse -= pulseSpeed * fDeltaTime;
+	if (m_downPulse > 1.0f)
+		m_downPulse -= pulseSpeed * fDeltaTime;
+
+	if (m_upPulse < 1.0f)
+		m_upPulse = 1.0f;
+	if (m_downPulse < 1.0f)
+		m_downPulse = 1.0f;
+
 	aie::Input* input = aie::Input::getInstance();
 
 	bool downPressed = input->wasKeyPressed(aie::INPUT_KEY_S) ||
@@ -159,15 +172,18 @@ void GameOverState::UpdateNameSelection(float fDeltaTime)
 
 	// handle changing letters
 	const float holdDelay = 0.1f;
+	const float pulseAmount = 1.6f;
 	if (upHeld && m_holdTimer <= 0.0f)
 	{
 		m_currentName[m_nameIndex]--;
 		m_holdTimer = holdDelay;
+		m_upPulse = pulseAmount;
 	}
 	if (downHeld && m_holdTimer <= 0.0f)
 	{
 		m_currentName[m_nameIndex]++;
 		m_holdTimer = holdDelay;
+		m_downPulse = pulseAmount;
 	}
 
 	// start timer for holding down key
@@ -349,11 +365,15 @@ void GameOverState::DrawLetter(aie::Renderer2D* pRenderer, char letter,
 	const float waveAmt = 10.0f;
 	float waveOffset = fabsf(sinf(m_arrowTimer * 4.0f)) * waveAmt;
 
+	float arrowX = posX + 26.0f;
 	float upArrowY = posY + letterHeight + 10.0f + waveOffset;
 	float downArrowY = posY - 10.0f - waveOffset;
 
-	pRenderer->drawSprite(m_upArrow, posX, upArrowY);
-	pRenderer->drawSprite(m_downArrow, posX, downArrowY);
+	float upSize = 17.0f * m_upPulse;
+	float downSize = 17.0f * m_downPulse;
+
+	pRenderer->drawSprite(m_upArrow, arrowX, upArrowY, upSize, upSize);
+	pRenderer->drawSprite(m_downArrow, arrowX, downArrowY, downSize, downSize);
 }
 
 void GameOverState::DrawCenteredText(aie::Renderer2D* pRenderer,
