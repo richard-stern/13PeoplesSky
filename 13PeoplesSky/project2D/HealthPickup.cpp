@@ -33,6 +33,17 @@ HealthPickup::~HealthPickup()
 {
 }
 
+void HealthPickup::Update(float deltaTime)
+{
+	if (m_collided)
+	{
+		m_bVisible = false;
+	}
+	m_collided = false;
+
+	Actor::Update(deltaTime);
+}
+
 void HealthPickup::OnCollision(Actor* collidingObject, CollisionData* data)
 {
 	Vector2 currentPos = GetPosition();
@@ -44,12 +55,12 @@ void HealthPickup::OnCollision(Actor* collidingObject, CollisionData* data)
 	case(ECOLLISIONLAYER_PLAYER):
 		//destroy health pickup
 		//player should also gain health, code done in player class
-		this->SetVisible(false);
+		m_collided = true;
 		break;
 	case(ECOLLISIONLAYER_BULLET):
 		//destroy health pickup
 		//bullet should also be destroyed, code would be done in bullet class
-		this->SetVisible(false);
+		m_collided = true;
 		break;
 	case(ECOLLISIONLAYER_ROCK):
 		//formula for bouncing off of rocks

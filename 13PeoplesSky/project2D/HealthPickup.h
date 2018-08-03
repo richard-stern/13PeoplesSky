@@ -22,6 +22,12 @@ public:
 	~HealthPickup();
 
 	//------------------------------------
+	// Updates position, velocity, etc
+	// If the pickup has collided with the player or bullet the pickup will be destroyed
+	//------------------------------------
+	void Update(float deltaTime);
+
+	//------------------------------------
 	//OnCollision
 	//Should do the following:
 	//Detect whether the collision was caused by the player, a bullet, a rock, an enemy, or another health pickup. 
@@ -29,5 +35,8 @@ public:
 	//If anything else collides, it should bounce off harmlessly. 
 	//------------------------------------
 	void OnCollision(Actor* collidingObject, CollisionData* data);
+
+private:
+	bool m_collided;
 };
 
