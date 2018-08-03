@@ -32,6 +32,7 @@ Enemy::Enemy(Level* pLevel) : Actor()
 
 	//The number of rocks in the level is equal to ROCK_COUNT sqrd
 	rockCount = ROCK_COUNT * ROCK_COUNT;
+	enemyCount = ENEMY_COUNT * ENEMY_COUNT;
 	
 	//Creating the instances of the enemy's 2 behaviour types
 	m_pursue = new PursueBehaviour;
@@ -112,20 +113,35 @@ void Enemy::Update(float DeltaTime)
 	//ROCK AVOIDANCE
 	for(int i = 0; i < rockCount; i++)
 	{
-		if (m_rock[i]->GetPosition().magnitude() <= 150.0f)
+		//Formula to get the distance between two vectors
+		float distBetween = sqrt((powf(GetPosition().x - m_rock[i]->GetPosition().x, 2)) + (powf(GetPosition().y - m_rock[i]->GetPosition().y, 2.0f)));
+
+		if (distBetween <= 100.0f)
 		{
 			Vector2 avoidForce = m_avoid->update(m_rock[i], this);
-			Vector2 pursueForce = m_avoid->update(m_player, this);
-			SetVelocity(GetVelocity() + pursueForce + avoidForce * DeltaTime);
+			Vector2 pursueForce = m_pursue->update(m_player, this);
+			SetVelocity(GetVelocity() + avoidForce * DeltaTime);
+		}
+	}
+
+	for (int i = 0; i < enemyCount; i++)
+	{
+		//Formula to get the distance between two vectors
+		float distBetween = sqrt((powf(GetPosition().x - m_enemy[i]->GetPosition().x, 2)) + (powf(GetPosition().y - m_enemy[i]->GetPosition().y, 2.0f)));
+
+		if (distBetween <= 30.0f)
+		{
+			Vector2 avoidForce = m_avoid->update(m_enemy[i], this);
+			Vector2 pursueForce = m_pursue->update(m_player, this);
+			SetVelocity(GetVelocity() + avoidForce * DeltaTime);
 		}
 	}
 
 	Actor::Update(DeltaTime);
 
+	//Enemy rotation
 	Vector2 v2Facing = GetVelocity();
-
 	v2Facing.normalise();
-
 	SetRotation(atan2(v2Facing.y, v2Facing.x));	
 }
 
