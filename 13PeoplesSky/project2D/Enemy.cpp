@@ -67,7 +67,6 @@ Enemy::~Enemy()
 
 void Enemy::Update(float DeltaTime)
 {
-
 	m_timer += DeltaTime;
 
 	//Updates the distance between this class and the player every frame
@@ -113,8 +112,9 @@ void Enemy::Update(float DeltaTime)
 	//ROCK AVOIDANCE
 	for(int i = 0; i < rockCount; i++)
 	{
-		//Formula to get the distance between two vectors
-		float distBetween = sqrt((powf(GetPosition().x - m_rock[i]->GetPosition().x, 2)) + (powf(GetPosition().y - m_rock[i]->GetPosition().y, 2.0f)));
+		//Formula to get the distance between two vectors (sqrt(x2 - x1)^2 + (y2 - y1)^2)
+		float distBetween = sqrt((powf(GetPosition().x - m_rock[i]->GetPosition().x, 2.0f)) +
+								 (powf(GetPosition().y - m_rock[i]->GetPosition().y, 2.0f)));
 
 		if (distBetween <= 100.0f)
 		{
@@ -126,8 +126,9 @@ void Enemy::Update(float DeltaTime)
 
 	for (int i = 0; i < enemyCount; i++)
 	{
-		//Formula to get the distance between two vectors
-		float distBetween = sqrt((powf(GetPosition().x - m_enemy[i]->GetPosition().x, 2)) + (powf(GetPosition().y - m_enemy[i]->GetPosition().y, 2.0f)));
+		//Formula to get the distance between two vectors (sqrt(x2 - x1)^2 + (y2 - y1)^2)
+		float distBetween = sqrt((powf(GetPosition().x - m_enemy[i]->GetPosition().x, 2.0f)) + 
+								 (powf(GetPosition().y - m_enemy[i]->GetPosition().y, 2.0f)));
 
 		if (distBetween <= 30.0f)
 		{

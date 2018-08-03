@@ -44,7 +44,6 @@ protected:
 	PursueBehaviour* m_pursue;
 	AvoidBehaviour* m_avoid;
 
-
 	// Shooting
 	BulletManager* m_bulletMan;
 	float m_timer;
