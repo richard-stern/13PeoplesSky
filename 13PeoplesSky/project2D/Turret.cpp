@@ -90,6 +90,11 @@ void Turret::AddAmmo(int _amount_of_ammo)
 	m_iAmmo += _amount_of_ammo;
 }
 
+void Turret::SetAmmo(int _ammo)
+{
+	m_iAmmo = _ammo;
+}
+
 int Turret::GetAmmo()
 {
 	return m_iAmmo;

@@ -20,6 +20,8 @@ public:
 
 	//Adds INT amount of ammo to the turret
 	void AddAmmo(int _amount_of_ammo); 
+	//Sets ammo to INT
+	void SetAmmo(int _ammo);
 	//Return current ammo count as INT
 	int GetAmmo();
 
