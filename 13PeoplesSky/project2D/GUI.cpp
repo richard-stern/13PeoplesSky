@@ -267,6 +267,15 @@ void GUI::UseAmmo()
 }
 
 /*
+Function:	 SetAmmo
+Description: Sets the GUI's ammo qty
+*/
+void GUI::SetAmmo(int value)
+{
+
+}
+
+/*
 Function:	 GetAmmo
 Output:		 int
 Description: Retrieves the number of remaining ammo

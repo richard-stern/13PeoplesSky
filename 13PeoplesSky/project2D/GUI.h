@@ -57,6 +57,7 @@ public:
 	int GetLives();
 	void AddAmmo(int optionalQty = 1);
 	void UseAmmo();
+	void SetAmmo(int value);
 	int GetAmmo();
 };
 
