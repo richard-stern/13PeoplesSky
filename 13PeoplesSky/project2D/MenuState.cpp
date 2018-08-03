@@ -88,13 +88,16 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 
 	Vector2 v2HalfButtonSize = *m_v2ButtonSize * 0.5;
 
-	if (v2MousePos > Vector2(v2StartButtonPosition.x - v2HalfButtonSize.x, v2StartButtonPosition.y - v2HalfButtonSize.y) && v2MousePos < Vector2(v2StartButtonPosition.x + v2HalfButtonSize.x, v2StartButtonPosition.y + v2HalfButtonSize.y))
+	if (!m_bStarting)
 	{
-		m_m3StartButton->SetPosition(m_m3StartButton->m1[6] + rand() % 30 - 15, m_m3StartButton->m1[7] + rand() % 30 - 15);
-	}
-	else if (v2MousePos > Vector2(v2QuitButtonPosition.x - v2HalfButtonSize.x, v2QuitButtonPosition.y - v2HalfButtonSize.y) && v2MousePos < Vector2(v2QuitButtonPosition.x + v2HalfButtonSize.x, v2QuitButtonPosition.y + v2HalfButtonSize.y))
-	{
-		m_m3QuitButton->SetPosition(m_m3QuitButton->m1[6] + rand() % 30 - 15, m_m3QuitButton->m1[7] + rand() % 30 - 15);
+		if (v2MousePos > Vector2(v2StartButtonPosition.x - v2HalfButtonSize.x, v2StartButtonPosition.y - v2HalfButtonSize.y) && v2MousePos < Vector2(v2StartButtonPosition.x + v2HalfButtonSize.x, v2StartButtonPosition.y + v2HalfButtonSize.y))
+		{
+			m_m3StartButton->SetPosition(m_m3StartButton->m1[6] + rand() % 30 - 15, m_m3StartButton->m1[7] + rand() % 30 - 15);
+		}
+		if (v2MousePos > Vector2(v2QuitButtonPosition.x - v2HalfButtonSize.x, v2QuitButtonPosition.y - v2HalfButtonSize.y) && v2MousePos < Vector2(v2QuitButtonPosition.x + v2HalfButtonSize.x, v2QuitButtonPosition.y + v2HalfButtonSize.y))
+		{
+			m_m3QuitButton->SetPosition(m_m3QuitButton->m1[6] + rand() % 30 - 15, m_m3QuitButton->m1[7] + rand() % 30 - 15);
+		}
 	}
 
 	// If left mouse button was clicked, find which button the mouse was over (if any)
