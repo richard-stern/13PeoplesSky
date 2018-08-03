@@ -22,7 +22,6 @@ Enemy::Enemy(Level* pLevel) : Actor()
 	m_rock = pLevel->GetRocks();
 	m_enemy = pLevel->GetEnemies();
 	fireRate = 4.0f;
-	duckKills = 0.0f;
 
 	//*slaps top of enemy* this bad boy can take so many bullets
 	SetHealth(1);
@@ -177,10 +176,13 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 		ModifyHealth(-1);
 		if (GetHealth() <= 0)
 		{
+			for (int i = 0; i < enemyCount; i++)
+			{
+				m_enemy[i]->duckKills++;
+			}
+
 			SetVisible(false);
 			SetWrapAndRespawn(true);
-
-			duckKills++;
 
 			//When the enemy is destroyed, add 5 to the player score
 			GUI::GetInstance()->AddScore(200);

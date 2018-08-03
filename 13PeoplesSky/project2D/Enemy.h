@@ -37,7 +37,7 @@ protected:
 	int enemyCount;
 
 	float fireRate;
-	int duckKills;
+	int duckKills = 0;
 
 	Player* m_player;
 	Enemy** m_enemy;
