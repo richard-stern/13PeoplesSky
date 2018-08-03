@@ -112,7 +112,7 @@ void Enemy::Update(float DeltaTime)
 	//ROCK AVOIDANCE
 	for(int i = 0; i < rockCount; i++)
 	{
-		if (m_rock[i]->GetPosition().magnitude() <= 300.0f)
+		if (m_rock[i]->GetPosition().magnitude() <= 150.0f)
 		{
 			Vector2 avoidForce = m_avoid->update(m_rock[i], this);
 			Vector2 pursueForce = m_avoid->update(m_player, this);
@@ -134,7 +134,6 @@ void Enemy::Update(float DeltaTime)
 //When the enemy collides with another object, rather than being "destroyed", it simply becomes invisible and runs away
 void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 {
-
 	/*Vector2 currentPos = GetPosition();*/
 		switch (collidingObject->GetCollider()->GetLayer())
 	{
@@ -169,7 +168,6 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 		break;
 
 	case(ECOLLISIONLAYER_ENEMY):
-		//collidingObject->GetCollider()->SetIgnoreLayer(ECOLLISIONLAYER_ENEMY);
 
 		//formula for bouncing off of enemies
 		m_v2Velocity = (m_v2Velocity - (2 * (m_v2Velocity.dot(data->m_v2Normal)) * data->m_v2Normal));
