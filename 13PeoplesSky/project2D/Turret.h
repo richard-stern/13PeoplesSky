@@ -14,7 +14,7 @@ public:
 	~Turret();
 
 	void Update(float fDeltaTime);		//updates the turrets rotation, checks for shoot input
-	void Draw(aie::Renderer2D* pRenderer);		//draws turret
+	//void Draw(aie::Renderer2D* pRenderer);		//draws turret
 
 	inline void OnCollision(Actor* collidingObject, CollisionData* data) {};		//doesnt do anything, needed for override
 
@@ -29,13 +29,6 @@ private:
 	BulletManager * m_pBullets;		//bulletpool that is responsible for bullet management
 
 	float m_fTimer; //Primary fire
-	float m_fAnimTimer;
 	int m_iAmmo; //Special attack shot count
-
-	bool m_bFiring;
-
-	Vector2 m_v2TurretSize;
-	aie::Texture* m_turretSheet;
-	aie::Texture* m_turretSprite;
 };
 
