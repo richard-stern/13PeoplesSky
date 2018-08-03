@@ -365,7 +365,7 @@ void GameOverState::DrawLetter(aie::Renderer2D* pRenderer, char letter,
 	const float waveAmt = 10.0f;
 	float waveOffset = fabsf(sinf(m_arrowTimer * 4.0f)) * waveAmt;
 
-	float arrowX = posX + 26.0f;
+	float arrowX = posX;
 	float upArrowY = posY + letterHeight + 10.0f + waveOffset;
 	float downArrowY = posY - 10.0f - waveOffset;
 
