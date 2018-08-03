@@ -22,6 +22,7 @@ Enemy::Enemy(Level* pLevel) : Actor()
 	m_rock = pLevel->GetRocks();
 	m_enemy = pLevel->GetEnemies();
 	fireRate = 4.0f;
+	duckKills = 0.0f;
 
 	//*slaps top of enemy* this bad boy can take so many bullets
 	SetHealth(1);
