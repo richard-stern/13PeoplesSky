@@ -53,24 +53,27 @@ Level::Level()
 		}
 	}
 
-	Player* p = new Player;
+	 playerID = new Player;
 
 	for (int i = 0; i < ENEMY_COUNT; i++)
 	{
 		for (int j = 0; j < ENEMY_COUNT; j++)
 		{
-			Enemy* e = new Enemy(p, rockID);
+			
+			Enemy* e = new Enemy(playerID, rockID);
 			this->AddChild(e);
+			enemyID[3 * i + j] = e;
 			e->SetParent(this);
 			int randX = rand() % 1100;
 			int randY = rand() % 1100;
 			e->SetPosition(Vector2(j * 415.0f + randX, i * 445.0f + randY));
+
 		}
 	}
 
 	
-	this->AddChild(p);
-	p->SetParent(this);
+	this->AddChild(playerID);
+	playerID->SetParent(this);
 	
 }
 
@@ -81,6 +84,21 @@ Level::~Level()
 		delete (*iter);
 	}
 	
+}
+
+Rock** Level::GetRocks()
+{
+	return rockID;
+}
+
+Enemy** Level::GetEnemies()
+{
+	return enemyID;
+}
+
+Player* Level::GetPlayer()
+{
+	return playerID;
 }
 
 void Level::Draw(aie::Renderer2D* _render)

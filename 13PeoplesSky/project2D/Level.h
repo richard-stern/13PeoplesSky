@@ -5,7 +5,10 @@
 #define ROCK_COUNT 4
 #define ENEMY_COUNT 3
 
+
 class Rock; 
+class Enemy;
+class Player;
 
 class Level : public GameObject
 {
@@ -14,6 +17,13 @@ public:
 	~Level();
 	void Draw(aie::Renderer2D* _render);
 	void Update(float _delta_time);
+	Rock** GetRocks();
+	Enemy** GetEnemies();
+	Player* GetPlayer();
+private:
 	Rock* rockID[ROCK_COUNT * ROCK_COUNT];
+	Enemy* enemyID[ENEMY_COUNT * ENEMY_COUNT];
+	Player* playerID;
+	
 };
 
