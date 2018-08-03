@@ -74,7 +74,6 @@ void Player::Update(float deltaTime)
 
 	// resetting values
 	Vector2 v2Acceleration, v2Dampening, v2ForceSum = Vector2(0.0f, 0.0f);
-	m_v2StationaryPos = GetPosition();
 
 	// Variables for rotation calculation
 	float fForceRot = 0.0f;
@@ -150,12 +149,6 @@ void Player::Update(float deltaTime)
 		SetColor(a, w, w, w);
 		m_ShipTurret->SetColor(a, w, w, w);
 	}
-
-	//if (m_timer - m_fStationaryTime >= 10.0f)
-	//{
-	//	m_fStationaryTime = m_timer;
-	//	ModifyHealth(-2);
-	//}
 }
 
 void Player::Draw(aie::Renderer2D* pRenderer)
