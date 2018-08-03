@@ -17,7 +17,7 @@ AmmoPickup::AmmoPickup()
 
 	//set texture to health texture
 	//TEMP TEXTURE, replace when new texture made
-	//SetTexture(textureMan->LoadTexture("./textures/.png"));
+	SetTexture(textureMan->LoadTexture("./textures/ammo.png"));
 
 	//Sets random velocity, change numbers as neccesary
 	SetVelocity(Vector2((float)((rand() % 72) - 36), (float)((rand() % 72) - 36)));
