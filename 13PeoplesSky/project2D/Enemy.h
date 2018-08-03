@@ -11,7 +11,6 @@ class StateMachine;
 class BulletManager;
 class Level;
 
-#define FIRE_RATE 5.0f
 
 class Enemy : public Actor
 {
@@ -36,6 +35,9 @@ protected:
 	float m_maxRot;
 	int rockCount;
 	int enemyCount;
+
+	float fireRate;
+	int duckKills;
 
 	Player* m_player;
 	Enemy** m_enemy;

@@ -21,6 +21,7 @@ Enemy::Enemy(Level* pLevel) : Actor()
 	m_player = pLevel->GetPlayer();
 	m_rock = pLevel->GetRocks();
 	m_enemy = pLevel->GetEnemies();
+	fireRate = 4.0f;
 
 	//*slaps top of enemy* this bad boy can take so many bullets
 	SetHealth(1);
@@ -91,7 +92,7 @@ void Enemy::Update(float DeltaTime)
 	
 
 		// Shooting
-		if (m_timer > FIRE_RATE)
+		if (m_timer > fireRate)
 		{
 			m_timer = 0;
 
@@ -100,6 +101,12 @@ void Enemy::Update(float DeltaTime)
 
 			m_bulletMan->ShootBullet(m_v2Position, toPlayer);
 		}
+	}
+
+	if (duckKills >= 3 && fireRate >= 0.2f)
+	{
+		fireRate -= 0.2f;
+		duckKills = 0;
 	}
 
 	//If the enemy has been destroyed, it will flee the player so that it can reach a distance where it can "respawn"
@@ -171,6 +178,8 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 		{
 			SetVisible(false);
 			SetWrapAndRespawn(true);
+
+			duckKills++;
 
 			//When the enemy is destroyed, add 5 to the player score
 			GUI::GetInstance()->AddScore(200);
