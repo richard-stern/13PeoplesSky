@@ -1,6 +1,11 @@
 #include <crtdbg.h>
 #include <random>
 #include <ctime>
+#include <Windows.h>
+#include <Mmsystem.h>
+#include <mciapi.h>
+//these two headers are already included in the <Windows.h> header
+#pragma comment(lib, "Winmm.lib")
 
 #include "Application2D.h"
 #include "Vector2.h"
@@ -21,6 +26,13 @@ int main() {
 
 	// allocation
 	auto app = new Application2D();
+
+	mciSendString(L"open \"C:\\Users\\s181209\\Desktop\\13PeoplesSky\\13PeoplesSky\\8.mp3\" type mpegvideo alias mp3", NULL, 0, NULL);
+	
+	//mciSendString(L"play mp3", NULL, 0, NULL);	
+	//mciSendString(L"play mp3 from 0", NULL, 0, NULL);	
+	//mciSendString(L"play mp3 from 0 wait", NULL, 0, NULL);	
+	mciSendString(L"play mp3 repeat", NULL, 0, NULL);
 
 	// initialise and loop
 	app->run("13 People's Sky", 1280, 720, false);
