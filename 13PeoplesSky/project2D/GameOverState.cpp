@@ -26,6 +26,7 @@ GameOverState::GameOverState()
 
 	m_duckBody = manager->LoadTexture("./textures/deadDuckBody.png");
 	m_duckHead = manager->LoadTexture("./textures/deadDuckHead.png");
+	m_bloodPool = manager->LoadTexture("./textures/bloodPool.png");
 
 	// grab the banner size so we can properly scale it
 	m_bannerSize.x = (float)m_banner->getWidth();
@@ -55,6 +56,8 @@ void GameOverState::Enter()
 	m_duckHeadPosition.x = windowSize.x - 220.0f;
 	m_duckHeadPosition.y = windowSize.y + 500.0f;
 	m_duckHeadVelocity = -1000.0f;
+	m_bloodPoolSize = 0.0f;
+	m_bloodPoolSpreading = false;
 
 	LoadScores();
 }
@@ -68,7 +71,12 @@ void GameOverState::Update(float fDeltaTime, StateMachine* pStateMachine)
 	{
 		m_duckHeadPosition.y = 128.0f;
 		m_duckHeadVelocity = -m_duckHeadVelocity / 3.0f;
+		if (m_duckHeadVelocity < 300)
+			m_bloodPoolSpreading = true;
 	}
+
+	if (m_bloodPoolSpreading)
+		m_bloodPoolSize -= (m_bloodPoolSize - 256.0f) * fDeltaTime;
 
 	if (!m_hasSubmitted)
 	{
@@ -85,10 +93,15 @@ void GameOverState::Draw(aie::Renderer2D* pRenderer)
 {
 	Vector2 windowSize = Camera::GetInstance()->GetResolution();
 
-	pRenderer->drawSprite(m_background, windowSize.x/2.0f, windowSize.y/2.0f,
+	pRenderer->drawSprite(m_background, windowSize.x / 2.0f, windowSize.y / 2.0f,
 		windowSize.x, windowSize.y);
 
 	DrawBanner(pRenderer, windowSize.x / 2.0f, windowSize.y - 140.0f);
+
+	// draw blood pool :D
+	if (m_bloodPoolSpreading)
+		pRenderer->drawSprite(m_bloodPool, m_duckHeadPosition.x, 88.0f,
+			m_bloodPoolSize, m_bloodPoolSize);
 
 	const float duckSize = 256.0f;
 
@@ -96,6 +109,7 @@ void GameOverState::Draw(aie::Renderer2D* pRenderer)
 	pRenderer->drawSprite(m_duckBody, 220.0f, 128.0f, duckSize, duckSize);
 	pRenderer->drawSprite(m_duckHead, m_duckHeadPosition.x, m_duckHeadPosition.y,
 		duckSize, duckSize);
+
 
 	if (!m_hasSubmitted)
 		DrawNameSelection(pRenderer);
@@ -240,7 +254,7 @@ void GameOverState::DrawNameSelection(aie::Renderer2D* pRenderer)
 	DrawCenteredText(pRenderer, "Enter your name:", windowSize.x / 2.0f,
 		letterPosY + 120);
 
-	DrawCenteredText(pRenderer, scoreText, windowSize.x / 2.0f, 
+	DrawCenteredText(pRenderer, scoreText, windowSize.x / 2.0f,
 		letterPosY - 80);
 
 	DrawCenteredText(pRenderer, "Use WASD to input your name",
@@ -283,9 +297,9 @@ void GameOverState::DrawScoreList(aie::Renderer2D* pRenderer)
 	float cell1Center = centerX - cellWidth / 2.0f;
 	float cell2Center = centerX + cellWidth / 2.0f;
 
-	DrawCenteredText(pRenderer, "Name", cell1Center, tableY + cellHeight/2.0f);
-	DrawCenteredText(pRenderer, "Score", cell2Center, tableY + cellHeight/2.0f);
-	DrawCenteredText(pRenderer, "HIGH SCORES", windowSize.x / 2.0f, 
+	DrawCenteredText(pRenderer, "Name", cell1Center, tableY + cellHeight / 2.0f);
+	DrawCenteredText(pRenderer, "Score", cell2Center, tableY + cellHeight / 2.0f);
+	DrawCenteredText(pRenderer, "HIGH SCORES", windowSize.x / 2.0f,
 		tableY + 70, m_largeFont);
 
 	for (int i = 0; i < tableRows; ++i)
@@ -375,7 +389,7 @@ void GameOverState::SaveScores()
 		GameOverScore score = m_allScores[i];
 
 		int points = score.score;
-		char name[NAME_LENGTH+1];
+		char name[NAME_LENGTH + 1];
 		name[NAME_LENGTH] = 0;
 		strcpy(name, score.name.c_str());
 
@@ -404,7 +418,7 @@ void GameOverState::LoadScores()
 	for (int i = 0; i < scoreCount; ++i)
 	{
 		int points;
-		char name[NAME_LENGTH+1];
+		char name[NAME_LENGTH + 1];
 		name[NAME_LENGTH] = 0;
 		file.read(name, NAME_LENGTH);
 		file.read((char*)&points, 4);

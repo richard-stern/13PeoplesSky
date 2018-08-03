@@ -41,8 +41,11 @@ private:
 
 	aie::Texture* m_duckBody;
 	aie::Texture* m_duckHead;
+	aie::Texture* m_bloodPool;
 	Vector2 m_duckHeadPosition;
 	float m_duckHeadVelocity;
+	float m_bloodPoolSize;
+	bool m_bloodPoolSpreading;
 
 
 	Vector2 m_bannerSize;
