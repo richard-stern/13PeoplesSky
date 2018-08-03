@@ -59,7 +59,7 @@ Level::Level()
 	{
 		for (int j = 0; j < ENEMY_COUNT; j++)
 		{
-			Enemy* e = new Enemy(p);
+			Enemy* e = new Enemy(p, rockID);
 			this->AddChild(e);
 			e->SetParent(this);
 			int randX = rand() % 1100;

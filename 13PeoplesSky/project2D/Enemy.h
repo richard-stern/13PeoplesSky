@@ -12,7 +12,7 @@ class StateMachine;
 class Enemy : public Actor
 {
 public:
-	Enemy(Player* pPlayer);
+	Enemy(Player* pPlayer, Rock** pRock);
 	~Enemy();
 
 	void Update(float DeltaTime);
@@ -30,6 +30,7 @@ protected:
 	float m_lengthToRock;
 
 	float m_maxRot;
+	int rockCount;
 
 	Player* m_player;
 	PursueBehaviour* m_pursue;

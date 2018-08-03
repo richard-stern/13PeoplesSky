@@ -11,9 +11,9 @@
 #include "Level.h"
 #include <MathF.h>
 
-Enemy::Enemy(Player* pPlayer) : Actor()
+Enemy::Enemy(Player* pPlayer, Rock** pRock) : Actor()
 {
-	//i'm loading me mum's car, broom broom
+	//Loading texture instance
 	TextureManager* TextureManager = TextureManager::GetInstance();
 	SetTexture(TextureManager->LoadTexture("./textures/car.png"));
 
@@ -22,9 +22,13 @@ Enemy::Enemy(Player* pPlayer) : Actor()
 	//*slaps top of enemy* this bad boy can take so many bullets
 	SetHealth(1);
 
+	//Initialising player variables
 	SetMass(0.5f);
 	m_maxRot = 2.0f;
 	SetMaxHealth(1);
+
+	//The number of rocks in the level is equal to ROCK_COUNT sqrd
+	rockCount = ROCK_COUNT * ROCK_COUNT;
 
 	//Creating the instances of the enemy's 2 behaviour types
 	m_pursue = new PursueBehaviour;
@@ -52,8 +56,6 @@ Enemy::~Enemy()
 
 void Enemy::Update(float DeltaTime)
 {
-	
-
 	//Updates the distance between this class and the player every frame
 	m_distToPlayer = m_player->GetPosition() - GetPosition();
 	m_lengthToPlayer = m_distToPlayer.magnitude();
@@ -83,6 +85,16 @@ void Enemy::Update(float DeltaTime)
 		Vector2 avoidForce = m_avoid->update(m_player, this);
 		SetVelocity(GetVelocity() + avoidForce * DeltaTime);
 	}
+
+	//ROCK AVOIDANCE
+	for(int i = 0; i < rockCount; i++)
+	{
+		if (Level::rockID[i]->GetPosition().magnitude() < 200.0f)
+		{
+
+		}
+	}
+
 	Actor::Update(DeltaTime);
 
 	Vector2 v2Facing = GetVelocity();
