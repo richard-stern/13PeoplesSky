@@ -265,16 +265,23 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 		if (GetHealth() <= 0)
 			SetVisible(false);
 		break;
+
 	case(ECOLLISIONLAYER_HEALTH):
-
-		m_fCollisionTime = m_timer;
-
+		
 		ModifyHealth(2);
 		std::cout << "Player health 2, Health is " << GetHealth() << std::endl;
 
 		if (GetHealth() > GetMaxHealth())
 			SetHealth(GetMaxHealth());
 
+		break;
+
+	case(ECOLLISIONLAYER_AMMO):
+
+		m_fCollisionTime = m_timer;
+		m_ShipTurret->AddAmmo(1);
+
+		std::cout << "16 ammo added to the turret" << GetHealth() << std::endl;
 		break;
 	}
 	GUI::GetInstance()->SetHealth(GetHealth());
