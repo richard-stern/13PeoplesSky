@@ -37,9 +37,11 @@ protected:
 	float m_fMaxRot;
 	float m_timer;
 	float m_fCollisionTime;
+	//float m_fStationaryTime;
 	float m_fRotationDrag;
-	Turret* m_ShipTurret;
 	bool m_bPlayerInvincibility;
+	//Vector2 m_v2StationaryPos;
+	Turret* m_ShipTurret;
 	
 	// stuff for animation (by cameron :D )
 	aie::Texture* m_shipSheet; // spritesheet

@@ -1,5 +1,4 @@
 #include <Input.h>
-#include <iostream>
 #include "Player.h"
 #include "Camera.h"
 #include "TextureManager.h"
@@ -24,6 +23,7 @@ Player::Player()
 	m_timer = 0.0f;
 	m_bPlayerInvincibility = true; // Player starts of as invincible
 	m_fCollisionTime = m_timer;
+	//m_fStationaryTime = m_timer;
 
 	// Request the TextureManager for the ship texture 
 	// Getting GUI, TextureManager and CollisionManager Instance
@@ -74,6 +74,7 @@ void Player::Update(float deltaTime)
 
 	// resetting values
 	Vector2 v2Acceleration, v2Dampening, v2ForceSum = Vector2(0.0f, 0.0f);
+	m_v2StationaryPos = GetPosition();
 
 	// Variables for rotation calculation
 	float fForceRot = 0.0f;
@@ -149,6 +150,12 @@ void Player::Update(float deltaTime)
 		SetColor(a, w, w, w);
 		m_ShipTurret->SetColor(a, w, w, w);
 	}
+
+	//if (m_timer - m_fStationaryTime >= 10.0f)
+	//{
+	//	m_fStationaryTime = m_timer;
+	//	ModifyHealth(-2);
+	//}
 }
 
 void Player::Draw(aie::Renderer2D* pRenderer)
@@ -198,8 +205,6 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 
 
 			ModifyHealth(-1);
-			std::cout << "Player health -1, Health is " << GetHealth() << std::endl;
-			std::cout << "Player is Invincible" << std::endl;
 			m_bPlayerInvincibility = true;
 		}
 
@@ -226,8 +231,6 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 
 
 			ModifyHealth(-1);
-			std::cout << "Player health -1, Health is " << GetHealth() << std::endl;
-			std::cout << "Player is Invincible" << std::endl;
 			m_bPlayerInvincibility = true;
 		}
 
@@ -253,8 +256,6 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 			m_fCollisionTime = m_timer;
 
 			ModifyHealth(-1);
-			std::cout << "Player health -1, Health is " << GetHealth() << std::endl;
-			std::cout << "Player is Invincible" << std::endl;
 			m_bPlayerInvincibility = true;
 		}
 
@@ -267,9 +268,8 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 		break;
 
 	case(ECOLLISIONLAYER_HEALTH):
-		
+
 		ModifyHealth(2);
-		std::cout << "Player health 2, Health is " << GetHealth() << std::endl;
 
 		if (GetHealth() > GetMaxHealth())
 			SetHealth(GetMaxHealth());
@@ -280,10 +280,14 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 
 		m_fCollisionTime = m_timer;
 		m_ShipTurret->AddAmmo(1);
-
-		std::cout << "16 ammo added to the turret" << GetHealth() << std::endl;
+		if (m_ShipTurret->GetAmmo() > 3)
+		{
+			m_ShipTurret->SetAmmo(3);
+		}
 		break;
 	}
+
 	GUI::GetInstance()->SetHealth(GetHealth());
+	GUI::GetInstance()->SetAmmo(m_ShipTurret->GetAmmo());
 	SetPosition(currentPos);
 }
