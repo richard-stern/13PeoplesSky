@@ -111,15 +111,24 @@ void Player::Update(float deltaTime)
 
 	if (m_timer - m_fCollisionTime >= 3.0f)
 	{
+		// reset the colours of the ship and turret when
+		// invincibility runs out so they're opaque again
 		SetColor(0xffffffff);
+		m_ShipTurret->SetColor(0xffffffff);
 		m_bPlayerInvincibility = false;
 	}
 
 	if (m_bPlayerInvincibility)
 	{
-		float alpha = fabsf(sinf(m_timer*10.0f)) / 2.0f + 0.125f;
+		// make the alpha go between 1/4 and 3/4
+		float alpha = 1 - (fabsf(sinf(m_timer*10.0f)) / 2.0f + 0.125f);
+		// convert things to unsigned chars because SetColor is weird
 		const unsigned char w = 0xff;
-		SetColor((char)(alpha * 255), w, w, w);
+		unsigned char a = (unsigned char)(alpha * 255);
+
+		// apply the colour
+		SetColor(a, w, w, w);
+		m_ShipTurret->SetColor(a, w, w, w);
 	}
 }
 
