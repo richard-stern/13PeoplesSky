@@ -16,6 +16,7 @@ GUI::GUI()
 	health = maxHealth;
 	score = NO_SCORE;
 	lives = NUMBER_OF_LIVES;
+	ammo = 1;
 }
 
 /*
@@ -63,6 +64,7 @@ void GUI::Reset()
 	health = maxHealth;
 	score = NO_SCORE;
 	lives = NUMBER_OF_LIVES;
+	ammo = 1;
 }
 
 /*
@@ -87,7 +89,7 @@ void GUI::Draw(aie::Renderer2D *renderer)
 
 /*
 Function:	 DrawHealthBar
-Input/s:	 Renderer2D
+Input/s:	 Renderer2D, Vector2, Vector2
 Description: Draw the player's health bar
 */
 void GUI::DrawHealthBar(aie::Renderer2D *renderer, Vector2 resolution, Vector2 position)
@@ -146,7 +148,7 @@ void GUI::DrawHealthBar(aie::Renderer2D *renderer, Vector2 resolution, Vector2 p
 
 /*
 Function:	 DrawScore
-Input/s:	 Renderer2D
+Input/s:	 Renderer2D, Vector2, Vector2
 Description: Draw the player's current score
 */
 void GUI::DrawScore(aie::Renderer2D *renderer, Vector2 resolution, Vector2 position)
@@ -161,6 +163,28 @@ void GUI::DrawScore(aie::Renderer2D *renderer, Vector2 resolution, Vector2 posit
 	char scoreDisplay[8];
 	sprintf(scoreDisplay, "%i", score);
 	renderer->drawText(font, scoreDisplay, scorePosX, scorePosY);
+}
+
+/*
+Function:	 DrawAmmo
+Input/s:	 Renderer2D, Vector2, Vector2
+Description: Draw the player's remaining ammo
+*/
+void GUI::DrawAmmo(aie::Renderer2D *renderer, Vector2 resolution, Vector2 position)
+{
+	for (int i = 0; i < NUMBER_OF_BULLETS; i++)
+	{
+		aie::Texture *bullet = TextureManager::GetInstance()->LoadTexture("./textures/bulletUI.png");
+
+		if (ammo < i)
+		{
+			renderer->setRenderColour(0x444444FF);
+		}
+
+		float ammoPosX = position.x + AMMO_OFFSET_X + i * 10.0f;
+		float ammoPosY = resolution.y + position.y - AMMO_OFFSET_Y;
+		renderer->setRenderColour(0xFFFFFFFF);
+	}
 }
 
 /*
@@ -221,4 +245,33 @@ Description: Retrieves the number of lives displayed on the UI
 int GUI::GetLives()
 {
 	return lives;
+}
+
+/*
+Function:	 AddAmmo
+Input/s:	 int
+Description: Increments the GUI's ammo count by one unless fed optional argument
+*/
+void GUI::AddAmmo(int optionalQty)
+{
+	ammo += optionalQty;
+}
+
+/*
+Function:	 UseAmmo
+Description: Decrements the GUI's ammo by one
+*/
+void GUI::UseAmmo()
+{
+	ammo--;
+}
+
+/*
+Function:	 GetAmmo
+Output:		 int
+Description: Retrieves the number of remaining ammo
+*/
+int GUI::GetAmmo()
+{
+	return ammo;
 }
