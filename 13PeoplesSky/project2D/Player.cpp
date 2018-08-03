@@ -193,9 +193,6 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 	case(ECOLLISIONLAYER_HEALTH):
 
 			m_fCollisionTime = m_timer;
-			//formula for bouncing off of health pickups
-			currentPos -= data->m_v2Normal * data->m_fPenetration;
-			SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
 
 			ModifyHealth(30);
 			std::cout << "Player health 10, Health is " << GetHealth() << std::endl;
