@@ -7,8 +7,8 @@
 
 Rock::Rock()
 {
-	//set health and max health to a random value between 2 and 4
-	SetMaxHealth((rand() % 3) + 2);
+	//set health and max health to 4
+	SetMaxHealth(4);
 	SetHealth(GetMaxHealth());
 
 	//set self to visible

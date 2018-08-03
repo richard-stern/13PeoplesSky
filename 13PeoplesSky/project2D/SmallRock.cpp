@@ -6,8 +6,8 @@
 
 SmallRock::SmallRock()
 {
-	//set health and max health to a random value between 1 and 2
-	SetMaxHealth((rand() % 2) + 1);
+	//set health and max health to 1
+	SetMaxHealth(1);
 	SetHealth(GetMaxHealth());
 
 	//set self to invisible
