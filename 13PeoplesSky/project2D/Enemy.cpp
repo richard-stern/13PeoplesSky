@@ -96,7 +96,6 @@ void Enemy::Update(float DeltaTime)
 void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 {
 	/*Vector2 currentPos = GetPosition();*/
-
 		switch (collidingObject->GetCollider()->GetLayer())
 	{
 	case(ECOLLISIONLAYER_NONE):
@@ -117,7 +116,7 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 		if (GetHealth() <= 0)
 		{
 			SetVisible(false);
-			SetWrapAndRespawn(false);
+			SetWrapAndRespawn(true);
 
 			//When the enemy is destroyed, add 5 to the player score
 			GUI::GetInstance()->AddScore(200);
