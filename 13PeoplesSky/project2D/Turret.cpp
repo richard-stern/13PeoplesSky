@@ -17,7 +17,7 @@ Turret::Turret(Player* pPlayer) : Actor()
 	m_pBullets = new BulletManager(pPlayer, 20, ECOLLISIONLAYER_BULLET, ECOLLISIONLAYER_PLAYER);		//makes new bullet pool and passes in a player pointer
 	AddChild(m_pBullets);		//adds bullets to child list for updating
 	m_bWrapAndRespawn = false;		//stops bullets from wrapping around the screen
-	m_pTexture = TextureManager::GetInstance()->LoadTexture("./textures/BarrelBlue.png");		//loads texture from texture manager
+	m_pTexture = TextureManager::GetInstance()->LoadTexture("./textures/turret.png");		//loads texture from texture manager
 }
 
 Turret::~Turret()		//cleanup
