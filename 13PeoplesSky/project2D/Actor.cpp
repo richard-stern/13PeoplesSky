@@ -59,9 +59,6 @@ void Actor::Update(float deltaTime)
 void Actor::Draw(aie::Renderer2D *renderer)
 {
 	GameObject::Draw(renderer); /* call base class draw */
-
-	if (m_pCollider)
-		m_pCollider->DrawCollider(m_m3GlobalMatrix.GetPosition(), renderer); /* draws bounding box */
 }
 
 /*
