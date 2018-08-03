@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <Input.h>
+#include <fstream>
 #include <algorithm>
 
 #include "GUI.h"
@@ -41,6 +42,8 @@ void GameOverState::Enter()
 
 	Vector2 windowSize = Camera::GetInstance()->GetResolution();
 	Camera::GetInstance()->SetPosition(windowSize.x / 2, windowSize.y / 2);
+
+	LoadScores();
 }
 
 void GameOverState::Update(float fDeltaTime, StateMachine* pStateMachine)
@@ -151,6 +154,7 @@ void GameOverState::SubmitCurrentName()
 	});
 
 	m_hasSubmitted = true;
+	SaveScores();
 }
 
 void GameOverState::DrawNameSelection(aie::Renderer2D* pRenderer)
@@ -304,4 +308,64 @@ void GameOverState::DrawCenteredText(aie::Renderer2D* pRenderer,
 
 	pRenderer->drawText(font, text, posX - sWidth / 2.0f,
 		posY + sHeight / 2.0f);
+}
+
+void GameOverState::SaveScores()
+{
+	std::fstream file;
+	file.open(SAVE_NAME, std::ios::out | std::ios::binary);
+
+	if (!file.is_open())
+	{
+		printf("Couldn't open high scores file to save!\n");
+		return;
+	}
+
+	int scoreCount = (int)m_allScores.size();
+
+	file.write((char*)&scoreCount, 4);
+
+	for (int i = 0; i < scoreCount; ++i)
+	{
+		GameOverScore score = m_allScores[i];
+
+		int points = score.score;
+		char name[4];
+		name[3] = 0;
+		strcpy(name, score.name.c_str());
+
+		file.write(name, sizeof(char) * 3);
+		file.write((char*)&points, 4);
+	}
+
+	file.close();
+}
+
+void GameOverState::LoadScores()
+{
+	std::fstream file;
+	file.open(SAVE_NAME, std::ios::in | std::ios::binary);
+
+	if (!file.is_open())
+	{
+		printf("Couldn't open high scores file to load!\n");
+		return;
+	}
+
+	int scoreCount;
+	file.read((char*)&scoreCount, 4);
+
+	m_allScores.clear();
+	for (int i = 0; i < scoreCount; ++i)
+	{
+		int points;
+		char name[4];
+		name[3] = 0;
+		file.read(name, 3);
+		file.read((char*)&points, 4);
+
+		m_allScores.push_back({ points, std::string(name) });
+	}
+
+	file.close();
 }

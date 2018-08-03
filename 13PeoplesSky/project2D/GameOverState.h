@@ -5,6 +5,7 @@
 #include <vector>
 
 #define NAME_LENGTH 3
+#define SAVE_NAME "scores.sav"
 
 // little struct to contain both a name and a score for use in the leaderboards
 struct GameOverScore
@@ -57,5 +58,8 @@ private:
 
 	void DrawCenteredText(aie::Renderer2D* pRenderer, const char* text,
 		float posX, float posY, aie::Font* font = nullptr);
+
+	void SaveScores();
+	void LoadScores();
 };
 
