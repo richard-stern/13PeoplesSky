@@ -38,5 +38,10 @@ public:
 	void OnCollision(Actor* collidingObject, CollisionData* data);
 
 	bool WrapAndRespawn();
+
+	void Update(float deltaTime);
+
+private:
+	bool m_destroyed;
 };
 

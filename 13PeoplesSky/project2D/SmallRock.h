@@ -36,5 +36,8 @@ public:
 
 	void Update(float deltatime);
 	void Draw(aie::Renderer2D *renderer);
+
+private:
+	bool m_destroyed;
 };
 

@@ -46,6 +46,7 @@ Rock::Rock()
 	SetCollider(collider);
 	collisionMan->AddObject(this);
 
+	m_destroyed = false;
 }
 
 Rock::~Rock()
@@ -74,7 +75,7 @@ void Rock::OnCollision(Actor* collidingObject, CollisionData* data)
 		ModifyHealth(-1);
 		if (GetHealth() <= 0)
 		{
-			SetVisible(false);
+			m_destroyed = true;
 			GUI::GetInstance()->AddScore(100);
 			m_pSmallRock1->SpawnSelf(m_v2Position);
 			m_pSmallRock2->SpawnSelf(m_v2Position);
@@ -116,4 +117,15 @@ bool Rock::WrapAndRespawn()
 		}
 	}
 	return true;
+}
+
+void Rock::Update(float deltaTime)
+{
+	if (m_destroyed)
+	{
+		m_bVisible = false;
+	}
+	m_destroyed = false;
+
+	Actor::Update(deltaTime);
 }

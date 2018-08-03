@@ -38,6 +38,8 @@ SmallRock::SmallRock()
 	collider->SetLayer(ECOLLISIONLAYER_ROCK);
 	SetCollider(collider);
 	collisionMan->AddObject(this);
+
+	m_destroyed = false;
 }
 
 
@@ -63,7 +65,7 @@ void SmallRock::OnCollision(Actor * collidingObject, CollisionData * data)
 		ModifyHealth(-1);
 		if (GetHealth() <= 0)
 		{
-			SetVisible(false);
+			m_destroyed = true;
 			GUI::GetInstance()->AddScore(50);
 		}
 		break;
@@ -101,6 +103,12 @@ bool SmallRock::WrapAndRespawn()
 
 void SmallRock::Update(float deltatime)
 {
+	if (m_destroyed)
+	{
+		m_bVisible = false;
+	}
+	m_destroyed = false;
+
 	Actor::Update(deltatime);
 }
 
