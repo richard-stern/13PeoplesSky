@@ -53,8 +53,8 @@ void MenuState::Enter()
 
 	// Load button textures
 	TextureManager* textureMan = TextureManager::GetInstance();
-	m_pStartTexture = textureMan->LoadTexture("./textures/startButton.png");
-	m_pQuitTexture = textureMan->LoadTexture("./textures/quitButton.png");
+	m_pStartTexture = textureMan->LoadTexture("./textures/startButton_duck.png");
+	m_pQuitTexture = textureMan->LoadTexture("./textures/quitButton_duck.png");
 	m_pGameTitle = textureMan->LoadTexture("./textures/gameTitle.png");
 	m_pMenuBackground = textureMan->LoadTexture("./textures/menuBackground.png");
 	m_pExplosionTexture = textureMan->LoadTexture("./textures/explosion_sheet.png");
