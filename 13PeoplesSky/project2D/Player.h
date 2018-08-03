@@ -25,6 +25,9 @@ public:
 	//			Setting Camera's position to move with the player
 	//-----------------------------------------------------------//
 	void Update(float deltTime);
+
+	// override the draw so we can use it to draw animations
+	void Draw(aie::Renderer2D* pRenderer) override;
 	
 	// Does nothing at the moment
 	void OnCollision(Actor* collidingObject, CollisionData* data);
@@ -37,4 +40,10 @@ protected:
 	float m_fRotationDrag;
 	Turret* m_ShipTurret;
 	bool m_bPlayerInvincibility;
+	
+	// stuff for animation (by cameron :D )
+	aie::Texture* m_shipSheet; // spritesheet
+	aie::Texture* m_shipSprite; // ship itself
+	Vector2 m_shipSize; // single sprite size
+	
 };

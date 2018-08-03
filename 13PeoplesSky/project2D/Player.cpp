@@ -49,6 +49,13 @@ Player::Player()
 	collider->SetLayer(ECOLLISIONLAYER_PLAYER);
 	SetCollider(collider);
 	collisionMan->AddObject(this);
+
+	// animation stuff
+	m_shipSheet = textureInstance->LoadTexture("./textures/ship flight-anim.png");
+	m_shipSprite = m_pTexture;
+
+	m_shipSize.x = (float)m_shipSprite->getWidth();
+	m_shipSize.y = (float)m_shipSprite->getHeight();
 }
 
 Player::~Player()
@@ -77,7 +84,18 @@ void Player::Update(float deltaTime)
 
 	// use WASD keys to move camera
 	if (input->isKeyDown(aie::INPUT_KEY_W))
+	{
+
 		v2ForceSum += m_m3GlobalMatrix.GetFacing2D() * m_fMaxSpeed;
+
+		// set the texture to nullptr so we know it's animating
+		SetTexture(nullptr);
+	}
+	else
+	{
+		// disable animation when W is not held
+		SetTexture(m_shipSprite);
+	}
 
 	if (input->isKeyDown(aie::INPUT_KEY_S))
 		v2ForceSum -= m_m3GlobalMatrix.GetFacing2D() * m_fMaxSpeed;
@@ -130,6 +148,36 @@ void Player::Update(float deltaTime)
 		SetColor(a, w, w, w);
 		m_ShipTurret->SetColor(a, w, w, w);
 	}
+}
+
+void Player::Draw(aie::Renderer2D* pRenderer)
+{
+	// if we're just drawing the sprite, we can simply draw and exit this
+	if (m_pTexture == m_shipSprite)
+	{
+		Actor::Draw(pRenderer);
+		return;
+	}
+
+	// we're accelerating, draw the animation!
+	const int frameCount = 5;
+
+	int thisFrame = (int)(m_timer * 15.0f) % frameCount;
+
+	float xStart = thisFrame / (float)frameCount;
+	float xWidth = 1.0f / frameCount;
+
+	// set the UV rect to split up the spritesheet
+	pRenderer->setUVRect(xStart, 0.0f, xWidth, 1.0f);
+
+	pRenderer->setRenderColour(m_iColor);
+	pRenderer->drawSpriteTransformed3x3(m_shipSheet, (float*)m_m3GlobalMatrix,
+		m_shipSize.x, m_shipSize.y);
+
+	// reset UV rect which was changed for animation
+	pRenderer->setUVRect(0, 0, 1, 1);
+
+	Actor::Draw(pRenderer);
 }
 
 void Player::OnCollision(Actor* collidingObject, CollisionData* data)
