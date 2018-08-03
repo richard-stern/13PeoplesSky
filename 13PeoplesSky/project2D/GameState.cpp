@@ -22,9 +22,9 @@ GameState::~GameState()
 
 void GameState::Enter()
 {
+	GUI::GetInstance()->Reset();
 	CollisionManager::GetInstance()->Clear();
 	level = new Level;
-	GUI::GetInstance()->Reset();
 }
 
 void GameState::Update(float fDeltaTime, StateMachine* pStateMachine)
