@@ -156,7 +156,7 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 		{
 			m_fCollisionTime = m_timer;
 
-			ModifyHealth(-50);
+			ModifyHealth(-10);
 			std::cout << "Player health -10, Health is " << GetHealth() << std::endl;
 			std::cout << "Player is Invincible" << std::endl;
 			m_bPlayerInvincibility = true;
@@ -197,7 +197,7 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 			currentPos -= data->m_v2Normal * data->m_fPenetration;
 			SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
 
-			ModifyHealth(10);
+			ModifyHealth(30);
 			std::cout << "Player health 10, Health is " << GetHealth() << std::endl;
 
 		if (GetHealth() > GetMaxHealth())
