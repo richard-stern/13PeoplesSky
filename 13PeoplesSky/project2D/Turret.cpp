@@ -87,7 +87,7 @@ void Turret::Update(float fDeltaTime)
 
 void Turret::AddAmmo(int _amount_of_ammo)
 {
-	m_iAmmo = _amount_of_ammo;
+	m_iAmmo += _amount_of_ammo;
 }
 
 int Turret::GetAmmo()
