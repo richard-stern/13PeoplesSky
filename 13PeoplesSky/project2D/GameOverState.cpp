@@ -17,10 +17,15 @@ GameOverState::GameOverState()
 
 	m_font = manager->LoadFont("./font/consolas.ttf", 24);
 	m_largeFont = manager->LoadFont("./font/consolas.ttf", 48);
+	m_titleFont = manager->LoadFont("./font/consolas.ttf", 64);
 
 	m_upArrow = manager->LoadTexture("./textures/up_arrow.png");
 	m_downArrow = manager->LoadTexture("./textures/down_arrow.png");
+	m_banner = manager->LoadTexture("./textures/gameOverBanner.png");
 	m_background = manager->LoadTexture("./textures/menuBackground.png");
+
+	m_bannerSize.x = (float)m_banner->getWidth();
+	m_bannerSize.y = (float)m_banner->getHeight();
 }
 
 GameOverState::~GameOverState() { }
@@ -62,8 +67,9 @@ void GameOverState::Update(float fDeltaTime, StateMachine* pStateMachine)
 void GameOverState::Draw(aie::Renderer2D* pRenderer)
 {
 	Vector2 windowSize = Camera::GetInstance()->GetResolution();
-	pRenderer->drawSprite(m_background, 0.0f, 0.0f, windowSize.x, windowSize.y,
-		0.0f, 100.0f, 0.0f, 0.0f);
+
+	DrawBanner(pRenderer, windowSize.x / 2.0f, windowSize.y - 140.0f);
+
 	if (!m_hasSubmitted)
 		DrawNameSelection(pRenderer);
 	else
@@ -157,6 +163,24 @@ void GameOverState::SubmitCurrentName()
 	SaveScores();
 }
 
+void GameOverState::DrawBanner(aie::Renderer2D * pRenderer, float xPos, float yPos)
+{
+	Vector2 windowSize = Camera::GetInstance()->GetResolution();
+
+	// draw banner stuff
+	const float bannerSizeFactor = 0.7f;
+	float bannerWidth = m_bannerSize.x * bannerSizeFactor;
+	if (bannerWidth < windowSize.x)
+		bannerWidth = windowSize.x;
+
+	pRenderer->drawSprite(m_banner, windowSize.x / 2.0f, yPos,
+		bannerWidth, m_bannerSize.y * bannerSizeFactor);
+
+	// banner text
+	DrawCenteredText(pRenderer, "GAME OVER", windowSize.x / 2.0f,
+		yPos, m_titleFont);
+}
+
 void GameOverState::DrawNameSelection(aie::Renderer2D* pRenderer)
 {
 	// grab the size of the window 
@@ -175,7 +199,7 @@ void GameOverState::DrawNameSelection(aie::Renderer2D* pRenderer)
 
 	const float namePos = windowSize.x / 2.0f;
 	const float startPos = namePos - (wordWidth*0.5f);
-	const float letterPosY = 440.0f;
+	const float letterPosY = windowSize.y - 380.0f;
 	// draw the letters individually
 	for (int i = 0; i < NAME_LENGTH; ++i)
 	{
@@ -185,11 +209,9 @@ void GameOverState::DrawNameSelection(aie::Renderer2D* pRenderer)
 		DrawLetter(pRenderer, letter, posX, letterPosY, m_nameIndex == i);
 	}
 
-	DrawCenteredText(pRenderer, "You died!", windowSize.x / 2.0f,
-		windowSize.y - 150, m_largeFont);
 
 	DrawCenteredText(pRenderer, "Enter your name:", windowSize.x / 2.0f,
-		letterPosY + 80);
+		letterPosY + 120);
 
 	DrawCenteredText(pRenderer, scoreText, windowSize.x / 2.0f, 
 		letterPosY - 80);
@@ -214,10 +236,10 @@ void GameOverState::DrawScoreList(aie::Renderer2D* pRenderer)
 	const float lineX1 = centerX - cellWidth;
 	const float lineX2 = centerX + cellWidth;
 
-	const int tableRows = 10;
+	const int tableRows = 7;
 	const float cellHeight = 40.0f;
 
-	float tableY = windowSize.y - 200.0f;
+	float tableY = windowSize.y - 330.0f;
 	const float tableBottom = tableY - (cellHeight * (tableRows));
 
 	pRenderer->setRenderColour(0xff00ff80);
@@ -234,21 +256,20 @@ void GameOverState::DrawScoreList(aie::Renderer2D* pRenderer)
 	float cell1Center = centerX - cellWidth / 2.0f;
 	float cell2Center = centerX + cellWidth / 2.0f;
 
-	DrawCenteredText(pRenderer, "Name", cell1Center, tableY);
-	DrawCenteredText(pRenderer, "Score", cell2Center, tableY);
+	DrawCenteredText(pRenderer, "Name", cell1Center, tableY + cellHeight/2.0f);
+	DrawCenteredText(pRenderer, "Score", cell2Center, tableY + cellHeight/2.0f);
 	DrawCenteredText(pRenderer, "HIGH SCORES", windowSize.x / 2.0f, 
-		tableY + 100, m_largeFont);
+		tableY + 70, m_largeFont);
 
 	for (int i = 0; i < tableRows; ++i)
 	{
-
 		pRenderer->drawLine(lineX1, tableY, lineX2, tableY, lineWidth);
 
 		tableY -= cellHeight;
 		if (i >= (int)m_allScores.size())
 			continue;
 		// draw score info
-		float scoreY = tableY + 4;
+		float scoreY = tableY + cellHeight / 2.0f;
 		std::string scoreText = std::to_string(m_allScores[i].score);
 
 
@@ -304,7 +325,7 @@ void GameOverState::DrawCenteredText(aie::Renderer2D* pRenderer,
 	font->getStringSize(text, sWidth, sHeight);
 
 	pRenderer->drawText(font, text, posX - sWidth / 2.0f,
-		posY + sHeight / 2.0f);
+		posY - sHeight / 2.0f);
 }
 
 void GameOverState::SaveScores()

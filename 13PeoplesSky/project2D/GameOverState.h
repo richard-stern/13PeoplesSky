@@ -4,6 +4,8 @@
 
 #include <vector>
 
+#include "Vector2.h"
+
 // changing the name length will break previous saves!
 #define NAME_LENGTH 3
 #define SAVE_NAME "scores.sav"
@@ -30,10 +32,14 @@ public:
 private:
 	aie::Font* m_font;
 	aie::Font* m_largeFont;
+	aie::Font* m_titleFont;
 
+	aie::Texture* m_banner;
 	aie::Texture* m_upArrow;
 	aie::Texture* m_downArrow;
 	aie::Texture* m_background;
+
+	Vector2 m_bannerSize;
 
 	float m_arrowTimer;
 	float m_holdTimer;
@@ -51,6 +57,7 @@ private:
 	void UpdateNameSelection(float fDeltaTime);
 	void SubmitCurrentName();
 
+	void DrawBanner(aie::Renderer2D* pRenderer, float xPos, float yPos);
 	void DrawNameSelection(aie::Renderer2D* pRenderer);
 	void DrawScoreList(aie::Renderer2D* pRenderer);
 
