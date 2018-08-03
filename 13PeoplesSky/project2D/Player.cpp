@@ -14,11 +14,12 @@ Player::Player()
 	SetMaxHealth(100);
 	SetHealth(GetMaxHealth());
 
-	GUI::GetInstance()->SetHealth(GetMaxHealth());
 	// Request the TextureManager for the ship texture 
 	// Getting TextureManager  and CollisionManager Instance
 	CollisionManager* collisionMan = CollisionManager::GetInstance();
 	TextureManager* textureInstance = TextureManager::GetInstance();
+	GUI::GetInstance()->SetHealth(GetMaxHealth());
+
 	// Initializing m_pTexture to ship texture
 	SetTexture(textureInstance->LoadTexture("./textures/ship.png"));
 		
@@ -39,6 +40,7 @@ Player::Player()
 	m_fDrag = 0.5f;
 	m_fRotationDrag = 3.0f;
 	m_timer = 0.0f;
+	m_bPlayerInvincibility = false;
 
 	// Collider things ask nick for it
 	Collider* collider = new Collider;
@@ -124,13 +126,12 @@ void Player::Update(float deltaTime)
 		m_m3LocalMatrix.GetPosition().x, 
 		m_m3LocalMatrix.GetPosition().y
 	);
-
 }
 
 void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 {
 	Vector2 currentPos = GetPosition();
-	if(m_timer )
+	Camera* camera = Camera::GetInstance();
 	switch (collidingObject->GetCollider()->GetLayer())
 	{
 	//case(ECOLLISIONLAYER_BULLET):
@@ -140,40 +141,49 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 		//	SetVisible(false);
 		//break;
 	case(ECOLLISIONLAYER_ROCK):
-		m_fCollisionTime = m_timer;
-
-		//formula for bouncing off of other rocks
-		currentPos -= data->m_v2Normal * data->m_fPenetration;
-		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
-
-		ModifyHealth(-10);
-		std::cout << "Player health -10, Health is " << GetHealth() << std::endl;
-
-		if (GetHealth() <= 0)
-			SetVisible(false);
-		break;
-	case(ECOLLISIONLAYER_ENEMY):
-		m_fCollisionTime = m_timer;
 
 		//formula for bouncing off of enemies
 		currentPos -= data->m_v2Normal * data->m_fPenetration;
 		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
 
-		ModifyHealth(-10);
-		std::cout << "Player health -10, Health is " << GetHealth() << std::endl;
+			m_fCollisionTime = m_timer;			
+
+			ModifyHealth(-10);
+			std::cout << "Player health -10, Health is " << GetHealth() << std::endl;
+			std::cout << "Player is Invincible" << std::endl;
+
+		camera->SetShakeDuration(0.1f);
+		camera->SetShakeMagnitude(5.0f);
+
+		if (GetHealth() <= 0)
+			SetVisible(false);
+		break;
+	case(ECOLLISIONLAYER_ENEMY):
+
+		//formula for bouncing off of enemies
+		currentPos -= data->m_v2Normal * data->m_fPenetration;
+		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
+
+			m_fCollisionTime = m_timer;
+
+			ModifyHealth(-10);
+			std::cout << "Player health -10, Health is " << GetHealth() << std::endl;
+
+		camera->SetShakeDuration(0.1f);
+		camera->SetShakeMagnitude(5.0f);
 
 		if (GetHealth() <= 0)
 			SetVisible(false);
 		break;
 	case(ECOLLISIONLAYER_HEALTH):
-		m_fCollisionTime = m_timer;
 
-		//formula for bouncing off of health pickups
-		currentPos -= data->m_v2Normal * data->m_fPenetration;
-		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
+			m_fCollisionTime = m_timer;
+			//formula for bouncing off of health pickups
+			currentPos -= data->m_v2Normal * data->m_fPenetration;
+			SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
 
-		ModifyHealth(10);
-		std::cout << "Player health 10, Health is " << GetHealth() << std::endl;
+			ModifyHealth(10);
+			std::cout << "Player health 10, Health is " << GetHealth() << std::endl;
 
 		if (GetHealth() > 100)
 			SetHealth(GetMaxHealth());

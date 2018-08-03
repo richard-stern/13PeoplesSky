@@ -36,4 +36,5 @@ protected:
 	float m_fCollisionTime;
 	float m_fRotationDrag;
 	Turret* m_ShipTurret;
+	bool m_bPlayerInvincibility;
 };
