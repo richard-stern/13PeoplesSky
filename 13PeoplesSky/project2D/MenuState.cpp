@@ -5,6 +5,9 @@
 #include "Vector2.h"
 #include "Application2D.h"
 #include "Camera.h"
+#include <time.h>
+#define SCREEN_FADE_SPEED 0.04f
+
 MenuState::MenuState()
 {
 }
@@ -19,6 +22,10 @@ void MenuState::Enter()
 	m_pCamera = Camera::GetInstance();
 
 	m_bExiting = false;
+	m_bStarting = false;
+	m_bExploding = false;
+	m_fScreenFade = 0.0f;
+	m_nExplosionIterator = 0;
 
 	// Get window width/height
 	m_v2WindowSize = new Vector2();
@@ -34,6 +41,7 @@ void MenuState::Enter()
 	m_m3StartButton = new Matrix3();
 	m_m3QuitButton = new Matrix3();
 	m_m3GameTitle = new Matrix3();
+	m_m3Explosion = new Matrix3();
 
 	// Find centre of window on x axis
 	unsigned int nWindowMiddleX = (unsigned int)m_v2WindowSize->x / 2;
@@ -49,6 +57,7 @@ void MenuState::Enter()
 	m_pQuitTexture = textureMan->LoadTexture("./textures/quitButton.png");
 	m_pGameTitle = textureMan->LoadTexture("./textures/gameTitle.png");
 	m_pMenuBackground = textureMan->LoadTexture("./textures/menuBackground.png");
+	m_pExplosionTexture = textureMan->LoadTexture("./textures/explosion_sheet.png");
 }
 
 void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
@@ -71,23 +80,33 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 	// Get input instance
 	aie::Input* pInput = aie::Input::getInstance();
 
-	// If left mouse button was clicked, find which button the mouse was over if any
+	// Store mouse position in Vector2
+	Vector2 v2MousePos = Vector2((float)pInput->getMouseX(), (float)pInput->getMouseY());
+
+	// Store button positions in Vector2
+	Vector2 v2StartButtonPosition = m_m3StartButton->GetPosition();
+	Vector2 v2QuitButtonPosition = m_m3QuitButton->GetPosition();
+
+	Vector2 v2HalfButtonSize = *m_v2ButtonSize * 0.5;
+
+	if (v2MousePos > Vector2(v2StartButtonPosition.x - v2HalfButtonSize.x, v2StartButtonPosition.y - v2HalfButtonSize.y) && v2MousePos < Vector2(v2StartButtonPosition.x + v2HalfButtonSize.x, v2StartButtonPosition.y + v2HalfButtonSize.y))
+	{
+		//srand((unsigned int)time(NULL));
+		//m_m3StartButton->m1[6] = m_m3StartButton->m1[6] + rand() % 30 - 30;
+	}
+
+	// If left mouse button was clicked, find which button the mouse was over (if any)
 	if (pInput->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT))
 	{
-		// Store mouse position in Vector2
-		Vector2 v2MousePos = Vector2((float)pInput->getMouseX(), (float)pInput->getMouseY());
-
-		// Store button positions in Vector2
-		Vector2 v2StartButtonPosition = m_m3StartButton->GetPosition();
-		Vector2 v2QuitButtonPosition = m_m3QuitButton->GetPosition();
-
-		Vector2 v2HalfButtonSize = *m_v2ButtonSize * 0.5;
+		if (!m_bExploding)
+			m_m3Explosion->SetPosition(v2MousePos);
+		m_bExploding = true;
 
 		// Find if mouse is over start or quit button
 		if (v2MousePos > Vector2(v2StartButtonPosition.x - v2HalfButtonSize.x, v2StartButtonPosition.y - v2HalfButtonSize.y) && v2MousePos < Vector2(v2StartButtonPosition.x + v2HalfButtonSize.x, v2StartButtonPosition.y + v2HalfButtonSize.y))
 		{
-			// Enter game state
-			pStateMachine->ChangeState(ESTATE_GAME);
+			// Make screen fade out
+			m_bStarting = true;
 		}
 		else if (v2MousePos > Vector2(v2QuitButtonPosition.x - v2HalfButtonSize.x, v2QuitButtonPosition.y - v2HalfButtonSize.y) && v2MousePos < Vector2(v2QuitButtonPosition.x + v2HalfButtonSize.x, v2QuitButtonPosition.y + v2HalfButtonSize.y))
 		{
@@ -95,6 +114,25 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 			Exit();
 			Application2D::quit();
 		}
+	}
+
+	// Exit state when press escape (application already exits, this fixes memory leaks)
+	if (pInput->wasKeyPressed(aie::INPUT_KEY_ESCAPE))
+	{
+		Exit();
+	}
+
+	// If the start button has been clicked
+	if (m_bStarting)
+	{
+		// Increment screen fade
+		m_fScreenFade += SCREEN_FADE_SPEED;
+
+		m_nExplosionIterator++;
+
+		// Start game if screen is black
+		if (m_fScreenFade >= 1.0f)
+			pStateMachine->ChangeState(ESTATE_GAME);
 	}
 }
 
@@ -114,6 +152,18 @@ void MenuState::Draw(aie::Renderer2D* pRenderer)
 
 		// Draw menu background
 		pRenderer->drawSprite(m_pMenuBackground, 0.0f, 0.0f, m_v2WindowSize->x, m_v2WindowSize->y, 0.0f, 100.0f, 0.0f, 0.0f);
+
+		if (m_bExploding)
+		{
+			pRenderer->setUVRect(m_nExplosionIterator % 48 / 48.0f, m_nExplosionIterator, 1.0f / 48, 1.0f);
+			pRenderer->drawSpriteTransformed3x3(m_pExplosionTexture, (float*)m_m3Explosion, 256, 256);
+			pRenderer->setUVRect(0, 0, 1, 1);
+		}
+
+		// Draw screen fade
+		pRenderer->setRenderColour(0, 0, 0, m_fScreenFade);
+		pRenderer->drawBox(m_v2WindowSize->x * 0.5f, m_v2WindowSize->y * 0.5f, m_v2WindowSize->x, m_v2WindowSize->y);
+		pRenderer->setRenderColour(1, 1, 1);
 	}
 }
 
@@ -128,6 +178,9 @@ void MenuState::Exit()
 
 	delete m_m3GameTitle;
 	m_m3GameTitle = nullptr;
+
+	delete m_m3Explosion;
+	m_m3Explosion = nullptr;
 
 	delete m_v2WindowSize;
 	m_v2WindowSize = nullptr;

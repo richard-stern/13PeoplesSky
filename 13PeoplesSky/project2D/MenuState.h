@@ -45,17 +45,24 @@ private:
 	Matrix3* m_m3StartButton;
 	Matrix3* m_m3QuitButton;
 	Matrix3* m_m3GameTitle;
+	Matrix3* m_m3Explosion;
 
 	aie::Texture* m_pStartTexture;
 	aie::Texture* m_pQuitTexture;
 	aie::Texture* m_pGameTitle;
 	aie::Texture* m_pMenuBackground;
+	aie::Texture* m_pExplosionTexture;
 
 	Vector2* m_v2WindowSize;
 	Vector2* m_v2ButtonSize;
 	Vector2* m_v2TitleSize;
 
 	bool m_bExiting;
+	bool m_bStarting;
+	float m_fScreenFade;
+
+	bool m_bExploding;
+	unsigned int m_nExplosionIterator;
 
 	Camera* m_pCamera;
 };
