@@ -4,7 +4,7 @@
 #define HEALTH_PICKUP_COUNT 1 
 #define ROCK_COUNT 4
 #define ENEMY_COUNT 3
-
+#define AMMO_COUNT 1
 
 class Rock; 
 class Enemy;

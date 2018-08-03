@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "HealthPickup.h"
 #include "Star.h"
+#include "AmmoPickup.h"
 
 Level::Level()
 {
@@ -45,6 +46,19 @@ Level::Level()
 		for (int j = 0; j < HEALTH_PICKUP_COUNT; j++)
 		{
 			HealthPickup* h = new HealthPickup;
+			this->AddChild(h);
+			h->SetParent(this);
+			int randX = rand() % 1300;
+			int randY = rand() % 1300;
+			h->SetPosition(Vector2(j * 425.0f + randX, i * 475.0f + randY));
+		}
+	}
+
+	for (int i = 0; i < AMMO_COUNT; i++)
+	{
+		for (int j = 0; j < AMMO_COUNT; j++)
+		{
+			AmmoPickup* h = new AmmoPickup;
 			this->AddChild(h);
 			h->SetParent(this);
 			int randX = rand() % 1300;
