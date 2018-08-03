@@ -4,10 +4,7 @@
 #include "Enemy.h"
 #include "HealthPickup.h"
 #include "Star.h"
-#define STAR_COUNT 30
-#define HEALTH_PICKUP_COUNT 1 
-#define ROCK_COUNT 3
-#define ENEMY_COUNT 2
+
 Level::Level()
 {
 	m_bWrapAndRespawn = false;
