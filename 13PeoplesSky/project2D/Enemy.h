@@ -33,6 +33,7 @@ protected:
 	int rockCount;
 
 	Player* m_player;
+	Rock** m_rock;
 	PursueBehaviour* m_pursue;
 	AvoidBehaviour* m_avoid;
 };

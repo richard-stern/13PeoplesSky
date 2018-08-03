@@ -30,6 +30,8 @@ Enemy::Enemy(Player* pPlayer, Rock** pRock) : Actor()
 	//The number of rocks in the level is equal to ROCK_COUNT sqrd
 	rockCount = ROCK_COUNT * ROCK_COUNT;
 
+	m_rock = pRock;
+
 	//Creating the instances of the enemy's 2 behaviour types
 	m_pursue = new PursueBehaviour;
 	m_avoid = new AvoidBehaviour;
@@ -87,13 +89,13 @@ void Enemy::Update(float DeltaTime)
 	}
 
 	//ROCK AVOIDANCE
-	for(int i = 0; i < rockCount; i++)
+	/*for(int i = 0; i < rockCount; i++)
 	{
-		if (Level::rockID[i]->GetPosition().magnitude() < 200.0f)
+		if (m_rock[i]->GetPosition().magnitude() < 200.0f)
 		{
 
 		}
-	}
+	}*/
 
 	Actor::Update(DeltaTime);
 
