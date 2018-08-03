@@ -330,11 +330,11 @@ void GameOverState::SaveScores()
 		GameOverScore score = m_allScores[i];
 
 		int points = score.score;
-		char name[4];
-		name[3] = 0;
+		char name[NAME_LENGTH+1];
+		name[NAME_LENGTH] = 0;
 		strcpy(name, score.name.c_str());
 
-		file.write(name, sizeof(char) * 3);
+		file.write(name, sizeof(char) * NAME_LENGTH);
 		file.write((char*)&points, 4);
 	}
 
@@ -359,9 +359,9 @@ void GameOverState::LoadScores()
 	for (int i = 0; i < scoreCount; ++i)
 	{
 		int points;
-		char name[4];
-		name[3] = 0;
-		file.read(name, 3);
+		char name[NAME_LENGTH+1];
+		name[NAME_LENGTH] = 0;
+		file.read(name, NAME_LENGTH);
 		file.read((char*)&points, 4);
 
 		m_allScores.push_back({ points, std::string(name) });

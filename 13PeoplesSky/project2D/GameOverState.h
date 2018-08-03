@@ -4,6 +4,7 @@
 
 #include <vector>
 
+// changing the name length will break previous saves!
 #define NAME_LENGTH 3
 #define SAVE_NAME "scores.sav"
 
