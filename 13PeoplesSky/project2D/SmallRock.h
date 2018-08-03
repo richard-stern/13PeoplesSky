@@ -30,7 +30,7 @@ public:
 	//------------------------------------
 	void OnCollision(Actor* collidingObject, CollisionData* data);
 
-	void SpawnSelf();
+	void SpawnSelf(Vector2 position);
 
 	bool WrapAndRespawn();
 

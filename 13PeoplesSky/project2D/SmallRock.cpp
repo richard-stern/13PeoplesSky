@@ -86,8 +86,9 @@ void SmallRock::OnCollision(Actor * collidingObject, CollisionData * data)
 	SetPosition(currentPos);
 }
 
-void SmallRock::SpawnSelf()
+void SmallRock::SpawnSelf(Vector2 position)
 {
+	m_v2Position = position;
 	SetVelocity(Vector2((float)((rand() % 50) - 25), (float)((rand() % 30) - 50)));
 	SetVisible(true);
 }

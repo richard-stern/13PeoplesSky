@@ -16,11 +16,11 @@ Rock::Rock()
 
 	//create children
 	m_pSmallRock1 = new SmallRock;
-	m_pSmallRock1->SetParent(this);
+	//m_pSmallRock1->SetParent(this);
 	AddChild(m_pSmallRock1);
 
 	m_pSmallRock2 = new SmallRock;
-	m_pSmallRock2->SetParent(this);
+	//m_pSmallRock2->SetParent(this);
 	AddChild(m_pSmallRock2);
 
 	//set wrap to true
@@ -76,8 +76,8 @@ void Rock::OnCollision(Actor* collidingObject, CollisionData* data)
 		{
 			SetVisible(false);
 			GUI::GetInstance()->AddScore(100);
-			m_pSmallRock1->SpawnSelf();
-			m_pSmallRock2->SpawnSelf();
+			m_pSmallRock1->SpawnSelf(m_v2Position);
+			m_pSmallRock2->SpawnSelf(m_v2Position);
 		}
 		break;
 	case(ECOLLISIONLAYER_ROCK):
