@@ -78,13 +78,13 @@ void GUI::Draw(aie::Renderer2D *renderer)
 	Vector2 cameraPosition = Camera::GetInstance()->GetPosition();
 
 	/* health */
-	/*float healthPosY = resolution.y - CORNER_OFFSET_Y;
-	renderer->drawText(font, "Health", xPos, healthPosY);
-	renderer->drawText(font, (char*)health, xPos + CORNER_OFFSET_X, healthPosY);*/
 	DrawHealthBar(renderer, cameraResolution, cameraPosition);
 
 	/* score */
 	DrawScore(renderer, cameraResolution, cameraPosition);
+
+	/* ammo */
+	DrawAmmo(renderer, cameraResolution, cameraPosition);
 }
 
 /*
@@ -176,13 +176,15 @@ void GUI::DrawAmmo(aie::Renderer2D *renderer, Vector2 resolution, Vector2 positi
 	{
 		aie::Texture *bullet = TextureManager::GetInstance()->LoadTexture("./textures/bulletUI.png");
 
-		if (ammo < i)
+		if (ammo <= i)
 		{
 			renderer->setRenderColour(0x444444FF);
 		}
 
-		float ammoPosX = position.x + AMMO_OFFSET_X + i * 10.0f;
+		float ammoPosX = position.x + AMMO_OFFSET_X + i * 35.0f;
 		float ammoPosY = resolution.y + position.y - AMMO_OFFSET_Y;
+		renderer->drawSprite(bullet, ammoPosX, ammoPosY);
+
 		renderer->setRenderColour(0xFFFFFFFF);
 	}
 }
@@ -272,7 +274,7 @@ Description: Sets the GUI's ammo qty
 */
 void GUI::SetAmmo(int value)
 {
-
+	ammo = value;
 }
 
 /*

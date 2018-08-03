@@ -20,8 +20,8 @@
 #define SCORE_OFFSET_X 160.0f
 #define SCORE_OFFSET_Y 30.0f
 
-#define AMMO_OFFSET_X 20.0f
-#define AMMO_OFFSET_Y 60.0f
+#define AMMO_OFFSET_X 45.0f
+#define AMMO_OFFSET_Y 80.0f
 
 class GUI
 {
@@ -49,12 +49,19 @@ public:
 	void DrawScore(aie::Renderer2D *renderer, Vector2 resolution, Vector2 position);
 	void DrawAmmo(aie::Renderer2D *renderer, Vector2 resolution, Vector2 position);
 
-	void SetHealth(int health); /* tell UI how much health to display */
+	/* health getters/setters */
+	void SetHealth(int health);
 	int GetHealth();
-	void AddScore(int score); /* tell UI to increase player score */
-	int  GetScore(); /* retrieve final score */
+
+	/* score getters/setters */
+	void AddScore(int score); 
+	int GetScore();
+
+	/* lives getters/setters */
 	void SetLives(int remainingLives); /* set the amount of player lives left */
 	int GetLives();
+
+	/* ammo getters/setters */
 	void AddAmmo(int optionalQty = 1);
 	void UseAmmo();
 	void SetAmmo(int value);
