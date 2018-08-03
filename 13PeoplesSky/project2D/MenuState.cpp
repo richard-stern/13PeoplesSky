@@ -109,6 +109,9 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 			// Make screen fade out
 			m_bStarting = true;
 
+			TextureManager* textureMan = TextureManager::GetInstance();
+			m_pStartTexture = textureMan->LoadTexture("./textures/startButton_duckDead.png");
+
 			if (!m_bExploding)
 				m_m3Explosion->SetPosition(v2MousePos);
 			m_bExploding = true;
