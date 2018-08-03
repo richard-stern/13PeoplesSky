@@ -126,6 +126,12 @@ void Player::Update(float deltaTime)
 		m_m3LocalMatrix.GetPosition().x, 
 		m_m3LocalMatrix.GetPosition().y
 	);
+
+	if (m_timer - m_fCollisionTime >= 3.0f)
+	{
+		m_bPlayerInvincibility = false;
+		std::cout << "Player is not Invincible" << std::endl;
+	}
 }
 
 void Player::OnCollision(Actor* collidingObject, CollisionData* data)
@@ -146,11 +152,15 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 		currentPos -= data->m_v2Normal * data->m_fPenetration;
 		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
 
-			m_fCollisionTime = m_timer;			
+		if (!m_bPlayerInvincibility)
+		{
+			m_fCollisionTime = m_timer;
 
-			ModifyHealth(-10);
+			ModifyHealth(-50);
 			std::cout << "Player health -10, Health is " << GetHealth() << std::endl;
 			std::cout << "Player is Invincible" << std::endl;
+			m_bPlayerInvincibility = true;
+		}
 
 		camera->SetShakeDuration(0.1f);
 		camera->SetShakeMagnitude(5.0f);
@@ -164,10 +174,15 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 		currentPos -= data->m_v2Normal * data->m_fPenetration;
 		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
 
+		if (!m_bPlayerInvincibility)
+		{
 			m_fCollisionTime = m_timer;
 
 			ModifyHealth(-10);
 			std::cout << "Player health -10, Health is " << GetHealth() << std::endl;
+			std::cout << "Player is Invincible" << std::endl;
+			m_bPlayerInvincibility = true;
+		}
 
 		camera->SetShakeDuration(0.1f);
 		camera->SetShakeMagnitude(5.0f);
@@ -185,7 +200,7 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 			ModifyHealth(10);
 			std::cout << "Player health 10, Health is " << GetHealth() << std::endl;
 
-		if (GetHealth() > 100)
+		if (GetHealth() > GetMaxHealth())
 			SetHealth(GetMaxHealth());
 
 		break;
