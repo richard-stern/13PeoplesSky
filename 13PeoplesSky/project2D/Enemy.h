@@ -36,8 +36,8 @@ protected:
 	float m_maxRot;
 	int rockCount;
 
-	Enemy** m_enemy;
 	Player* m_player;
+	Enemy** m_enemy;
 	Rock** m_rock;
 	Rock** closestRock;
 	PursueBehaviour* m_pursue;

@@ -19,6 +19,8 @@ Enemy::Enemy(Level* pLevel) : Actor()
 	SetTexture(TextureManager->LoadTexture("./textures/car.png"));
 
 	m_player = pLevel->GetPlayer();
+	m_rock = pLevel->GetRocks();
+	m_enemy = pLevel->GetEnemies();
 
 	//*slaps top of enemy* this bad boy can take so many bullets
 	SetHealth(1);
@@ -30,10 +32,7 @@ Enemy::Enemy(Level* pLevel) : Actor()
 
 	//The number of rocks in the level is equal to ROCK_COUNT sqrd
 	rockCount = ROCK_COUNT * ROCK_COUNT;
-
-	m_rock = pLevel->GetRocks();
-	m_enemy = pLevel->GetEnemies();
-
+	
 	//Creating the instances of the enemy's 2 behaviour types
 	m_pursue = new PursueBehaviour;
 	m_avoid = new AvoidBehaviour;
@@ -127,9 +126,7 @@ void Enemy::Update(float DeltaTime)
 
 	v2Facing.normalise();
 
-	SetRotation(atan2(v2Facing.y, v2Facing.x));
-
-	
+	SetRotation(atan2(v2Facing.y, v2Facing.x));	
 }
 
 //When the enemy collides with another object, rather than being "destroyed", it simply becomes invisible and runs away
