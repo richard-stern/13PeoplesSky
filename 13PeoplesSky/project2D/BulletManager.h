@@ -2,16 +2,15 @@
 #include "Vector2.h"
 #include "GameObject.h"
 
-#define POOL_SIZE 20
-
 class Bullet;
-class Player;
+class Actor;
+enum ELayer;
 
 class BulletManager : public GameObject
 {
 public:
 
-	BulletManager(Player* player);
+	BulletManager(Actor* owner, int poolSize, ELayer layer, ELayer ignoreLayer);
 	~BulletManager();
 
 	//-----------------
@@ -26,6 +25,8 @@ public:
 	void Draw(aie::Renderer2D* pRenderer);
 
 	Bullet** m_bulletPool;
-	Player* m_player;
+	Actor* m_owner;
+
+	int m_poolSize;
 };
 

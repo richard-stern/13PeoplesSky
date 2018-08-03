@@ -32,12 +32,12 @@ Player::Player()
 
 	// Initializing m_pTexture to ship texture
 	SetTexture(textureInstance->LoadTexture("./textures/ship.png"));
-
+		
 	// Create turret
 	m_ShipTurret = new Turret(this);
 	this->AddChild(m_ShipTurret);
 	m_ShipTurret->SetParent(this);
-
+	
 	// Collider things ask nick for it
 	Collider* collider = new Collider;
 	auto colliderNodes = collider->GetNodes();
@@ -123,7 +123,7 @@ void Player::Update(float deltaTime)
 
 	// Setting positon of camera
 	cLevelCamera->SetPosition(
-		m_m3LocalMatrix.GetPosition().x,
+		m_m3LocalMatrix.GetPosition().x, 
 		m_m3LocalMatrix.GetPosition().y
 	);
 
@@ -186,12 +186,29 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 	Camera* cLevelCamera = Camera::GetInstance();
 	switch (collidingObject->GetCollider()->GetLayer())
 	{
-		//case(ECOLLISIONLAYER_BULLET):
-			//take damage from the bullet, bullet should also be destroyed on impact
-			//ModifyHealth(-1);
-			//if (GetHealth() <= 0)
-			//	SetVisible(false);
-			//break;
+	case(ECOLLISIONLAYER_ENEMY_BULLET):
+		//take damage from the bullet, bullet should also be destroyed on impact
+		// Checking if invincibility is true or false 
+		// if true
+		if (!m_bPlayerInvincibility)
+		{
+			// setting the collision time
+			m_fCollisionTime = m_timer;
+
+
+			ModifyHealth(-10);
+			std::cout << "Player health -10, Health is " << GetHealth() << std::endl;
+			std::cout << "Player is Invincible" << std::endl;
+			m_bPlayerInvincibility = true;
+		}
+
+		// Camera shake feature
+		cLevelCamera->SetShakeDuration(0.1f);
+		cLevelCamera->SetShakeMagnitude(5.0f);
+
+		if (GetHealth() <= 0)
+			SetVisible(false);
+		break;
 	case(ECOLLISIONLAYER_ROCK):
 
 		//formula for bouncing off of enemies

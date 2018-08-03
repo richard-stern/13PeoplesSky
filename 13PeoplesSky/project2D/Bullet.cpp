@@ -6,7 +6,7 @@
 #include "CollisionManager.h"
 #include "Primitives.h"
 
-Bullet::Bullet()
+Bullet::Bullet(ELayer layer, ELayer ignoreLayer)
 {
 	m_bWrapAndRespawn = false;
 	m_bVisible = false;
@@ -24,8 +24,8 @@ Bullet::Bullet()
 	colliderNodes->push_back(new ColliderNode(Vector2(2.5, -2.5), 3));
 	colliderNodes->push_back(new ColliderNode(Vector2(-2.5, -2.5), 0));
 
-	collider->SetLayer(ECOLLISIONLAYER_BULLET);
-	collider->SetIgnoreLayer(ECOLLISIONLAYER_PLAYER);
+	collider->SetLayer(layer);
+	collider->SetIgnoreLayer(ignoreLayer);
 
 	SetCollider(collider);
 
@@ -60,11 +60,11 @@ void Bullet::Update(float deltaTime)
 // Set new position and velocity
 // Set the bullet to visible
 //-----------------
-void Bullet::Shoot(Vector2 position, Vector2 velocity, Vector2 playerVelocity)
+void Bullet::Shoot(Vector2 position, Vector2 velocity, Vector2 ownerVelocity)
 {
 	m_v2Position = position;
 	m_v2Velocity = velocity * 600;
-	m_v2Velocity += playerVelocity;
+	m_v2Velocity += ownerVelocity;
 	
 	m_bVisible = true;
 }
@@ -75,10 +75,23 @@ void Bullet::Shoot(Vector2 position, Vector2 velocity, Vector2 playerVelocity)
 //-----------------
 void Bullet::OnCollision(Actor* collidingObject, CollisionData* _collision_data)
 {
+	ELayer layer = GetCollider()->GetLayer();
+	bool playerBullet = false;
+	if (layer == ECOLLISIONLAYER_BULLET)
+	{
+		playerBullet = true;
+	}
+
 	switch (collidingObject->GetCollider()->GetLayer())
 	{
+	
 	case(ECOLLISIONLAYER_ENEMY):
-		m_collided = true;
+		if (playerBullet)
+			m_collided = true;
+		break;
+	case(ECOLLISIONLAYER_PLAYER):
+		if (!playerBullet)
+			m_collided = true;
 		break;
 
 	case(ECOLLISIONLAYER_HEALTH):

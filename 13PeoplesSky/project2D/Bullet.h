@@ -2,11 +2,12 @@
 #include "Actor.h"
 
 struct CollisionData;
+enum ELayer;
 
 class Bullet : public Actor
 {
 public:
-	Bullet();
+	Bullet(ELayer layer, ELayer ignoreLayer);
 
 	void Update(float deltaTime);
 
@@ -16,7 +17,7 @@ public:
 	//			initial velocity
 	//			Player velocity
 	//-----------------
-	void Shoot(Vector2 position, Vector2 velocity, Vector2 playerVelocity);
+	void Shoot(Vector2 position, Vector2 velocity, Vector2 ownerVelocity);
 
 	//-----------------
 	// Destroys the bullet on collision

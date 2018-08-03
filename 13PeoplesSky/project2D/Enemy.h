@@ -8,6 +8,9 @@ class Rock;
 class PursueBehaviour;
 class AvoidBehaviour;
 class StateMachine;
+class BulletManager;
+
+#define FIRE_RATE 5.0f
 
 class Enemy : public Actor
 {
@@ -36,4 +39,9 @@ protected:
 	Rock** m_rock;
 	PursueBehaviour* m_pursue;
 	AvoidBehaviour* m_avoid;
+
+
+	// Shooting
+	BulletManager* m_bulletMan;
+	float m_timer;
 };

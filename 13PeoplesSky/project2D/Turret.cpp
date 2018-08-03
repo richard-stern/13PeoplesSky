@@ -7,13 +7,14 @@
 #include "BulletManager.h"
 #include "Camera.h"
 #include "Player.h"
+#include "Collider.h"
 
 Turret::Turret(Player* pPlayer) : Actor()
 {
 	m_fTimer = 0.f;
 	m_iAmmo = 1; //Starting ammo
 
-	m_pBullets = new BulletManager(pPlayer);		//makes new bullet pool and passes in a player pointer
+	m_pBullets = new BulletManager(pPlayer, 20, ECOLLISIONLAYER_BULLET, ECOLLISIONLAYER_PLAYER);		//makes new bullet pool and passes in a player pointer
 	AddChild(m_pBullets);		//adds bullets to child list for updating
 	m_bWrapAndRespawn = false;		//stops bullets from wrapping around the screen
 	m_pTexture = TextureManager::GetInstance()->LoadTexture("./textures/BarrelBlue.png");		//loads texture from texture manager

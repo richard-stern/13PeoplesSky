@@ -1,24 +1,27 @@
 #include "BulletManager.h"
 #include "Bullet.h"
 #include "Vector2.h"
-#include "Player.h"
+#include "Actor.h"
+#include "Collider.h"
 
-BulletManager::BulletManager(Player* player)
+BulletManager::BulletManager(Actor* owner, int poolSize, ELayer layer, ELayer ignoreLayer)
 {
-	m_bulletPool = new Bullet*[POOL_SIZE];
+	m_poolSize = poolSize;
 
-	for (int i = 0; i < POOL_SIZE; i++)
+	m_bulletPool = new Bullet*[m_poolSize];
+
+	for (int i = 0; i < m_poolSize; i++)
 	{
-		m_bulletPool[i] = new Bullet();
+		m_bulletPool[i] = new Bullet(layer, ignoreLayer);
 		AddChild(m_bulletPool[i]);
 	}
 
-	m_player = player;
+	m_owner = owner;
 }
 
 BulletManager::~BulletManager()
 {
-	for (int i = 0; i < POOL_SIZE; i++)
+	for (int i = 0; i < m_poolSize; i++)
 	{
 		delete m_bulletPool[i];
 	}
@@ -30,11 +33,11 @@ BulletManager::~BulletManager()
 //-----------------
 void BulletManager::ShootBullet(Vector2 position, Vector2 velocity)
 {
-	for (int i = 0; i < POOL_SIZE; i++)
+	for (int i = 0; i < m_poolSize; i++)
 	{
 		if (!m_bulletPool[i]->GetVisible())
 		{
-			m_bulletPool[i]->Shoot(position, velocity, m_player->GetVelocity());
+			m_bulletPool[i]->Shoot(position, velocity, m_owner->GetVelocity());
 			break;
 		}
 	}

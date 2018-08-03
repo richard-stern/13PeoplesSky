@@ -10,6 +10,7 @@
 #include "GUI.h"
 #include "Level.h"
 #include <MathF.h>
+#include "BulletManager.h"
 
 Enemy::Enemy(Player* pPlayer, Rock** pRock) : Actor()
 {
@@ -47,6 +48,12 @@ Enemy::Enemy(Player* pPlayer, Rock** pRock) : Actor()
 	SetVisible(true);
 
 	SetWrapAndRespawn(true);
+
+	// Shooting
+	m_timer = 0.0f;
+
+	m_bulletMan = new BulletManager(this, 5, ECOLLISIONLAYER_ENEMY_BULLET, ECOLLISIONLAYER_ENEMY);
+	AddChild(m_bulletMan);
 }
 
 Enemy::~Enemy()
@@ -54,10 +61,14 @@ Enemy::~Enemy()
 	//Spring cleaning
 	delete m_pursue;
 	delete m_avoid;
+	delete m_bulletMan;
 }
 
 void Enemy::Update(float DeltaTime)
 {
+
+	m_timer += DeltaTime;
+
 	//Updates the distance between this class and the player every frame
 	m_distToPlayer = m_player->GetPosition() - GetPosition();
 	m_lengthToPlayer = m_distToPlayer.magnitude();
@@ -79,6 +90,17 @@ void Enemy::Update(float DeltaTime)
 		SetVelocity(GetVelocity() + pursueForce * DeltaTime);
 		/*if(m_distToRock < 200.f)
 		m_avoid->update(pRock, this);*/
+
+		// Shooting
+		if (m_timer > FIRE_RATE)
+		{
+			m_timer = 0;
+
+			Vector2 toPlayer = m_player->GetPosition() - m_v2Position;
+			toPlayer.normalise();
+
+			m_bulletMan->ShootBullet(m_v2Position, toPlayer);
+		}
 	}
 
 	//If the enemy has been destroyed, it will flee the player so that it can reach a distance where it can "respawn"
@@ -104,6 +126,8 @@ void Enemy::Update(float DeltaTime)
 	v2Facing.normalise();
 
 	SetRotation(atan2(v2Facing.y, v2Facing.x));
+
+	
 }
 
 //When the enemy collides with another object, rather than being "destroyed", it simply becomes invisible and runs away
