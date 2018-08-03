@@ -1,6 +1,9 @@
 #pragma once
 #include "Renderer2D.h"
 #include "Actor.h"
+
+#define FIRE_RATE 0.12f
+
 class BulletManager;
 class Player;
 
@@ -17,5 +20,7 @@ public:
 
 private:
 	BulletManager * m_pBullets;		//bulletpool that is responsible for bullet management
+
+	float timer;
 };
 
