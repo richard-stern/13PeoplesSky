@@ -22,7 +22,8 @@ Player::Player()
 	m_fDrag = 0.5f;
 	m_fRotationDrag = 3.0f;
 	m_timer = 0.0f;
-	m_bPlayerInvincibility = false;
+	m_bPlayerInvincibility = true; // Player starts of as invincible
+	m_fCollisionTime = m_timer;
 
 	// Request the TextureManager for the ship texture 
 	// Getting GUI, TextureManager and CollisionManager Instance
