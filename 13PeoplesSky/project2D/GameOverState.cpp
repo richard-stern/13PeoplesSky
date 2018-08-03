@@ -75,10 +75,24 @@ void GameOverState::UpdateNameSelection(float fDeltaTime)
 
 	aie::Input* input = aie::Input::getInstance();
 
+	bool downPressed = input->wasKeyPressed(aie::INPUT_KEY_S) ||
+		input->wasKeyPressed(aie::INPUT_KEY_DOWN);
+	bool upPressed = input->wasKeyPressed(aie::INPUT_KEY_W) ||
+		input->wasKeyPressed(aie::INPUT_KEY_UP);
+	bool leftPressed = input->wasKeyPressed(aie::INPUT_KEY_A) ||
+		input->wasKeyPressed(aie::INPUT_KEY_LEFT);
+	bool rightPressed = input->wasKeyPressed(aie::INPUT_KEY_D) ||
+		input->wasKeyPressed(aie::INPUT_KEY_RIGHT);
+
+	bool downHeld = input->isKeyDown(aie::INPUT_KEY_S) ||
+		input->isKeyDown(aie::INPUT_KEY_DOWN);
+	bool upHeld = input->isKeyDown(aie::INPUT_KEY_W) ||
+		input->isKeyDown(aie::INPUT_KEY_UP);
+
 	// moving between letters
-	if (input->wasKeyPressed(aie::INPUT_KEY_LEFT))
+	if (leftPressed)
 		m_nameIndex--;
-	if (input->wasKeyPressed(aie::INPUT_KEY_RIGHT))
+	if (rightPressed)
 		m_nameIndex++;
 
 	// make selection wrap around
@@ -90,27 +104,25 @@ void GameOverState::UpdateNameSelection(float fDeltaTime)
 	if (m_holdTimer > 0.0f)
 		m_holdTimer -= fDeltaTime;
 
-	if (input->wasKeyPressed(aie::INPUT_KEY_UP) ||
-		input->wasKeyPressed(aie::INPUT_KEY_DOWN))
+	if (upPressed || downPressed)
 		m_holdTimer = 0.0f;
 
 	// handle changing letters
-	const float holdDelay = 0.05f;
-	if (input->isKeyDown(aie::INPUT_KEY_UP) && m_holdTimer <= 0.0f)
+	const float holdDelay = 0.1f;
+	if (upHeld && m_holdTimer <= 0.0f)
 	{
 		m_currentName[m_nameIndex]--;
 		m_holdTimer = holdDelay;
 	}
-	if (input->isKeyDown(aie::INPUT_KEY_DOWN) && m_holdTimer <= 0.0f)
+	if (downHeld && m_holdTimer <= 0.0f)
 	{
 		m_currentName[m_nameIndex]++;
 		m_holdTimer = holdDelay;
 	}
 
 	// start timer for holding down key
-	if (input->wasKeyPressed(aie::INPUT_KEY_UP) ||
-		input->wasKeyPressed(aie::INPUT_KEY_DOWN))
-		m_holdTimer = 0.5f;
+	if (upPressed || downPressed)
+		m_holdTimer = 0.3f;
 
 	// make letters wrap around from A to Z
 	if (m_currentName[m_nameIndex] < 'A')
@@ -181,7 +193,7 @@ void GameOverState::DrawNameSelection(aie::Renderer2D* pRenderer)
 	DrawCenteredText(pRenderer, "Enter your name:", windowSize.x / 2.0f,
 		letterPosY + 60);
 
-	DrawCenteredText(pRenderer, "Use ARROW KEYS to input your name",
+	DrawCenteredText(pRenderer, "Use WASD to input your name",
 		windowSize.x / 2.0f, 60.0f);
 	DrawCenteredText(pRenderer, "Press ENTER to submit score",
 		windowSize.x / 2.0f, 30.0f);
