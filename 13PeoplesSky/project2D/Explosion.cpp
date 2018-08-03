@@ -3,7 +3,7 @@
 
 Explosion::Explosion()
 {
-	m_pParticles = new ParticleSystem(EXPLOSION_PARTICLE_COUNT, 0.1f, "./textures/bullet.png");
+	m_pParticles = new ParticleSystem(EXPLOSION_PARTICLE_COUNT, 0.1f, "./textures/gibs.png");
 	m_pParticles->SetEmissionEnabled(false);
 	m_pParticles->SetMinMaxLifetime(1.5f, 2.5f);
 	m_pParticles->SetMinMaxSpeed(400.0f, 500.0f);
