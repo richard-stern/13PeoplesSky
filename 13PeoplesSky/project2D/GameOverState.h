@@ -39,6 +39,12 @@ private:
 	aie::Texture* m_downArrow;
 	aie::Texture* m_background;
 
+	aie::Texture* m_duckBody;
+	aie::Texture* m_duckHead;
+	Vector2 m_duckHeadPosition;
+	float m_duckHeadVelocity;
+
+
 	Vector2 m_bannerSize;
 
 	float m_arrowTimer;

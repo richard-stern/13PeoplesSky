@@ -22,8 +22,12 @@ GameOverState::GameOverState()
 	m_upArrow = manager->LoadTexture("./textures/up_arrow.png");
 	m_downArrow = manager->LoadTexture("./textures/down_arrow.png");
 	m_banner = manager->LoadTexture("./textures/gameOverBanner.png");
-	m_background = manager->LoadTexture("./textures/menuBackground.png");
+	m_background = manager->LoadTexture("./textures/gameOverBackground.png");
 
+	m_duckBody = manager->LoadTexture("./textures/deadDuckBody.png");
+	m_duckHead = manager->LoadTexture("./textures/deadDuckHead.png");
+
+	// grab the banner size so we can properly scale it
 	m_bannerSize.x = (float)m_banner->getWidth();
 	m_bannerSize.y = (float)m_banner->getHeight();
 }
@@ -48,11 +52,24 @@ void GameOverState::Enter()
 	Vector2 windowSize = Camera::GetInstance()->GetResolution();
 	Camera::GetInstance()->SetPosition(windowSize.x / 2, windowSize.y / 2);
 
+	m_duckHeadPosition.x = windowSize.x - 220.0f;
+	m_duckHeadPosition.y = windowSize.y + 500.0f;
+	m_duckHeadVelocity = -1000.0f;
+
 	LoadScores();
 }
 
 void GameOverState::Update(float fDeltaTime, StateMachine* pStateMachine)
 {
+	m_duckHeadVelocity -= 5000.0f * fDeltaTime;
+	m_duckHeadPosition.y += m_duckHeadVelocity * fDeltaTime;
+
+	if (m_duckHeadPosition.y < 128.0f)
+	{
+		m_duckHeadPosition.y = 128.0f;
+		m_duckHeadVelocity = -m_duckHeadVelocity / 3.0f;
+	}
+
 	if (!m_hasSubmitted)
 	{
 		UpdateNameSelection(fDeltaTime);
@@ -68,7 +85,17 @@ void GameOverState::Draw(aie::Renderer2D* pRenderer)
 {
 	Vector2 windowSize = Camera::GetInstance()->GetResolution();
 
+	pRenderer->drawSprite(m_background, windowSize.x/2.0f, windowSize.y/2.0f,
+		windowSize.x, windowSize.y);
+
 	DrawBanner(pRenderer, windowSize.x / 2.0f, windowSize.y - 140.0f);
+
+	const float duckSize = 256.0f;
+
+	// draw duck body
+	pRenderer->drawSprite(m_duckBody, 220.0f, 128.0f, duckSize, duckSize);
+	pRenderer->drawSprite(m_duckHead, m_duckHeadPosition.x, m_duckHeadPosition.y,
+		duckSize, duckSize);
 
 	if (!m_hasSubmitted)
 		DrawNameSelection(pRenderer);
