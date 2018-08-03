@@ -71,7 +71,7 @@ void GameOverState::Update(float fDeltaTime, StateMachine* pStateMachine)
 	{
 		m_duckHeadPosition.y = 128.0f;
 		m_duckHeadVelocity = -m_duckHeadVelocity / 3.0f;
-		if (m_duckHeadVelocity < 300)
+		if (m_duckHeadVelocity < 350)
 			m_bloodPoolSpreading = true;
 	}
 
