@@ -9,6 +9,7 @@
 #include "Primitives.h"
 #include "GUI.h"
 #include "Level.h"
+#include <MathF.h>
 
 Enemy::Enemy(Player* pPlayer) : Actor()
 {
@@ -22,6 +23,8 @@ Enemy::Enemy(Player* pPlayer) : Actor()
 	SetHealth(1);
 
 	SetMass(0.5f);
+	m_maxRot = 2.0f;
+	SetMaxHealth(1);
 
 	//Creating the instances of the enemy's 2 behaviour types
 	m_pursue = new PursueBehaviour;
@@ -49,6 +52,8 @@ Enemy::~Enemy()
 
 void Enemy::Update(float DeltaTime)
 {
+	
+
 	//Updates the distance between this class and the player every frame
 	m_distToPlayer = m_player->GetPosition() - GetPosition();
 	m_lengthToPlayer = m_distToPlayer.magnitude();
@@ -78,8 +83,13 @@ void Enemy::Update(float DeltaTime)
 		Vector2 avoidForce = m_avoid->update(m_player, this);
 		SetVelocity(GetVelocity() + avoidForce * DeltaTime);
 	}
-
 	Actor::Update(DeltaTime);
+
+	Vector2 v2Facing = GetVelocity();
+
+	v2Facing.normalise();
+
+	SetRotation(atan2(v2Facing.y, v2Facing.x));
 }
 
 //When the enemy collides with another object, rather than being "destroyed", it simply becomes invisible and runs away
@@ -95,7 +105,6 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 
 	case(ECOLLISIONLAYER_PLAYER):
 		//When the enemy hits a player, the enemy gets destroyed and the player takes 1 point of damage
-		collidingObject->ModifyHealth(-1);
 		SetVisible(false);
 		//Bouncing off the player
 		/*currentPos -= data->m_v2Normal * data->m_fPenetration;

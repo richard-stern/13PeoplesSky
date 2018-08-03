@@ -18,8 +18,8 @@ public:
 	void Update(float DeltaTime);
 	void OnCollision(Actor* collidingObject, CollisionData* data);
 
-	void SetMaxSpeed(float speed);
 	float GetMaxSpeed();
+	void SetMaxSpeed(float speed);
 
 protected:
 	//The speed at which the enemy will move
@@ -28,6 +28,8 @@ protected:
 	float m_lengthToPlayer;
 	Vector2 m_distToRock;
 	float m_lengthToRock;
+
+	float m_maxRot;
 
 	Player* m_player;
 	PursueBehaviour* m_pursue;
