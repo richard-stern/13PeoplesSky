@@ -32,12 +32,12 @@ Player::Player()
 
 	// Initializing m_pTexture to ship texture
 	SetTexture(textureInstance->LoadTexture("./textures/ship.png"));
-		
+
 	// Create turret
 	m_ShipTurret = new Turret(this);
 	this->AddChild(m_ShipTurret);
 	m_ShipTurret->SetParent(this);
-	
+
 	// Collider things ask nick for it
 	Collider* collider = new Collider;
 	auto colliderNodes = collider->GetNodes();
@@ -105,13 +105,21 @@ void Player::Update(float deltaTime)
 
 	// Setting positon of camera
 	cLevelCamera->SetPosition(
-		m_m3LocalMatrix.GetPosition().x, 
+		m_m3LocalMatrix.GetPosition().x,
 		m_m3LocalMatrix.GetPosition().y
 	);
 
 	if (m_timer - m_fCollisionTime >= 3.0f)
 	{
+		SetColor(0xffffffff);
 		m_bPlayerInvincibility = false;
+	}
+
+	if (m_bPlayerInvincibility)
+	{
+		float alpha = fabsf(sinf(m_timer*10.0f)) / 2.0f + 0.125f;
+		const unsigned char w = 0xff;
+		SetColor((char)(alpha * 255), w, w, w);
 	}
 }
 
@@ -121,12 +129,12 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 	Camera* cLevelCamera = Camera::GetInstance();
 	switch (collidingObject->GetCollider()->GetLayer())
 	{
-	//case(ECOLLISIONLAYER_BULLET):
-		//take damage from the bullet, bullet should also be destroyed on impact
-		//ModifyHealth(-1);
-		//if (GetHealth() <= 0)
-		//	SetVisible(false);
-		//break;
+		//case(ECOLLISIONLAYER_BULLET):
+			//take damage from the bullet, bullet should also be destroyed on impact
+			//ModifyHealth(-1);
+			//if (GetHealth() <= 0)
+			//	SetVisible(false);
+			//break;
 	case(ECOLLISIONLAYER_ROCK):
 
 		//formula for bouncing off of enemies
@@ -184,10 +192,10 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 		break;
 	case(ECOLLISIONLAYER_HEALTH):
 
-			m_fCollisionTime = m_timer;
+		m_fCollisionTime = m_timer;
 
-			ModifyHealth(30);
-			std::cout << "Player health 10, Health is " << GetHealth() << std::endl;
+		ModifyHealth(30);
+		std::cout << "Player health 10, Health is " << GetHealth() << std::endl;
 
 		if (GetHealth() > GetMaxHealth())
 			SetHealth(GetMaxHealth());
