@@ -103,9 +103,9 @@ void Enemy::Update(float DeltaTime)
 		}
 	}
 
-	if (duckKills >= 3 && fireRate >= 0.2f)
+	if (duckKills >= 3 && fireRate >= 0.4f)
 	{
-		fireRate -= 0.2f;
+		fireRate -= 0.4f;
 		duckKills = 0;
 	}
 
