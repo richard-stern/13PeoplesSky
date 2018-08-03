@@ -33,6 +33,9 @@ SmallRock::SmallRock()
 	//Sets random rotation in radians
 	SetRotation(((float)(rand() % 32) - 16) / 10);
 
+	//Sets random angular rotation
+	SetAngularVelocity(((float)(rand() % 32) - 16) / 10);
+
 	//Creates a collider, sets neccesary variables. 
 	PrimRectangle* collider = new PrimRectangle(32, 32);
 	collider->SetLayer(ECOLLISIONLAYER_ROCK);

@@ -16,11 +16,9 @@ Rock::Rock()
 
 	//create children
 	m_pSmallRock1 = new SmallRock;
-	//m_pSmallRock1->SetParent(this);
 	AddChild(m_pSmallRock1);
 
 	m_pSmallRock2 = new SmallRock;
-	//m_pSmallRock2->SetParent(this);
 	AddChild(m_pSmallRock2);
 
 	//set wrap to true
@@ -39,6 +37,9 @@ Rock::Rock()
 
 	//Sets random rotation in radians
 	SetRotation(((float)(rand() % 32) - 16) / 10);
+
+	//Sets random angular rotation
+	SetAngularVelocity(((float)(rand() % 32) - 16) / 10);
 
 	//Creates a collider, sets neccesary variables. 
 	PrimRectangle* collider = new PrimRectangle(64, 64);
