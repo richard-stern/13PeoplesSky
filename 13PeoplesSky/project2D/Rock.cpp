@@ -3,6 +3,8 @@
 #include "CollisionManager.h"
 #include "Primitives.h"
 #include "GUI.h"
+#include "SmallRock.h"
+
 Rock::Rock()
 {
 	//set health and max health to a random value between 2 and 4
@@ -11,6 +13,15 @@ Rock::Rock()
 
 	//set self to visible
 	SetVisible(true);
+
+	//create children
+	m_pSmallRock1 = new SmallRock;
+	m_pSmallRock1->SetParent(this);
+	AddChild(m_pSmallRock1);
+
+	m_pSmallRock2 = new SmallRock;
+	m_pSmallRock2->SetParent(this);
+	AddChild(m_pSmallRock2);
 
 	//set wrap to true
 	m_bWrapAndRespawn = true;
@@ -39,6 +50,10 @@ Rock::Rock()
 
 Rock::~Rock()
 {
+	delete m_pSmallRock1;
+	m_pSmallRock1 = nullptr;
+	delete m_pSmallRock2;
+	m_pSmallRock2 = nullptr;
 }
 
 void Rock::OnCollision(Actor* collidingObject, CollisionData* data)
@@ -61,9 +76,9 @@ void Rock::OnCollision(Actor* collidingObject, CollisionData* data)
 		{
 			SetVisible(false);
 			GUI::GetInstance()->AddScore(100);
+			m_pSmallRock1->SpawnSelf();
+			m_pSmallRock2->SpawnSelf();
 		}
-
-
 		break;
 	case(ECOLLISIONLAYER_ROCK):
 		//formula for bouncing off of other rocks
@@ -82,4 +97,23 @@ void Rock::OnCollision(Actor* collidingObject, CollisionData* data)
 		break;
 	}
 	SetPosition(currentPos);
+}
+
+bool Rock::WrapAndRespawn()
+{
+	if (GameObject::WrapAndRespawn() && !m_bVisible) /* call base class wrap & respawn function */
+	{
+		if (!m_pSmallRock1->GetVisible() && !m_pSmallRock2->GetVisible())
+		{
+			m_pSmallRock1->SetPosition(Vector2(0, 0));
+			m_pSmallRock2->SetPosition(Vector2(0, 0));
+			m_pSmallRock1->SetVelocity(Vector2(0, 0));
+			m_pSmallRock2->SetVelocity(Vector2(0, 0));
+			m_pSmallRock1->SetHealth(GetMaxHealth());
+			m_pSmallRock2->SetHealth(GetMaxHealth());
+			SetHealth(GetMaxHealth()); /* reset health to full */
+			SetVisible(true);
+		}
+	}
+	return true;
 }

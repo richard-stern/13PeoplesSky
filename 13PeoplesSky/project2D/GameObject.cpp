@@ -51,13 +51,13 @@ void GameObject::Draw(aie::Renderer2D* _render)
 	{
 		_render->setRenderColour(m_iColor);
 		//Dont draw it if texture is nullptr
-		if(m_pTexture)
+		if (m_pTexture)
 			_render->drawSpriteTransformed3x3(m_pTexture, (float*)m_m3GlobalMatrix);
-		//Draw all of our children
-		for (auto iter = m_Children.begin(); iter != m_Children.end(); ++iter)
-		{
-			(*iter)->Draw(_render);
-		}
+	}
+	//Draw all of our children
+	for (auto iter = m_Children.begin(); iter != m_Children.end(); ++iter)
+	{
+		(*iter)->Draw(_render);
 	}
 }
 

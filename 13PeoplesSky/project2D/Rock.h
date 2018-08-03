@@ -2,9 +2,14 @@
 #include "Actor.h"
 
 struct CollisionData;
+class SmallRock;
 
 class Rock : public Actor
 {
+private:
+	SmallRock* m_pSmallRock1;
+	SmallRock* m_pSmallRock2;
+
 public:
 	//------------------------------------
 	//Constructor
@@ -31,5 +36,7 @@ public:
 	//If the rock's health is reduced to zero (0), the m_bVisible variable should be set to 'false'.
 	//------------------------------------
 	void OnCollision(Actor* collidingObject, CollisionData* data);
+
+	bool WrapAndRespawn();
 };
 

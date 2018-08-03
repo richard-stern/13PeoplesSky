@@ -188,6 +188,7 @@
     <ClCompile Include="SeekBehaviour.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rock.cpp" />
+    <ClCompile Include="SmallRock.cpp" />
     <ClCompile Include="Star.cpp" />
     <ClCompile Include="Primitives.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -217,6 +218,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rock.h" />
+    <ClInclude Include="SmallRock.h" />
     <ClInclude Include="Star.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="TextureManager.h" />

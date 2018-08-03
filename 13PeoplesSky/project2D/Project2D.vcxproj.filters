@@ -252,6 +252,9 @@
     <ClCompile Include="AmmoPickup.cpp">
       <Filter>Source Files\GameObject\Actor\AmmoPickup</Filter>
     </ClCompile>
+    <ClCompile Include="SmallRock.cpp">
+      <Filter>Source Files\GameObject\Actor\Rock</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application2D.h">
@@ -343,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="AmmoPickup.h">
       <Filter>Header Files\GameObject\Actor\AmmoPickup</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallRock.h">
+      <Filter>Header Files\GameObject\Actor\Rock</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
