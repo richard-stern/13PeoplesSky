@@ -11,9 +11,10 @@ public:
 	void Update(float deltaTime);
 
 	//-----------------
-	// Fire a bullet
+	// Fire a bullet relative to the player's velocity
 	// Params: initial position
 	//			initial velocity
+	//			Player velocity
 	//-----------------
 	void Shoot(Vector2 position, Vector2 velocity, Vector2 playerVelocity);
 

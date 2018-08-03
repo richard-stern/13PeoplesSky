@@ -10,6 +10,7 @@ class Player;
 class BulletManager : public GameObject
 {
 public:
+
 	BulletManager(Player* player);
 	~BulletManager();
 
