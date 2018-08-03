@@ -13,7 +13,10 @@ Bullet::Bullet(ELayer layer, ELayer ignoreLayer)
 	m_fDrag = 0.0f;
 
 	TextureManager* textureMan = TextureManager::GetInstance();
-	m_pTexture = textureMan->LoadTexture("./textures/bullet.png");	
+	if (layer == ECOLLISIONLAYER_BULLET)
+		m_pTexture = textureMan->LoadTexture("./textures/bulletBlue.png");
+	else
+		m_pTexture = textureMan->LoadTexture("./textures/bullet.png");	
 
 	Collider* collider = new Collider();
 
@@ -31,6 +34,7 @@ Bullet::Bullet(ELayer layer, ELayer ignoreLayer)
 
 	CollisionManager* cm = CollisionManager::GetInstance();
 	cm->AddObject(this);
+
 }
 
 void Bullet::Update(float deltaTime)
