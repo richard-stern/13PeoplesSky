@@ -23,7 +23,7 @@ int main() {
 	auto app = new Application2D();
 
 	// initialise and loop
-	app->run("AIE", 1280, 720, false);
+	app->run("13 People's Sky", 1280, 720, false);
 
 	// deallocation
 	delete app;
