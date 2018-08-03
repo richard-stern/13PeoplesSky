@@ -27,6 +27,6 @@ private:
 	BulletManager * m_pBullets;		//bulletpool that is responsible for bullet management
 
 	float m_fTimer; //Primary fire
-	int m_iAmmo; //Special attack
+	int m_iAmmo; //Special attack shot count
 };
 

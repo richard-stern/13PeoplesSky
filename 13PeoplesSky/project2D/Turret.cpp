@@ -11,7 +11,7 @@
 Turret::Turret(Player* pPlayer) : Actor()
 {
 	m_fTimer = 0.f;
-	m_iAmmo = 1;
+	m_iAmmo = 1; //Starting ammo
 
 	m_pBullets = new BulletManager(pPlayer);		//makes new bullet pool and passes in a player pointer
 	AddChild(m_pBullets);		//adds bullets to child list for updating
@@ -50,17 +50,29 @@ void Turret::Update(float fDeltaTime)
 	//Special attack, only fire if we have some ammo
 	if (input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_RIGHT) && m_iAmmo > 0)
 	{
-		//Simple spread of 9 bullets
-		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn + 0.8f), sinf(fTurn + 0.8f)));
-		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn + 0.6f), sinf(fTurn + 0.6f)));
-		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn + 0.4f), sinf(fTurn + 0.4f)));
-		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn + 0.2f), sinf(fTurn + 0.2f)));
+		//Shoot a triangle
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn + 0.45f), sinf(fTurn + 0.45f)));
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn + 0.3f), sinf(fTurn + 0.3f)));
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn + 0.15f), sinf(fTurn + 0.15f)));
 		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn), sinf(fTurn)));
-		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn - 0.2f), sinf(fTurn - 0.2f)));
-		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn - 0.4f), sinf(fTurn - 0.4f)));
-		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn - 0.6f), sinf(fTurn - 0.6f)));
-		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn - 0.8f), sinf(fTurn - 0.8f)));
-		--m_iAmmo; //Lose a shot
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn - 0.15f), sinf(fTurn - 0.15f)));
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn - 0.3f), sinf(fTurn - 0.3f)));
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn - 0.45f), sinf(fTurn - 0.45f)));
+
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn - 0.4f), sinf(fTurn - 0.4f)) * 1.1f);
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn + 0.4f), sinf(fTurn + 0.4f)) * 1.1f);
+
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn - 0.3f), sinf(fTurn - 0.3f)) * 1.2f);
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn + 0.3f), sinf(fTurn + 0.3f)) * 1.2f);
+
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn - 0.2f), sinf(fTurn - 0.2f)) * 1.3f);
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn + 0.2f), sinf(fTurn + 0.2f)) * 1.3f);
+
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn - 0.1f), sinf(fTurn - 0.1f)) * 1.4f);
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn + 0.1f), sinf(fTurn + 0.1f)) * 1.4f);
+
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn), sinf(fTurn)) * 1.5f);
+		--m_iAmmo; //Lose ammo
 	}
 
 	m_fRotation = fTurn - (float)M_PI/2.0f - m_pParent->GetRotation();		//sets the new rotation
