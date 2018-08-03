@@ -10,7 +10,9 @@
 
 Turret::Turret(Player* pPlayer) : Actor()
 {
-	timer = 0.f;
+	m_fTimer = 0.f;
+	m_iAmmo = 1;
+
 	m_pBullets = new BulletManager(pPlayer);		//makes new bullet pool and passes in a player pointer
 	AddChild(m_pBullets);		//adds bullets to child list for updating
 	m_bWrapAndRespawn = false;		//stops bullets from wrapping around the screen
@@ -26,7 +28,7 @@ void Turret::Update(float fDeltaTime)
 {
 	aie::Input* input = aie::Input::getInstance();		//gets the input instance
 
-	timer += fDeltaTime; //timer
+	m_fTimer += fDeltaTime; //timer
 
 	//gets rotation for both player rotation and bullet trajectory
 	Vector2 mousePos = Camera::GetInstance()->GetPosition();
@@ -39,11 +41,26 @@ void Turret::Update(float fDeltaTime)
 	float fTurn = (float)atan2(v2Diff.y, v2Diff.x);		//gets new rotation
 
 	//change it back to: input->wasMouseButtonPressed(...) and remove: timer > f_v
-	if (input->isMouseButtonDown(aie::INPUT_MOUSE_BUTTON_LEFT) && timer > FIRE_RATE)		//checks for LMB input
+	if (input->isMouseButtonDown(aie::INPUT_MOUSE_BUTTON_LEFT) && m_fTimer > FIRE_RATE)		//checks for LMB input
 	{
 		float spread = ((float)(rand()) - 16384) / 524288.f; //Slight shotspread
 		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn + spread), sinf(fTurn + spread)));		//calls the shoot function in the bullet manager
-		timer = 0.f; //reset timer
+		m_fTimer = 0.f; //reset timer
+	}
+	//Special attack, only fire if we have some ammo
+	if (input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_RIGHT) && m_iAmmo > 0)
+	{
+		//Simple spread of 9 bullets
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn + 0.8f), sinf(fTurn + 0.8f)));
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn + 0.6f), sinf(fTurn + 0.6f)));
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn + 0.4f), sinf(fTurn + 0.4f)));
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn + 0.2f), sinf(fTurn + 0.2f)));
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn), sinf(fTurn)));
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn - 0.2f), sinf(fTurn - 0.2f)));
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn - 0.4f), sinf(fTurn - 0.4f)));
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn - 0.6f), sinf(fTurn - 0.6f)));
+		m_pBullets->ShootBullet(GetGlobalTransform().GetPosition(), Vector2(cosf(fTurn - 0.8f), sinf(fTurn - 0.8f)));
+		--m_iAmmo; //Lose a shot
 	}
 
 	m_fRotation = fTurn - (float)M_PI/2.0f - m_pParent->GetRotation();		//sets the new rotation
@@ -54,3 +71,13 @@ void Turret::Update(float fDeltaTime)
 //{
 //	pRenderer->drawSpriteTransformed3x3(m_pTexture, (float*)m_m3GlobalMatrix, 0, 0, 0, 0.5, 0.2f);
 //}
+
+void Turret::AddAmmo(int _amount_of_ammo)
+{
+	m_iAmmo = _amount_of_ammo;
+}
+
+int Turret::GetAmmo()
+{
+	return m_iAmmo;
+}

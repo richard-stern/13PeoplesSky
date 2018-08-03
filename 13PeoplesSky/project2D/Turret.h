@@ -18,9 +18,15 @@ public:
 
 	inline void OnCollision(Actor* collidingObject, CollisionData* data) {};		//doesnt do anything, needed for override
 
+	//Adds INT amount of ammo to the turret
+	void AddAmmo(int _amount_of_ammo); 
+	//Return current ammo count as INT
+	int GetAmmo();
+
 private:
 	BulletManager * m_pBullets;		//bulletpool that is responsible for bullet management
 
-	float timer;
+	float m_fTimer; //Primary fire
+	int m_iAmmo; //Special attack
 };
 
