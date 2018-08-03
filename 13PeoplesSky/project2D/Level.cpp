@@ -36,6 +36,7 @@ Level::Level()
 			int randX = rand() % 200;
 			int randY = rand() % 200;
 			r->SetPosition(Vector2( j * 400.0f + randX, i * 400.0f + randY));
+			rockID[i] = r;
 		}
 	}
 
