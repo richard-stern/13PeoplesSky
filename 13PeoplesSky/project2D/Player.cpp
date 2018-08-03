@@ -10,12 +10,22 @@
 
 Player::Player()
 {
+	// Default Values
 	SetVisible(true);
 	SetMaxHealth(100);
 	SetHealth(GetMaxHealth());
+	m_v2Velocity = Vector2(0.0f, 0.0f);
+	m_fAngularVelocity = 0.0f;
+	m_fMaxSpeed = 150.0f;
+	m_fMaxRot = 4.7f;
+	m_fMass = 0.5f;
+	m_fDrag = 0.5f;
+	m_fRotationDrag = 3.0f;
+	m_timer = 0.0f;
+	m_bPlayerInvincibility = false;
 
 	// Request the TextureManager for the ship texture 
-	// Getting TextureManager  and CollisionManager Instance
+	// Getting GUI, TextureManager and CollisionManager Instance
 	CollisionManager* collisionMan = CollisionManager::GetInstance();
 	TextureManager* textureInstance = TextureManager::GetInstance();
 	GUI::GetInstance()->SetHealth(GetMaxHealth());
@@ -27,21 +37,7 @@ Player::Player()
 	m_ShipTurret = new Turret(this);
 	this->AddChild(m_ShipTurret);
 	m_ShipTurret->SetParent(this);
-
-	// Setting initial position
-	//m_m3LocalMatrix.SetPosition(Vector2(640.0f, 360.0f));
-
-	// Default Values
-	m_v2Velocity = Vector2(0.0f, 0.0f);
-	m_fAngularVelocity = 0.0f;
-	m_fMaxSpeed = 150.0f;
-	m_fMaxRot = 4.7f;
-	m_fMass = 0.5f;
-	m_fDrag = 0.5f;
-	m_fRotationDrag = 3.0f;
-	m_timer = 0.0f;
-	m_bPlayerInvincibility = false;
-
+	
 	// Collider things ask nick for it
 	Collider* collider = new Collider;
 	auto colliderNodes = collider->GetNodes();
@@ -66,7 +62,7 @@ void Player::Update(float deltaTime)
 	m_timer += deltaTime;
 	// Getting instance on input and camera
 	aie::Input* input = aie::Input::getInstance();
-	Camera* m_cLevelCamera = Camera::GetInstance();
+	Camera* cLevelCamera = Camera::GetInstance();
 
 	// resetting values
 	Vector2 v2Acceleration, v2Dampening, v2ForceSum = Vector2(0.0f, 0.0f);
@@ -81,24 +77,16 @@ void Player::Update(float deltaTime)
 
 	// use WASD keys to move camera
 	if (input->isKeyDown(aie::INPUT_KEY_W))
-	{
 		v2ForceSum += m_m3GlobalMatrix.GetFacing2D() * m_fMaxSpeed;
-	}
-		
+
 	if (input->isKeyDown(aie::INPUT_KEY_S))
-	{
 		v2ForceSum -= m_m3GlobalMatrix.GetFacing2D() * m_fMaxSpeed;
-	}
 
 	if (input->isKeyDown(aie::INPUT_KEY_A))
-	{
 		fForceRot += m_fMaxRot;
-	}
 
 	if (input->isKeyDown(aie::INPUT_KEY_D))
-	{
 		fForceRot -= m_fMaxRot;
-	}
 
 	// Calculating velocity
 	v2Acceleration.x = v2ForceSum.x / m_fMass;
@@ -112,17 +100,11 @@ void Player::Update(float deltaTime)
 	fDampening = (m_fAngularVelocity * m_fRotationDrag) * -1.0f;
 	m_fAngularVelocity += (fAcceleration + fDampening) * deltaTime;
 
-	// This code is done in Actor
-	/*m_v2Position = m_v2Position + (m_v2Velocity * deltaTime);
-	m_m3Position.SetPosition(m_v2Position);
-	m_m3LocalMatrix = m_m3Scale * m_m3Position;*/
-	// code end
-
 	// Calls the actor's update
 	Actor::Update(deltaTime);
 
 	// Setting positon of camera
-	m_cLevelCamera->SetPosition(
+	cLevelCamera->SetPosition(
 		m_m3LocalMatrix.GetPosition().x, 
 		m_m3LocalMatrix.GetPosition().y
 	);
@@ -130,14 +112,13 @@ void Player::Update(float deltaTime)
 	if (m_timer - m_fCollisionTime >= 3.0f)
 	{
 		m_bPlayerInvincibility = false;
-		std::cout << "Player is not Invincible" << std::endl;
 	}
 }
 
 void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 {
 	Vector2 currentPos = GetPosition();
-	Camera* camera = Camera::GetInstance();
+	Camera* cLevelCamera = Camera::GetInstance();
 	switch (collidingObject->GetCollider()->GetLayer())
 	{
 	//case(ECOLLISIONLAYER_BULLET):
@@ -151,10 +132,15 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 		//formula for bouncing off of enemies
 		currentPos -= data->m_v2Normal * data->m_fPenetration;
 		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
+		// formula end
 
+		// Checking if invincibility is true or false 
+			// if true
 		if (!m_bPlayerInvincibility)
 		{
+			// setting the collision time
 			m_fCollisionTime = m_timer;
+
 
 			ModifyHealth(-10);
 			std::cout << "Player health -10, Health is " << GetHealth() << std::endl;
@@ -162,8 +148,9 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 			m_bPlayerInvincibility = true;
 		}
 
-		camera->SetShakeDuration(0.1f);
-		camera->SetShakeMagnitude(5.0f);
+		// Camera shake feature
+		cLevelCamera->SetShakeDuration(0.1f);
+		cLevelCamera->SetShakeMagnitude(5.0f);
 
 		if (GetHealth() <= 0)
 			SetVisible(false);
@@ -173,9 +160,13 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 		//formula for bouncing off of enemies
 		currentPos -= data->m_v2Normal * data->m_fPenetration;
 		SetVelocity((GetVelocity() - (2 * (GetVelocity().dot(data->m_v2Normal)) * data->m_v2Normal)));
+		// formula end
 
+		// Checking if invincibility is true or false 
+		// if true
 		if (!m_bPlayerInvincibility)
 		{
+			// setting the collision time
 			m_fCollisionTime = m_timer;
 
 			ModifyHealth(-10);
@@ -184,8 +175,9 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 			m_bPlayerInvincibility = true;
 		}
 
-		camera->SetShakeDuration(0.1f);
-		camera->SetShakeMagnitude(5.0f);
+		// Camera shake feature
+		cLevelCamera->SetShakeDuration(0.1f);
+		cLevelCamera->SetShakeMagnitude(5.0f);
 
 		if (GetHealth() <= 0)
 			SetVisible(false);
