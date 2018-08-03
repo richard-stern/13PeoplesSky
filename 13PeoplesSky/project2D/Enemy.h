@@ -9,13 +9,14 @@ class PursueBehaviour;
 class AvoidBehaviour;
 class StateMachine;
 class BulletManager;
+class Level;
 
 #define FIRE_RATE 5.0f
 
 class Enemy : public Actor
 {
 public:
-	Enemy(Player* pPlayer, Rock** pRock);
+	Enemy(Level* pLevel);
 	~Enemy();
 
 	void Update(float DeltaTime);
@@ -35,6 +36,7 @@ protected:
 	float m_maxRot;
 	int rockCount;
 
+	Enemy** m_enemy;
 	Player* m_player;
 	Rock** m_rock;
 	Rock** closestRock;

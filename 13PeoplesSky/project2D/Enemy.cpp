@@ -12,13 +12,13 @@
 #include <MathF.h>
 #include "BulletManager.h"
 
-Enemy::Enemy(Player* pPlayer, Rock** pRock) : Actor()
+Enemy::Enemy(Level* pLevel) : Actor()
 {
 	//Loading texture instance
 	TextureManager* TextureManager = TextureManager::GetInstance();
 	SetTexture(TextureManager->LoadTexture("./textures/car.png"));
 
-	m_player = pPlayer;
+	m_player = pLevel->GetPlayer();
 
 	//*slaps top of enemy* this bad boy can take so many bullets
 	SetHealth(1);
@@ -31,7 +31,8 @@ Enemy::Enemy(Player* pPlayer, Rock** pRock) : Actor()
 	//The number of rocks in the level is equal to ROCK_COUNT sqrd
 	rockCount = ROCK_COUNT * ROCK_COUNT;
 
-	m_rock = pRock;
+	m_rock = pLevel->GetRocks();
+	m_enemy = pLevel->GetEnemies();
 
 	//Creating the instances of the enemy's 2 behaviour types
 	m_pursue = new PursueBehaviour;

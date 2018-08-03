@@ -74,7 +74,7 @@ Level::Level()
 		for (int j = 0; j < ENEMY_COUNT; j++)
 		{
 			
-			Enemy* e = new Enemy(playerID, rockID);
+			Enemy* e = new Enemy(this);
 			this->AddChild(e);
 			enemyID[3 * i + j] = e;
 			e->SetParent(this);
