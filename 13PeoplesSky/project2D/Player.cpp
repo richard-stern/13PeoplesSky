@@ -12,7 +12,7 @@ Player::Player()
 {
 	// Default Values
 	SetVisible(true);
-	SetMaxHealth(100);
+	SetMaxHealth(6);
 	SetHealth(GetMaxHealth());
 	m_v2Velocity = Vector2(0.0f, 0.0f);
 	m_fAngularVelocity = 0.0f;
@@ -159,8 +159,8 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 			m_fCollisionTime = m_timer;
 
 
-			ModifyHealth(-10);
-			std::cout << "Player health -10, Health is " << GetHealth() << std::endl;
+			ModifyHealth(-1);
+			std::cout << "Player health -1, Health is " << GetHealth() << std::endl;
 			std::cout << "Player is Invincible" << std::endl;
 			m_bPlayerInvincibility = true;
 		}
@@ -186,8 +186,8 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 			// setting the collision time
 			m_fCollisionTime = m_timer;
 
-			ModifyHealth(-10);
-			std::cout << "Player health -10, Health is " << GetHealth() << std::endl;
+			ModifyHealth(-1);
+			std::cout << "Player health -1, Health is " << GetHealth() << std::endl;
 			std::cout << "Player is Invincible" << std::endl;
 			m_bPlayerInvincibility = true;
 		}
@@ -203,8 +203,8 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 
 		m_fCollisionTime = m_timer;
 
-		ModifyHealth(30);
-		std::cout << "Player health 10, Health is " << GetHealth() << std::endl;
+		ModifyHealth(2);
+		std::cout << "Player health 2, Health is " << GetHealth() << std::endl;
 
 		if (GetHealth() > GetMaxHealth())
 			SetHealth(GetMaxHealth());
