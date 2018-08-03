@@ -23,6 +23,6 @@ public:
 	void OnCollision(Actor* collidingObject, CollisionData* _collision_data);
 
 private:
-
+	bool m_collided;
 };
 

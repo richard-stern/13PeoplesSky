@@ -47,6 +47,12 @@ void Bullet::Update(float deltaTime)
 		m_bVisible = false;
 	}
 
+	if (m_collided)
+	{
+		m_bVisible = false;
+	}
+	m_collided = false;
+
 	GetCollider()->UpdateBounds(&m_m3GlobalMatrix);
 }
 
@@ -72,15 +78,15 @@ void Bullet::OnCollision(Actor* collidingObject, CollisionData* _collision_data)
 	switch (collidingObject->GetCollider()->GetLayer())
 	{
 	case(ECOLLISIONLAYER_ENEMY):
-		m_bVisible = false;
+		m_collided = true;
 		break;
 
 	case(ECOLLISIONLAYER_HEALTH):
-		m_bVisible = false;
+		m_collided = true;
 		break;
 
 	case(ECOLLISIONLAYER_ROCK):
-		m_bVisible = false;
+		m_collided = true;
 		break;
 	}
 	
