@@ -166,14 +166,8 @@ void GameOverState::DrawNameSelection(aie::Renderer2D* pRenderer)
 	char scoreText[32];
 	sprintf_s(scoreText, 32, "Your Score: %i", m_lastScore);
 
-	// grab the width of the string so we can center it
-	float scoreWidth = m_font->getStringWidth(scoreText);
-	// and store the center position here for cleanliness
-	float centerPos = windowSize.x / 2.0f - scoreWidth / 2.0f;
-
 	// print it somewhere in the middle of the screen
 	pRenderer->setRenderColour(0xffffffff);
-	pRenderer->drawText(m_font, scoreText, centerPos, 200.0f);
 
 	// get some numbers to draw the name in the middle of the screen
 	const float letterWidth = 32.0f;
@@ -181,7 +175,7 @@ void GameOverState::DrawNameSelection(aie::Renderer2D* pRenderer)
 
 	const float namePos = windowSize.x / 2.0f;
 	const float startPos = namePos - (wordWidth*0.5f);
-	const float letterPosY = 400.0f;
+	const float letterPosY = 440.0f;
 	// draw the letters individually
 	for (int i = 0; i < NAME_LENGTH; ++i)
 	{
@@ -195,7 +189,10 @@ void GameOverState::DrawNameSelection(aie::Renderer2D* pRenderer)
 		windowSize.y - 150, m_largeFont);
 
 	DrawCenteredText(pRenderer, "Enter your name:", windowSize.x / 2.0f,
-		letterPosY + 60);
+		letterPosY + 80);
+
+	DrawCenteredText(pRenderer, scoreText, windowSize.x / 2.0f, 
+		letterPosY - 80);
 
 	DrawCenteredText(pRenderer, "Use WASD to input your name",
 		windowSize.x / 2.0f, 60.0f);
