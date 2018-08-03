@@ -28,7 +28,7 @@ Enemy::Enemy(Level* pLevel) : Actor()
 	SetHealth(1);
 
 	//Initialising player variables
-	SetMass(0.5f);
+	SetMass(0.1f);
 	m_maxRot = 2.0f;
 	SetMaxHealth(1);
 
