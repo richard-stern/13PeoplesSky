@@ -37,6 +37,7 @@ protected:
 
 	Player* m_player;
 	Rock** m_rock;
+	Rock** closestRock;
 	PursueBehaviour* m_pursue;
 	AvoidBehaviour* m_avoid;
 
