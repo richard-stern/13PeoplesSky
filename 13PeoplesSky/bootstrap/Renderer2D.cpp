@@ -580,12 +580,113 @@ void Renderer2D::drawText(Font * font, const char* text, float xPos, float yPos,
 	int w = 0, h = 0;
 	glfwGetWindowSize(glfwGetCurrentContext(), &w, &h);
 
-	//yPos = h - yPos;
+	yPos = h - yPos;
 
 	while (*text != 0) {
 
 		if (shouldFlush() || m_currentTexture >= TEXTURE_STACK_SIZE - 1) {
 				flushBatch();
+
+			glActiveTexture(GL_TEXTURE0 + m_currentTexture++);
+			glBindTexture(GL_TEXTURE_2D, font->getTextureHandle());
+			glActiveTexture(GL_TEXTURE0);
+			m_fontTexture[m_currentTexture - 1] = 1;
+		}
+
+		stbtt_GetBakedQuad((stbtt_bakedchar*)font->m_glyphData, font->m_textureWidth, font->m_textureHeight, (unsigned char)*text, &xPos, &yPos, &Q, 1);
+
+		int index = m_currentVertex;
+
+		/*float tlX = 0.0f;			float tlY = 0.0f;
+		float trX = Q.x1 - Q.x0;	float trY = 0.0f;
+		float brX = Q.x1 - Q.x0;	float brY = Q.y1 - Q.y0;
+		float blX = 0.0f;			float blY = Q.y1 - Q.y0;*/
+
+		m_vertices[m_currentVertex].pos[0] = Q.x0;
+		m_vertices[m_currentVertex].pos[1] = h - Q.y1;
+		m_vertices[m_currentVertex].pos[2] = depth;
+		m_vertices[m_currentVertex].pos[3] = (float)m_currentTexture - 1;
+		m_vertices[m_currentVertex].color[0] = m_r;
+		m_vertices[m_currentVertex].color[1] = m_g;
+		m_vertices[m_currentVertex].color[2] = m_b;
+		m_vertices[m_currentVertex].color[3] = m_a;
+		m_vertices[m_currentVertex].texcoord[0] = Q.s0;
+		m_vertices[m_currentVertex].texcoord[1] = Q.t1;
+		m_currentVertex++;
+		m_vertices[m_currentVertex].pos[0] = Q.x1;
+		m_vertices[m_currentVertex].pos[1] = h - Q.y1;
+		m_vertices[m_currentVertex].pos[2] = depth;
+		m_vertices[m_currentVertex].pos[3] = (float)m_currentTexture - 1;
+		m_vertices[m_currentVertex].color[0] = m_r;
+		m_vertices[m_currentVertex].color[1] = m_g;
+		m_vertices[m_currentVertex].color[2] = m_b;
+		m_vertices[m_currentVertex].color[3] = m_a;
+		m_vertices[m_currentVertex].texcoord[0] = Q.s1;
+		m_vertices[m_currentVertex].texcoord[1] = Q.t1;
+		m_currentVertex++;
+		m_vertices[m_currentVertex].pos[0] = Q.x1;
+		m_vertices[m_currentVertex].pos[1] = h - Q.y0;
+		m_vertices[m_currentVertex].pos[2] = depth;
+		m_vertices[m_currentVertex].pos[3] = (float)m_currentTexture - 1;
+		m_vertices[m_currentVertex].color[0] = m_r;
+		m_vertices[m_currentVertex].color[1] = m_g;
+		m_vertices[m_currentVertex].color[2] = m_b;
+		m_vertices[m_currentVertex].color[3] = m_a;
+		m_vertices[m_currentVertex].texcoord[0] = Q.s1;
+		m_vertices[m_currentVertex].texcoord[1] = Q.t0;
+		m_currentVertex++;
+		m_vertices[m_currentVertex].pos[0] = Q.x0;
+		m_vertices[m_currentVertex].pos[1] = h - Q.y0;
+		m_vertices[m_currentVertex].pos[2] = depth;
+		m_vertices[m_currentVertex].pos[3] = (float)m_currentTexture - 1;
+		m_vertices[m_currentVertex].color[0] = m_r;
+		m_vertices[m_currentVertex].color[1] = m_g;
+		m_vertices[m_currentVertex].color[2] = m_b;
+		m_vertices[m_currentVertex].color[3] = m_a;
+		m_vertices[m_currentVertex].texcoord[0] = Q.s0;
+		m_vertices[m_currentVertex].texcoord[1] = Q.t0;
+		m_currentVertex++;
+		
+		m_indices[m_currentIndex++] = (index + 0);
+		m_indices[m_currentIndex++] = (index + 2);
+		m_indices[m_currentIndex++] = (index + 3);
+
+		m_indices[m_currentIndex++] = (index + 0);
+		m_indices[m_currentIndex++] = (index + 1);
+		m_indices[m_currentIndex++] = (index + 2);
+
+		text++;
+	}
+}
+
+void Renderer2D::drawTextStable(Font * font, const char* text, float xPos, float yPos, float depth) {
+
+	//float fXdecimals = xPos - (int)xPos;
+	//float fYdecimals = yPos - (int)yPos;
+	if (font == nullptr ||
+		font->m_glHandle == 0)
+		return;
+
+	stbtt_aligned_quad Q = {};
+
+	if (shouldFlush() || m_currentTexture >= TEXTURE_STACK_SIZE - 1)
+		flushBatch();
+
+	glActiveTexture(GL_TEXTURE0 + m_currentTexture++);
+	glBindTexture(GL_TEXTURE_2D, font->getTextureHandle());
+	glActiveTexture(GL_TEXTURE0);
+	m_fontTexture[m_currentTexture - 1] = 1;
+
+	// font renders top to bottom, so we need to invert it
+	int w = 0, h = 0;
+	glfwGetWindowSize(glfwGetCurrentContext(), &w, &h);
+
+	//yPos = h - yPos;
+
+	while (*text != 0) {
+
+		if (shouldFlush() || m_currentTexture >= TEXTURE_STACK_SIZE - 1) {
+			flushBatch();
 
 			glActiveTexture(GL_TEXTURE0 + m_currentTexture++);
 			glBindTexture(GL_TEXTURE_2D, font->getTextureHandle());
@@ -646,7 +747,7 @@ void Renderer2D::drawText(Font * font, const char* text, float xPos, float yPos,
 		m_vertices[m_currentVertex].texcoord[0] = Q.s0;
 		m_vertices[m_currentVertex].texcoord[1] = Q.t0;
 		m_currentVertex++;
-		
+
 		m_indices[m_currentIndex++] = (index + 0);
 		m_indices[m_currentIndex++] = (index + 2);
 		m_indices[m_currentIndex++] = (index + 3);

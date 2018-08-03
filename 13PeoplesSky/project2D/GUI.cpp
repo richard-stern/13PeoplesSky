@@ -162,7 +162,7 @@ void GUI::DrawScore(aie::Renderer2D *renderer, Vector2 resolution, Vector2 posit
 
 	char scoreDisplay[8];
 	sprintf(scoreDisplay, "%i", score);
-	renderer->drawText(font, scoreDisplay, scorePosX, scorePosY);
+	renderer->drawTextStable(font, scoreDisplay, scorePosX, scorePosY);
 }
 
 /*
