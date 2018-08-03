@@ -98,15 +98,15 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 	// If left mouse button was clicked, find which button the mouse was over (if any)
 	if (pInput->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT))
 	{
-		if (!m_bExploding)
-			m_m3Explosion->SetPosition(v2MousePos);
-		m_bExploding = true;
-
 		// Find if mouse is over start or quit button
 		if (v2MousePos > Vector2(v2StartButtonPosition.x - v2HalfButtonSize.x, v2StartButtonPosition.y - v2HalfButtonSize.y) && v2MousePos < Vector2(v2StartButtonPosition.x + v2HalfButtonSize.x, v2StartButtonPosition.y + v2HalfButtonSize.y))
 		{
 			// Make screen fade out
 			m_bStarting = true;
+
+			if (!m_bExploding)
+				m_m3Explosion->SetPosition(v2MousePos);
+			m_bExploding = true;
 		}
 		else if (v2MousePos > Vector2(v2QuitButtonPosition.x - v2HalfButtonSize.x, v2QuitButtonPosition.y - v2HalfButtonSize.y) && v2MousePos < Vector2(v2QuitButtonPosition.x + v2HalfButtonSize.x, v2QuitButtonPosition.y + v2HalfButtonSize.y))
 		{
