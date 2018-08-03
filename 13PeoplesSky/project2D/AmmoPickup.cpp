@@ -24,7 +24,7 @@ AmmoPickup::AmmoPickup()
 
 	//Creates a collider, sets neccesary variables. 
 	PrimRectangle* collider = new PrimRectangle(32, 32);
-	collider->SetLayer(ECOLLISIONLAYER_HEALTH);
+	collider->SetLayer(ECOLLISIONLAYER_AMMO);
 	SetCollider(collider);
 	collisionMan->AddObject(this);
 }
