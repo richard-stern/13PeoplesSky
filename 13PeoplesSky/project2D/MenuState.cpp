@@ -5,7 +5,6 @@
 #include "Vector2.h"
 #include "Application2D.h"
 #include "Camera.h"
-#include <time.h>
 #define SCREEN_FADE_SPEED 0.04f
 
 MenuState::MenuState()
@@ -91,8 +90,11 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 
 	if (v2MousePos > Vector2(v2StartButtonPosition.x - v2HalfButtonSize.x, v2StartButtonPosition.y - v2HalfButtonSize.y) && v2MousePos < Vector2(v2StartButtonPosition.x + v2HalfButtonSize.x, v2StartButtonPosition.y + v2HalfButtonSize.y))
 	{
-		//srand((unsigned int)time(NULL));
-		m_m3StartButton->m1[6] = m_m3StartButton->m1[6] + rand() % 30 - 30;
+		m_m3StartButton->SetPosition(m_m3StartButton->m1[6] + rand() % 30 - 15, m_m3StartButton->m1[7] + rand() % 30 - 15);
+	}
+	else if (v2MousePos > Vector2(v2QuitButtonPosition.x - v2HalfButtonSize.x, v2QuitButtonPosition.y - v2HalfButtonSize.y) && v2MousePos < Vector2(v2QuitButtonPosition.x + v2HalfButtonSize.x, v2QuitButtonPosition.y + v2HalfButtonSize.y))
+	{
+		m_m3QuitButton->SetPosition(m_m3QuitButton->m1[6] + rand() % 30 - 15, m_m3QuitButton->m1[7] + rand() % 30 - 15);
 	}
 
 	// If left mouse button was clicked, find which button the mouse was over (if any)
