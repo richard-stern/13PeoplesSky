@@ -196,8 +196,8 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 			m_fCollisionTime = m_timer;
 
 
-			ModifyHealth(-10);
-			std::cout << "Player health -10, Health is " << GetHealth() << std::endl;
+			ModifyHealth(-1);
+			std::cout << "Player health -1, Health is " << GetHealth() << std::endl;
 			std::cout << "Player is Invincible" << std::endl;
 			m_bPlayerInvincibility = true;
 		}
