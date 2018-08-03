@@ -92,7 +92,7 @@ void MenuState::Update(float fDeltaTime, StateMachine* pStateMachine)
 	if (v2MousePos > Vector2(v2StartButtonPosition.x - v2HalfButtonSize.x, v2StartButtonPosition.y - v2HalfButtonSize.y) && v2MousePos < Vector2(v2StartButtonPosition.x + v2HalfButtonSize.x, v2StartButtonPosition.y + v2HalfButtonSize.y))
 	{
 		//srand((unsigned int)time(NULL));
-		//m_m3StartButton->m1[6] = m_m3StartButton->m1[6] + rand() % 30 - 30;
+		m_m3StartButton->m1[6] = m_m3StartButton->m1[6] + rand() % 30 - 30;
 	}
 
 	// If left mouse button was clicked, find which button the mouse was over (if any)
