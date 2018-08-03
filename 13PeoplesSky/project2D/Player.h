@@ -4,6 +4,7 @@
 
 class Turret;
 class Collider;
+class Explosion;
 struct CollisionData;
 
 class Player : public Actor
@@ -33,6 +34,10 @@ public:
 	void OnCollision(Actor* collidingObject, CollisionData* data);
 
 protected:
+
+	// Death process of the player.
+	void Kill();
+
 	float m_fMaxSpeed;
 	float m_fMaxRot;
 	float m_timer;

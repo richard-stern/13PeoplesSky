@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "TextureManager.h"
 #include "Turret.h"
+#include "Explosion.h"
 #include "CollisionManager.h"
 #include "Primitives.h"
 #include "GUI.h"
@@ -283,4 +284,11 @@ void Player::OnCollision(Actor* collidingObject, CollisionData* data)
 	GUI::GetInstance()->SetHealth(GetHealth());
 	GUI::GetInstance()->SetAmmo(m_ShipTurret->GetAmmo());
 	SetPosition(currentPos);
+}
+
+void Player::Kill() 
+{
+
+	SetVisible(false);
+	SetVelocity(Vector2(0, 0));
 }

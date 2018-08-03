@@ -5,6 +5,7 @@
 #include "HealthPickup.h"
 #include "Star.h"
 #include "AmmoPickup.h"
+#include "Explosion.h"
 
 Level::Level()
 {
@@ -31,9 +32,15 @@ Level::Level()
 	{
 		for (int j = 0; j < ROCK_COUNT; j++)
 		{
+			Explosion* rockExplosion = new Explosion;
+			rockExplosion->SetVisible(false);
+			this->AddChild(rockExplosion);
+			rockExplosion->SetParent(this);
+
 			Rock* r = new Rock;
 			this->AddChild(r);
 			r->SetParent(this);
+			r->SetExplosion(rockExplosion);
 			int randX = rand() % 200;
 			int randY = rand() % 200;
 			r->SetPosition(Vector2( j * 400.0f + randX, i * 400.0f + randY));
@@ -67,17 +74,22 @@ Level::Level()
 		}
 	}
 
-	 playerID = new Player;
+	playerID = new Player;
 
 	for (int i = 0; i < ENEMY_COUNT; i++)
 	{
 		for (int j = 0; j < ENEMY_COUNT; j++)
 		{
-			
+			Explosion* enemyExplosion = new Explosion;
+			enemyExplosion->SetVisible(false);
+			this->AddChild(enemyExplosion);
+			enemyExplosion->SetParent(this);
+
 			Enemy* e = new Enemy(this);
 			this->AddChild(e);
 			enemyID[3 * i + j] = e;
 			e->SetParent(this);
+			e->SetExplosion(enemyExplosion);
 			int randX = rand() % 1100;
 			int randY = rand() % 1100;
 			e->SetPosition(Vector2(j * 415.0f + randX, i * 445.0f + randY));
@@ -85,7 +97,6 @@ Level::Level()
 		}
 	}
 
-	
 	this->AddChild(playerID);
 	playerID->SetParent(this);
 	

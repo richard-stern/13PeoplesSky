@@ -169,6 +169,7 @@
     <ClCompile Include="Application2D.cpp" />
     <ClCompile Include="AvoidBehaviour.cpp" />
     <ClCompile Include="BaseBehaviour.cpp" />
+    <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="FleeBehaviour.cpp" />
     <ClCompile Include="BaseState.cpp" />
     <ClCompile Include="Bullet.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="Application2D.h" />
     <ClInclude Include="AvoidBehaviour.h" />
     <ClInclude Include="BaseBehaviour.h" />
+    <ClInclude Include="Explosion.h" />
     <ClInclude Include="FleeBehaviour.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="ParticleSystem.h" />

@@ -11,6 +11,7 @@
 #include "Level.h"
 #include <MathF.h>
 #include "BulletManager.h"
+#include "Explosion.h"
 
 Enemy::Enemy(Level* pLevel) : Actor()
 {
@@ -73,6 +74,7 @@ void Enemy::Update(float DeltaTime)
 	//Updates the distance between this class and the player every frame
 	m_distToPlayer = m_player->GetPosition() - GetPosition();
 	m_lengthToPlayer = m_distToPlayer.magnitude();
+	
 	//m_distToRock = pRock->GetPosition().dot(GetPosition());
 
 	//When a destroyed enemy is far enough away from the player, redraw it
@@ -145,6 +147,10 @@ void Enemy::Update(float DeltaTime)
 		}
 	}
 
+	// Ensure explosion is not seen when alive.
+	m_explosion->SetVisible(false);
+	m_explosion->SetPosition(GetPosition());
+
 	Actor::Update(DeltaTime);
 
 	//Enemy rotation
@@ -165,6 +171,12 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 
 	case(ECOLLISIONLAYER_PLAYER):
 		//When the enemy hits a player, the enemy gets destroyed and the player takes 1 point of damage
+		if (m_explosion)
+		{
+			m_explosion->SetHasEmitted(false);
+			m_explosion->SetVisible(true);
+		}
+
 		SetVisible(false);
 		//Bouncing off the player
 		/*currentPos -= data->m_v2Normal * data->m_fPenetration;
@@ -179,6 +191,11 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 			for (int i = 0; i < enemyCount; i++)
 			{
 				m_enemy[i]->duckKills++;
+			}
+			if (m_explosion)
+			{
+				m_explosion->SetHasEmitted(false);
+				m_explosion->SetVisible(true);
 			}
 
 			SetVisible(false);
@@ -210,6 +227,11 @@ void Enemy::OnCollision(Actor* collidingObject, CollisionData* data)
 void Enemy::SetMaxSpeed(float speed)
 {
 	m_maxSpeed = speed;
+}
+
+void Enemy::SetExplosion(Explosion* explosion) 
+{
+	m_explosion = explosion;
 }
 
 float Enemy::GetMaxSpeed()

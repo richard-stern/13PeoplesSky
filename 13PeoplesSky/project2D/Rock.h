@@ -3,6 +3,7 @@
 
 struct CollisionData;
 class SmallRock;
+class Explosion;
 
 class Rock : public Actor
 {
@@ -41,7 +42,10 @@ public:
 
 	void Update(float deltaTime);
 
+	void SetExplosion(Explosion* explosion);
+
 private:
 	bool m_destroyed;
+	Explosion* m_explosion;
 };
 

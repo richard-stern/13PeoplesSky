@@ -4,6 +4,7 @@
 #include "Primitives.h"
 #include "GUI.h"
 #include "SmallRock.h"
+#include "Explosion.h"
 
 Rock::Rock()
 {
@@ -48,6 +49,7 @@ Rock::Rock()
 	collisionMan->AddObject(this);
 
 	m_destroyed = false;
+	m_explosion = nullptr;
 }
 
 Rock::~Rock()
@@ -80,6 +82,12 @@ void Rock::OnCollision(Actor* collidingObject, CollisionData* data)
 			GUI::GetInstance()->AddScore(100);
 			m_pSmallRock1->SpawnSelf(m_v2Position);
 			m_pSmallRock2->SpawnSelf(m_v2Position);
+
+			if(m_explosion) 
+			{
+				m_explosion->SetVisible(true);
+				m_explosion->SetHasEmitted(false);
+			}	
 		}
 		break;
 	case(ECOLLISIONLAYER_ROCK):
@@ -128,5 +136,13 @@ void Rock::Update(float deltaTime)
 	}
 	m_destroyed = false;
 
+	m_explosion->SetVisible(false);
+	m_explosion->SetPosition(GetPosition());
+
 	Actor::Update(deltaTime);
+}
+
+void Rock::SetExplosion(Explosion* explosion) 
+{
+	m_explosion = explosion;
 }

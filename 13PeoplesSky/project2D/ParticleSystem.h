@@ -56,6 +56,13 @@ public:
 	void Draw(aie::Renderer2D* pRenderer);
 
 	/*
+	Description: Sets the emitter position.
+	Param:
+	     Vector2 v2Position: The position the emitter will be set to.
+	*/
+	void SetPosition(Vector2 v2Position);
+
+	/*
 	Description: Sets whether or not passive emission is enabled. (DOES NOT EFFECT BURST CALLS)
 	Param:
 	    bool bEnable: Future status to of the emitter.

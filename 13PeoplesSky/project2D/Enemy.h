@@ -10,6 +10,7 @@ class AvoidBehaviour;
 class StateMachine;
 class BulletManager;
 class Level;
+class Explosion;
 
 
 class Enemy : public Actor
@@ -23,6 +24,8 @@ public:
 
 	float GetMaxSpeed();
 	void SetMaxSpeed(float speed);
+
+	void SetExplosion(Explosion* explosion);
 
 protected:
 	//The speed at which the enemy will move
@@ -40,6 +43,7 @@ protected:
 	int duckKills = 0;
 
 	Player* m_player;
+	Explosion* m_explosion;
 	Enemy** m_enemy;
 	Rock** m_rock;
 	Rock** closestRock;

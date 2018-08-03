@@ -157,6 +157,11 @@ void ParticleSystem::Draw(aie::Renderer2D* pRenderer)
 	}
 }
 
+void ParticleSystem::SetPosition(Vector2 v2Position) 
+{
+	m_v2Position = v2Position;
+}
+
 void ParticleSystem::SetEmissionEnabled(bool bEnabled) 
 {
 	m_bEnabled = bEnabled;
@@ -206,16 +211,16 @@ void ParticleSystem::InstantiateParticle(Particle* particle)
 	Particle& particleRef = *particle;
 
 	// Set speed.
-	particleRef.m_fSpeed = m_fMinSpeed + (((rand() % 101) / 100) * (m_fMaxSpeed - m_fMinSpeed));
+	particleRef.m_fSpeed = m_fMinSpeed + (((float)(rand() % 101) / 100.0f) * (m_fMaxSpeed - m_fMinSpeed));
 
 	// Set lifetime.
-	particleRef.m_fLifeTime = m_fMinLifetime + (((rand() % 101) / 100) * (m_fMaxLifetime - m_fMinLifetime));
+	particleRef.m_fLifeTime = m_fMinLifetime + (((float)(rand() % 101) / 100.0f) * (m_fMaxLifetime - m_fMinLifetime));
 
 	// Set rotation.
-	particleRef.m_fRotation = m_fMinRotation + (((rand() % 101) / 100) * (m_fMaxRotation - m_fMinRotation));
+	particleRef.m_fRotation = m_fMinRotation + (((float)(rand() % 101) / 100.0f) * (m_fMaxRotation - m_fMinRotation));
 
 	// Set rotation speed.
-	particleRef.m_fRotationSpeed = m_fMinRotationSpeed + (((rand() % 101) / 100) * (m_fMaxRotationSpeed - m_fMinRotationSpeed));
+	particleRef.m_fRotationSpeed = m_fMinRotationSpeed + (((float)(rand() % 101) / 100.0f) * (m_fMaxRotationSpeed - m_fMinRotationSpeed));
 
 	// Create random unit vector for direction.
 	Vector2 v2RandomDir
