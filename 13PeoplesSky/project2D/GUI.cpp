@@ -12,9 +12,10 @@ Description: Memory allocation. Private to restrict initialisation of singleton 
 */
 GUI::GUI()
 {
-	health = 10;
-	score = 0;
-	lives = 3;
+	maxHealth = PLAYER_HEALTH;
+	health = maxHealth;
+	score = NO_SCORE;
+	lives = NUMBER_OF_LIVES;
 }
 
 /*
@@ -58,9 +59,10 @@ Description: Resets GUI to initialised values
 */
 void GUI::Reset()
 {
-	health = 10;
-	score = 0;
-	lives = 3;
+	maxHealth = PLAYER_HEALTH;
+	health = maxHealth;
+	score = NO_SCORE;
+	lives = NUMBER_OF_LIVES;
 }
 
 /*
@@ -81,12 +83,6 @@ void GUI::Draw(aie::Renderer2D *renderer)
 
 	/* score */
 	DrawScore(renderer, cameraResolution, cameraPosition);
-
-	/* lives */
-	/*float livesPosY = resolution.y - 3 * CORNER_OFFSET_Y;
-	renderer->drawText(font, "Lives", xPos, livesPosY);
-	renderer->drawText(font, (char*)lives, xPos + CORNER_OFFSET_X, scorePosY);*/
-	//DrawLives(renderer);
 }
 
 /*
@@ -96,15 +92,55 @@ Description: Draw the player's health bar
 */
 void GUI::DrawHealthBar(aie::Renderer2D *renderer, Vector2 resolution, Vector2 position)
 {
+	/* HP bar texture */
 	aie::Texture *healthBar = TextureManager::GetInstance()->LoadTexture("./textures/healthBar.png");
+	float healthBarPosX = position.x + HEALTH_BAR_OFFSET_X; /* anchored to left of screen */
+	float healthBarPosY = resolution.y + position.y - HEALTH_BAR_OFFSET_Y; /* anchored to top of screen */
+	renderer->drawSprite(healthBar, healthBarPosX, healthBarPosY); /* draw HP bar */
 
-	float healthPosX = position.x + CORNER_OFFSET_X;
-	float healthPosY = resolution.y + position.y - CORNER_OFFSET_Y;
-	float healthWidth = health * 0.56f;
-
-	renderer->drawSprite(healthBar, healthPosX, healthPosY);
+	/* HP "modules" */
+	float healthPercentage = (float)health / (float)maxHealth;
 	renderer->setRenderColour(0x70DD54FF);
-	renderer->drawBox(healthPosX, healthPosY, healthWidth, 12);
+
+	for (int i = 0; i < health; i++)
+	{
+		float healthPosX = HEALTH_MODULE_OFFSET_X + healthBarPosX - (healthBar->getWidth() * 0.5f) + (20.0f * i);
+		float healthPosY = HEALTH_MODULE_OFFSET_Y + healthBarPosY;
+
+		switch (i)
+		{
+		case 4:
+		{
+			float uniqueModuleY = healthPosY + 2;
+			float uniqueModuleHeight = HEALTH_MODULE_HEIGHT + 4;
+			renderer->drawBox(healthPosX, uniqueModuleY, HEALTH_MODULE_WIDTH, uniqueModuleHeight);
+			break;
+		}
+		case 5:
+		{
+			float uniqueModuleY = healthPosY + 4;
+			float uniqueModuleHeight = HEALTH_MODULE_HEIGHT + 8;
+			renderer->drawBox(healthPosX, uniqueModuleY, HEALTH_MODULE_WIDTH, uniqueModuleHeight);
+			break;
+		}
+		default:
+		{
+			renderer->drawBox(healthPosX, healthPosY, HEALTH_MODULE_WIDTH, HEALTH_MODULE_HEIGHT);
+			break;
+		}
+		}
+	}
+
+	renderer->setRenderColour(0x3B6CBBFF);
+
+	for (int i = 0; i < lives; i++)
+	{
+		float lifeBallPosX = position.x + HEALTH_BAR_OFFSET_X + healthBar->getWidth() * 0.5f - 28.0f + 10.0f * (float)i;
+		float lifeBallPosY = resolution.y + position.y - HEALTH_BAR_OFFSET_Y - 20.0f;
+
+		renderer->drawCircle(lifeBallPosX, lifeBallPosY, 3.5f);
+	}
+
 	renderer->setRenderColour(0xFFFFFFFF);
 }
 
@@ -117,24 +153,14 @@ void GUI::DrawScore(aie::Renderer2D *renderer, Vector2 resolution, Vector2 posit
 {
 	aie::Font *font = TextureManager::GetInstance()->LoadFont("./font/consolas_bold.ttf", GUI_FONT_SIZE);
 	
-	float scorePosX = position.x + 8.0f;
-	float scorePosY = resolution.y + position.y - 2.5f * CORNER_OFFSET_Y;
+	float scorePosX = position.x + SCORE_OFFSET_X;
+	float scorePosY = resolution.y + position.y - SCORE_OFFSET_Y;
+	//renderer->drawText(font, "Score: ", scorePosX, scorePosY); /* Score: */
 	
-	renderer->drawText(font, "Score: ", scorePosX, scorePosY); /* Score: */
 
 	char scoreDisplay[8];
 	sprintf(scoreDisplay, "%i", score);
-	renderer->drawText(font, scoreDisplay, scorePosX + 100.0f, scorePosY);
-}
-
-/*
-Function:	 DrawLives
-Input/s:	 Renderer2D
-Description: Draw the player's number of remaining lives
-*/
-void GUI::DrawLives(aie::Renderer2D *renderer, Vector2 resolution, Vector2 position)
-{
-
+	renderer->drawText(font, scoreDisplay, scorePosX, scorePosY);
 }
 
 /*
