@@ -165,6 +165,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="AmmoPickup.cpp" />
     <ClCompile Include="Application2D.cpp" />
     <ClCompile Include="AvoidBehaviour.cpp" />
     <ClCompile Include="BaseBehaviour.cpp" />
@@ -196,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="AmmoPickup.h" />
     <ClInclude Include="Application2D.h" />
     <ClInclude Include="AvoidBehaviour.h" />
     <ClInclude Include="BaseBehaviour.h" />

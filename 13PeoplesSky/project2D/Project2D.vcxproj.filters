@@ -151,6 +151,12 @@
     <Filter Include="Header Files\Collider\CollisionManager">
       <UniqueIdentifier>{35e516ae-b5a2-4ac3-84b9-c320afa0a090}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObject\Actor\AmmoPickup">
+      <UniqueIdentifier>{7f481d30-a631-48a1-bb4e-9ca3e409a5dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Actor\AmmoPickup">
+      <UniqueIdentifier>{ef2bb56e-8384-4fa8-996a-b882b29699f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -243,6 +249,9 @@
     <ClCompile Include="Primitives.cpp">
       <Filter>Source Files\Collider</Filter>
     </ClCompile>
+    <ClCompile Include="AmmoPickup.cpp">
+      <Filter>Source Files\GameObject\Actor\AmmoPickup</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application2D.h">
@@ -331,6 +340,9 @@
     </ClInclude>
     <ClInclude Include="Primitives.h">
       <Filter>Header Files\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="AmmoPickup.h">
+      <Filter>Header Files\GameObject\Actor\AmmoPickup</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
