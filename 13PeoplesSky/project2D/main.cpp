@@ -27,7 +27,7 @@ int main() {
 	// allocation
 	auto app = new Application2D();
 
-	mciSendString(L"open \"C:\\Users\\s181209\\Desktop\\13PeoplesSky\\13PeoplesSky\\8.mp3\" type mpegvideo alias mp3", NULL, 0, NULL);
+	mciSendString(L"open \"..\\8.mp3\" type mpegvideo alias mp3", NULL, 0, NULL);
 	
 	//mciSendString(L"play mp3", NULL, 0, NULL);	
 	//mciSendString(L"play mp3 from 0", NULL, 0, NULL);	
