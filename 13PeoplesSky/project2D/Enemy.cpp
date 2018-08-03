@@ -111,13 +111,13 @@ void Enemy::Update(float DeltaTime)
 	}
 
 	//ROCK AVOIDANCE
-	/*for(int i = 0; i < rockCount; i++)
+	for(int i = 0; i < rockCount; i++)
 	{
-		if (m_rock[i]->GetPosition().magnitude() < 200.0f)
+		if (m_rock[i]->GetPosition().magnitude() <= 200.0f)
 		{
-
+			m_avoid->update(m_rock[i], this);
 		}
-	}*/
+	}
 
 	Actor::Update(DeltaTime);
 
