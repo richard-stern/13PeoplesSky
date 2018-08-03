@@ -184,6 +184,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PursueBehaviour.cpp" />
     <ClCompile Include="SeekBehaviour.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -203,6 +204,8 @@
     <ClInclude Include="AvoidBehaviour.h" />
     <ClInclude Include="BaseBehaviour.h" />
     <ClInclude Include="FleeBehaviour.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PursueBehaviour.h" />
     <ClInclude Include="SeekBehaviour.h" />
     <ClInclude Include="Bullet.h" />
